@@ -5,7 +5,7 @@
 */
 
     // default CSS file
-    $defaultStyle = '';
+    $defaultStyle = 'bg_wood';
 
     // after style change redirect to this URL
     $redirectUrl = '';

@@ -5,7 +5,7 @@
 */
 
     // default CSS file
-    $defaultStyle = '';
+    $defaultStyle = 'theme_green.css';
 
     // after style change redirect to this URL
     $redirectUrl = '';
