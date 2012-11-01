@@ -49,10 +49,10 @@
   </div>
   <div class="toggle_container">
     <div id="tabs-kep1" class="block">
-    TETTTT
+    TES....
     </div>
     <div id="tabs-kep2" class="block">
-    TETTTT2
+    TES....2
     </div>
   </div>  
 </div>                
@@ -69,10 +69,10 @@
   </div>
   <div class="toggle_container">
     <div id="tabs-as1" class="block">
-    TETTTT
+    TES....
     </div>
     <div id="tabs-as2" class="block">
-    TETTTT2
+    TES....2
     </div>
   </div>  
 </div>                
@@ -88,7 +88,7 @@
   </div>
   <div class="toggle_container">
     <div id="tabs-peru1" class="block">
-    TETTTT
+    TES....
     </div>
   </div>  
 </div>                
@@ -105,10 +105,10 @@
   </div>
   <div class="toggle_container">
     <div id="tabs-mon1" class="block">
-    TETTTT
+    TES....
     </div>
     <div id="tabs-mon2" class="block">
-    TETTTT2
+    TES....2
     </div>
   </div>  
 </div>                
@@ -125,18 +125,18 @@
   </div>
   <div class="toggle_container">
     <div id="tabs-perp1" class="block">
-    TETTTT
+    TES....
     </div>
     <div id="tabs-perp2" class="block">
-    TETTTT2
+    TES....2
     </div>
   </div>  
 </div>
 
 <div class="box grid_8 tabs">
   <ul class="tab_header clearfix">
-    <li><a href="#tabs-per1">Schedule</a></li>
-    <li><a href="#tabs-per2">Rekap Surat</a></li>
+    <li><a href="#tabs-perk1">Schedule</a></li>
+    <li><a href="#tabs-perk2">Rekap Surat</a></li>
   </ul>
   <div class="controls">
     <a href="#" class="grabber"></a>
@@ -145,10 +145,10 @@
   </div>
   <div class="toggle_container">
     <div id="tabs-perk1" class="block">
-    TETTTT
+    TES....
     </div>
     <div id="tabs-perk2" class="block">
-    TETTTT2
+    TES....2
     </div>
   </div>  
 </div>                                

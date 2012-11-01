@@ -1001,6 +1001,7 @@ div.main_container.full_size > .box .block {
 }
 .toggle_container {
   background: #fff;
+  min-height:209px;
 }
 div.main_container p a,
 .text a {
@@ -2539,6 +2540,45 @@ table.static tbody tr td input,
 table.static tbody tr td button {
   margin: 10px 0;
 }
+
+/*NEW*/
+table.static2 {
+  width: 100%;
+  border:1px solid #000;
+  
+}
+table.static2 tr th {
+  line-height: 30px;
+  padding: 2px;
+  color: #333;
+  font-weight: 400;
+  text-shadow: 0 1px 0 #fff;
+  border:1px solid #000;  
+  border-collapse:collapse;
+  vertical-align:middle;
+  background-color:#CCC;
+}
+table.static2 tbody tr td {
+  line-height: 25px;
+  padding: 0 10px;
+  border:1px solid #000;  
+  border-collapse:collapse;
+}
+table.static2 tbody tr td {
+  border-bottom: 1px solid #E1E5E7;
+}
+table.static2 tbody tr:last-child td {
+  border-bottom: 0;
+}
+table.static2 tbody tr.even td {
+  background-color: #EDF1F3;
+  border-bottom: 1px solid #D8DCDE;
+}
+table.static2 tbody tr td input,
+table.static2 tbody tr td button {
+  margin: 10px 0;
+}
+
 /*--------------------------------
 	Wizard
 --------------------------------*/
