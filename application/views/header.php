@@ -36,7 +36,7 @@
 		<link rel="stylesheet" href="<?=base_url()?>assets/styles/adminica/colours.css"> 
 		<script src="<?=base_url()?>assets/scripts/plugins-min.js"></script>
 		<script src="<?=base_url()?>assets/scripts/adminica/adminica_all-min.js"></script>
-
+		<script type="text/javascript" src="<?=base_url()?>assets/scripts/jquery-min.js"></script>
 
 		</head>
 	<body>
@@ -64,10 +64,6 @@
 			</ul>
 		</li>
 		<li><a href="<?=base_url()?>index.php/kepegawaian"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kepegawaian</span></a>
-			<ul>
-				<li><a href="<?=base_url()?>index.php/kepegawaian" class="pjax"><span>Kepegawaian</span></a></li>
-				<li><a href="<?=base_url()?>index.php/kepegawaian/tabs/2" class="pjax"><span>Kunjungan Pegawai</span></a></li>
-			</ul>
 		</li>
 		<li><a href="<?=base_url()?>index.php/aset"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>
         Aset Manajemen</span></a>
@@ -86,7 +82,7 @@
 		<li><a href="<?=base_url()?>index.php/perpustakaan"><img src="<?=base_url()?>assets/images/icons/small/grey/file_cabinet.png"/><span>Perpustakaan</span></a>
 			<ul>
 				<li><a href="<?=base_url()?>index.php/perpustakaan" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/folder.png"/><span>Koleksi Perpustakaan</span></a></li>
-				<li><a href="<?=base_url()?>index.php/perpustakaan/tabs/2" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Guestbook</span></a></li>
+				<li><a href="<?=base_url()?>index.php/perpustakaan/tabs/2" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kunjungan Perpustakaan</span></a></li>
 			</ul>
 		</li>
 		<li><a href="<?=base_url()?>index.php/perkantoran" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Perkantoran</span></a>

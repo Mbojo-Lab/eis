@@ -1154,7 +1154,7 @@ div.main_container p a,
   zoom: 1;
   border: 1px solid #aaa;
   border-top: 1px solid #aaa;
-  width: 170px;
+  width: 190px;
 }
 .dropdown_menu ul li:hover ul.dropdown {
   left: -1px;
@@ -2543,7 +2543,8 @@ table.static tbody tr td button {
 
 /*NEW*/
 table.static2 {
-  width: 100%;
+  width: 99%;
+  margin: 0 5px;
   border:1px solid #000;
   
 }

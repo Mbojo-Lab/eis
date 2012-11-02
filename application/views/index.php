@@ -40,7 +40,6 @@
 <div class="box grid_8 tabs">
   <ul class="tab_header clearfix">
     <li><a href="#tabs-kep1">Kepegawaian</a></li>
-    <li><a href="#tabs-kep2">Kunjungan Pegawai</a></li>
   </ul>
   <div class="controls">
     <a href="#" class="grabber"></a>
@@ -50,9 +49,6 @@
   <div class="toggle_container">
     <div id="tabs-kep1" class="block">
     TES....
-    </div>
-    <div id="tabs-kep2" class="block">
-    TES....2
     </div>
   </div>  
 </div>                
@@ -116,7 +112,7 @@
 <div class="box grid_8 tabs">
   <ul class="tab_header clearfix">
     <li><a href="#tabs-perp1">Koleksi Perpustakaan</a></li>
-    <li><a href="#tabs-perp2">Guestbook</a></li>
+    <li><a href="#tabs-perp2">Kunjungan Perpustakaan</a></li>
   </ul>
   <div class="controls">
     <a href="#" class="grabber"></a>
@@ -125,7 +121,11 @@
   </div>
   <div class="toggle_container">
     <div id="tabs-perp1" class="block">
-    TES....
+      <h2 class="section">
+        Total kategori buku : 100 kategori</h2>
+      <h2 class="section">  
+        Total koleksi buku : 1500 buah<br />
+      </h2>
     </div>
     <div id="tabs-perp2" class="block">
     TES....2

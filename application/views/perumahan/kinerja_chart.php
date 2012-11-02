@@ -2,18 +2,28 @@
     <h2><?=$menutitle?></h2>
 </div>
 
-<div class="box grid_16 tabs">
-  <ul class="tab_header clearfix">
-    <li><a href="#tabs-kep1"><?=$tabtitle?></a></li>
-  </ul>
-  <div class="controls">
-    <a href="#" class="grabber"></a>
-    <a href="#" class="toggle"></a>
-    <a href="#" class="show_all_tabs"></a>
-  </div>
-  <div class="toggle_container">
-    <div id="tabs-kep1" class="block">
-        <div class="section">
+<style type="text/css">
+.tblright{
+	border-collapse:collapse;
+	background-color:#fff;	
+}
+.tblright tr th{
+	border:1px solid #000;
+	padding:2px;
+	background-color:#82CDE6;
+}
+.tblright tr td{
+	border:1px solid #000;
+	border-collapse:collapse;
+	padding:2px;
+}
+.trcolor {
+	background-color:#d9d9d9;
+}
+</style>
+<script src="<?=base_url()?>assets/scripts/highchart/highcharts.js"></script>
+<script src="<?=base_url()?>assets/scripts/highchart/modules/exporting.js"></script>
+
 <script type="text/javascript">
 function nformat2(num,curr) {				
 	
@@ -28,7 +38,15 @@ function nformat2(num,curr) {
 	if(cents2<10){
 		cents2 = "0" + cents2;
 	} 
-		
+	
+	/*cents3 = num%1000;
+	num = Math.floor(num/1000).toString();			
+	if(cents3<10){
+		cents3 = "00" + cents3;
+	} else if(cents3<100) {
+		cents3 = "0" + cents3;
+	}*/
+	
 	for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
 	num = num.substring(0,num.length-(4*i+3))+','+
 	num.substring(num.length-(4*i+3));
@@ -43,62 +61,16 @@ function nformat2(num,curr) {
 }
 
 $(function () {
-    var chart;
-    
-    $(document).ready(function () {
-    	
-    	// Build the chart
-        chart = new Highcharts.Chart({
-            chart: {
-                renderTo: 'container',
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
-            },
-			credits:{
-				enabled: false
-			},
-            title: {
-                text: '<?=$title1 ?>'
-            },
-            tooltip: {
-				enabled: false,
-        	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-            	percentageDecimals: 1
-            },			
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-						formatter: function() {
-							return nformat2(this.y,0);
-						}
-                    },
-                    showInLegend: true
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Kategori',
-                data: [
-				<?php 
-				
-				if($rs):
-				$data = '';
-				foreach($rs as $r): 
-					$data .= "['".$r->bagian."', ".$r->jml."],";
-				endforeach; 
-				$data = substr($data,0,-1);
-				endif;	
-				echo $data;			                
-				?>
-				]
-            }]
-        });
-		
-		Highcharts.visualize = function(table, options) {
+    // On document ready, call visualize on the datatable.
+    $(document).ready(function() {
+        /**
+         * Visualize an HTML table using Highcharts. The top (horizontal) header
+         * is used for series names, and the left (vertical) header is used
+         * for category names. This function is based on jQuery.
+         * @param {Object} table The reference to the HTML table to visualize
+         * @param {Object} options Highcharts options
+         */
+        Highcharts.visualize = function(table, options) {
             // the categories
             options.xAxis.categories = [];
             $('tbody th', table).each( function(i) {
@@ -129,23 +101,20 @@ $(function () {
         var table = document.getElementById('datatable'),
         options = {
             chart: {
-                renderTo: 'container2',
+                renderTo: 'container',
                 type: 'column'
             },
 			credits:{
 				enabled: false,
 			},
             title: {
-                text: '<?=$title2 ?>'
+                text: '<?=$title ?>'
             },
             xAxis: {
-				title: {
-                    text: 'Eselon'
-                }
             },
             yAxis: {
                 title: {
-                    text: 'Jumlah'
+                    text: 'Nilai (Rp. Milyar)'
                 },
 				labels: {
 					formatter: function() {
@@ -163,11 +132,8 @@ $(function () {
 					}
                 }
             },
-			legend: {
-				enabled: false
-			},
             tooltip: {
-				enabled:false,
+				//enabled:false,
                 formatter: function() {
                     return '<b>'+ this.series.name +'</b><br/>'+
                         nformat2(this.y, 2) +' '+ this.x.toLowerCase();
@@ -177,12 +143,13 @@ $(function () {
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0
+					//stacking: 'normal'
                 },series: {
 					cursor: 'pointer',
 					point: {
 						events: {
 							click: function() {
-								//window.open('perumahan/kinerjaTabel/'+ this.category,'_self');
+								window.open('perumahan/kinerjaTabel/'+ this.category,'_self');
 							}
 						}
 					}
@@ -191,25 +158,13 @@ $(function () {
         };
     
         Highcharts.visualize(table, options);
-		
     });
     
 });
+
+
 </script>
-<script src="<?=base_url()?>assets/scripts/highchart/highcharts.js"></script>
-<script src="<?=base_url()?>assets/scripts/highchart/modules/exporting.js"></script>
-		<table style="width:100%">
-        <tr>
-        <td style="border-right:1px #D6D6D6 solid">
-		  <div id="container" style="min-width: 350px; height: 400px; margin: 0 auto"></div>
-        </td>
-        <td>
-          <div id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
-        <?=$html?>
-        </td>
-        </tr>
-        </table>
-		</div>
-    </div>
-  </div>
-</div>    
+
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<?=$html ?>
+<br />&nbsp;

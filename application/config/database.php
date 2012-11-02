@@ -44,6 +44,38 @@
 | The $active_record variables lets you determine whether or not to load
 | the active record class
 */
+$active_group = "sdm";
+$active_record = TRUE;
+
+$db['sdm']['hostname'] = "localhost";
+$db['sdm']['username'] = "root";
+$db['sdm']['password'] = "";
+$db['sdm']['database'] = "eis_sdm";
+$db['sdm']['dbdriver'] = "mysql";
+$db['sdm']['dbprefix'] = "";
+$db['sdm']['pconnect'] = FALSE;
+$db['sdm']['db_debug'] = TRUE;
+$db['sdm']['cache_on'] = FALSE;
+$db['sdm']['cachedir'] = "";
+$db['sdm']['char_set'] = "utf8";
+$db['sdm']['dbcollat'] = "utf8_general_ci";
+
+$active_group = "perpus";
+$active_record = TRUE;
+
+$db['perpus']['hostname'] = "localhost";
+$db['perpus']['username'] = "root";
+$db['perpus']['password'] = "";
+$db['perpus']['database'] = "eis_perpus";
+$db['perpus']['dbdriver'] = "mysql";
+$db['perpus']['dbprefix'] = "";
+$db['perpus']['pconnect'] = FALSE;
+$db['perpus']['db_debug'] = TRUE;
+$db['perpus']['cache_on'] = FALSE;
+$db['perpus']['cachedir'] = "";
+$db['perpus']['char_set'] = "utf8";
+$db['perpus']['dbcollat'] = "utf8_general_ci";
+
 
 $active_group = 'default';
 $active_record = TRUE;
