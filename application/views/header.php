@@ -73,7 +73,7 @@
 			</ul>
 		</li>
 		<li><a href="<?=base_url()?>index.php/perumahan" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/apartment_building.png"/><span>Perumahan</span></a></li>
-		<li><a href="<?=base_url()?>index.php/monitoring"><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Monitoring</span></a>
+		<li><a href="<?=base_url()?>index.php/monitoring"><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Pengendalian dan Evaluasi Program</span></a>
 			<ul>
 				<li><a href="<?=base_url()?>index.php/monitoring" class="pjax"><span>Kegiatan Swakelola</span></a></li>
 				<li><a href="<?=base_url()?>index.php/monitoring/tabs/2" class="pjax"><span>Kontraktual</span></a></li>
@@ -85,11 +85,7 @@
 				<li><a href="<?=base_url()?>index.php/perpustakaan/tabs/2" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kunjungan Perpustakaan</span></a></li>
 			</ul>
 		</li>
-		<li><a href="<?=base_url()?>index.php/perkantoran" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Perkantoran</span></a>
-			<ul class="dropdown_right">
-				<li><a href="<?=base_url()?>index.php/perkantoran" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/month_calendar.png"/><span>Schedule</span></a></li>
-				<li><a href="<?=base_url()?>index.php/perkantoran/tabs/2" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/archive.png"/><span>Rekap Surat</span></a></li>
-			</ul></li>
+		<li><a href="<?=base_url()?>index.php/perkantoran" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda Kementrian</span></a></li>
 	</ul>
 
 	<div id="mobile_nav">

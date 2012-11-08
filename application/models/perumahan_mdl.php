@@ -13,7 +13,7 @@ class Perumahan_mdl extends CI_Model {
     
     function tampil($tahun){
 		$q = "SELECT * FROM kegiatan
-			  WHERE parent_id='' 
+			  WHERE parent_id=0
 			  ORDER BY no_urut ASC";
 		$rs = $this->db->query($q)->result();
 		
@@ -296,7 +296,7 @@ class Perumahan_mdl extends CI_Model {
 	
 	function chartBar(){
 		$q = "SELECT id,nama 
-			  FROM kegiatan WHERE parent_id='' ";
+			  FROM kegiatan WHERE parent_id=0 ";
 		$rs = $this->db->query($q)->result();
 		
 		$html = '<table id="datatable" style="display:none"><thead><tr><th></th>';
