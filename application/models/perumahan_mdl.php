@@ -299,7 +299,7 @@ class Perumahan_mdl extends CI_Model {
 			  FROM kegiatan WHERE parent_id=0 ";
 		$rs = $this->db->query($q)->result();
 		
-		$html = '<table id="datatable" style="display:none"><thead><tr><th></th>';
+		$html = '<table id="datatable_peru" style="display:none"><thead><tr><th></th>';
 		
 		foreach ($rs as $r){
 			$html .= '<th>'.$r->nama.'</th>';

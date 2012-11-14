@@ -2,24 +2,17 @@
 
 class Geospasial extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
-	{		
+	public function __construct(){
+		parent::__construct();
+		if (! $this->session->userdata('logged_in')){ redirect(base_url().'member/login'); }
+		
+		$this->load->model('geospasial_mdl','gis');
+	}
+	
+	function index(){		
 		$data['title']="GeoSpasial";
+		$data['rs'] = $this->gis->ambildata(1);
+		
 		$this->load->view('header');
 		$this->load->view('geospasial',$data);
 		$this->load->view('footer');
@@ -32,6 +25,43 @@ class Geospasial extends CI_Controller {
 		} else {
 			redirect(base_url()."index.php/geospasial#tabs-3");
 		}
+	}
+	
+	function ambildata($group){
+		$no = $this->uri->segment(4,0);
+		$no = ($no==0)?'':$no;
+		$rs = $this->gis->ambildata($group,$no);
+		
+		$json = '{"wilayah": {';
+		$json .= '"petak":[ ';
+		foreach ($rs as $r) {
+			$json .= '{';
+			$json .= '"no":"'.$r->no.'",
+				"title":"'.htmlspecialchars($r->title).'",
+				"jenis":"'.htmlspecialchars($r->gis_group).'",
+				"alamat":"'.htmlspecialchars($r->address).'",
+				"keterangan":"'.htmlspecialchars($r->desc).'",
+				"x":"'.$r->x.'",
+				"y":"'.$r->y.'"
+			},';
+		}
+		$json = substr($json,0,strlen($json)-1);
+		$json .= ']';
+		
+		$json .= '}}';
+		echo $json;
+	}
+	
+	function ambil_list($group){
+		$rs = $this->gis->ambildata($group);
+		$no=1;
+		$html = '';
+		 foreach ($rs as $r){
+		   $html .= "<a onclick=\"peta_awal('petaku',".$group.",".$r->no.")\" style='cursor:pointer'>".$no.". ".$r->title." &nbsp; &nbsp; ".$r->address."<br></a>";
+		   $no += 1;
+		 }
+		
+		echo $html;
 	}
 	
 }

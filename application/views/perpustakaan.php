@@ -87,8 +87,8 @@ $(function () {
 				
 				if($rs):
 				$data = '';
-				foreach($rs as $r): 
-					$data .= "['".$r->kategori."', ".$r->jml."],";
+				foreach($rs as $rkey => $value): 
+					$data .= "['".$rkey."',".$value."],";
 				endforeach; 
 				$data = substr($data,0,-1);
 				endif;	
@@ -98,6 +98,7 @@ $(function () {
             }]
         });
 		
+		<?php /*
 		Highcharts.visualize = function(table, options) {
             // the categories
             options.xAxis.categories = [];
@@ -186,7 +187,7 @@ $(function () {
         };
     
         Highcharts.visualize(table, options);
-		
+		*/?>
 		
 		chart = new Highcharts.Chart({
             chart: {
@@ -247,10 +248,11 @@ $(function () {
         <tr>
         <td style="border-right:1px #D6D6D6 solid">
 		  <div id="container" style="min-width: 350px; height: 400px; margin: 0 auto"></div>
-        </td>
+       <? /* </td>
         <td>
-          <div id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
-        <?=$html?>
+          <div id="container2" style="min-width: 400px; height: 400px; margin: 0 auto">
+          </div>
+        <? //=$html?>*/ ?>
         </td>
         </tr>
         </table>
@@ -258,7 +260,6 @@ $(function () {
     </div>
     <div id="tabs-perp2" class="block">
         <div class="section">
-        <? //=$rsTamu?>
             <div id="container3" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
         </div>
     </div>

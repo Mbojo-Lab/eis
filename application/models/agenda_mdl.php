@@ -1,5 +1,5 @@
 <?php
-class Perpustakaan_mdl extends CI_Model {
+class Agenda_mdl extends CI_Model {
 
     var $title   = '';
     var $content = '';

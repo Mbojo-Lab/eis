@@ -55,37 +55,38 @@
 	<ul class="clearfix">
 		<li class="icon_only"><a href="<?=base_url()?>" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/laptop.png"/><span class="display_none">Dashboard</span></a></li>
 
-		<li><a href="<?=base_url()?>index.php/geospasial"><img src="<?=base_url()?>assets/images/icons/small/grey/google_maps.png"/><span>GeoSpasial</span></a>
+		<li><a href="<?=base_url()?>geospasial"><img src="<?=base_url()?>assets/images/icons/small/grey/google_maps.png"/><span>GeoSpasial</span></a>
 			<ul class="open_multiple">
-				<li><a href="<?=base_url()?>index.php/geospasial" class="pjax"><span>DAK</span></a></li>
-				<li><a href="<?=base_url()?>index.php/geospasial/tabs/2" class="pjax"><span>Pembangunan Rusunawa</span></a></li>
-				<li><a class="hide_mobile" href="<?=base_url()?>index.php/geospasial/tabs/3"><span>PSU</span></a>
+				<li><a href="<?=base_url()?>geospasial" class="pjax"><span>DAK</span></a></li>
+				<li><a href="<?=base_url()?>geospasial/tabs/2" class="pjax"><span>Pembangunan Rusunawa</span></a></li>
+				<li><a class="hide_mobile" href="<?=base_url()?>geospasial/tabs/3"><span>PSU</span></a>
 				</li>				
 			</ul>
 		</li>
-		<li><a href="<?=base_url()?>index.php/kepegawaian"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kepegawaian</span></a>
+		<li><a href="<?=base_url()?>kepegawaian"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kepegawaian</span></a>
 		</li>
-		<li><a href="<?=base_url()?>index.php/aset"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>
+		<li><a href="<?=base_url()?>aset"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>
         Aset Manajemen</span></a>
 			<ul>
-				<li><a href="<?=base_url()?>index.php/aset" class="pjax"><span>Aset IT</span></a></li>
-				<li><a href="<?=base_url()?>index.php/aset/tabs/2" class="pjax"><span>Aset Non IT</span></a></li>
+				<li><a href="<?=base_url()?>aset" class="pjax"><span>Aset IT</span></a></li>
+				<li><a href="<?=base_url()?>aset/tabs/2" class="pjax"><span>Aset Non IT</span></a></li>
 			</ul>
 		</li>
-		<li><a href="<?=base_url()?>index.php/perumahan" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/apartment_building.png"/><span>Perumahan</span></a></li>
-		<li><a href="<?=base_url()?>index.php/monitoring"><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Pengendalian dan Evaluasi Program</span></a>
+		<li><a href="<?=base_url()?>perumahan" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/apartment_building.png"/><span>Perumahan</span></a></li>
+		<li><a href="<?=base_url()?>monitoring"><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Pengendalian dan Evaluasi Program</span></a>
 			<ul>
-				<li><a href="<?=base_url()?>index.php/monitoring" class="pjax"><span>Kegiatan Swakelola</span></a></li>
-				<li><a href="<?=base_url()?>index.php/monitoring/tabs/2" class="pjax"><span>Kontraktual</span></a></li>
+				<li><a href="<?=base_url()?>monitoring" class="pjax"><span>Kegiatan Swakelola</span></a></li>
+				<li><a href="<?=base_url()?>monitoring/tabs/2" class="pjax"><span>Kontraktual</span></a></li>
 			</ul>
 		</li>
-		<li><a href="<?=base_url()?>index.php/perpustakaan"><img src="<?=base_url()?>assets/images/icons/small/grey/file_cabinet.png"/><span>Perpustakaan</span></a>
+		<li><a href="<?=base_url()?>perpustakaan"><img src="<?=base_url()?>assets/images/icons/small/grey/file_cabinet.png"/><span>Perpustakaan</span></a>
 			<ul>
-				<li><a href="<?=base_url()?>index.php/perpustakaan" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/folder.png"/><span>Koleksi Perpustakaan</span></a></li>
-				<li><a href="<?=base_url()?>index.php/perpustakaan/tabs/2" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kunjungan Perpustakaan</span></a></li>
+				<li><a href="<?=base_url()?>perpustakaan" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/folder.png"/><span>Koleksi Perpustakaan</span></a></li>
+				<li><a href="<?=base_url()?>perpustakaan/tabs/2" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kunjungan Perpustakaan</span></a></li>
 			</ul>
 		</li>
-		<li><a href="<?=base_url()?>index.php/perkantoran" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda Kementrian</span></a></li>
+		<li><a href="<?=base_url()?>perkantoran" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda Kementrian</span></a></li>
+        <li><a href="<?=base_url()?>member/logout" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/locked_2.png"/><span>Logout</span></a></li>
 	</ul>
 
 	<div id="mobile_nav">

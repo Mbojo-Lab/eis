@@ -1,7 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Monitoring extends CI_Controller {
-	public function index()
+	
+	public function __construct(){
+		parent::__construct();
+		if (! $this->session->userdata('logged_in')){ redirect(base_url().'member/login'); }
+	}
+	
+	function index()
 	{		
 		$data['title']="Monitoring";
 		$this->load->view('header');

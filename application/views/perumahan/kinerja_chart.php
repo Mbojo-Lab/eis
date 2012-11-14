@@ -98,7 +98,7 @@ $(function () {
             var chart = new Highcharts.Chart(options);
         }
     
-        var table = document.getElementById('datatable'),
+        var table = document.getElementById('datatable_peru'),
         options = {
             chart: {
                 renderTo: 'container',
@@ -108,7 +108,10 @@ $(function () {
 				enabled: false,
 			},
             title: {
-                text: '<?=$title ?>'
+                text: '<?=$title?>'
+            },
+			subtitle: {
+                text: '<?=$subtitle?>'
             },
             xAxis: {
             },

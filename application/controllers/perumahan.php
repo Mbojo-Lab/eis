@@ -4,13 +4,16 @@ class Perumahan extends CI_Controller {
 	
 	public function __construct(){
 		parent::__construct();
+		if (! $this->session->userdata('logged_in')){ redirect(base_url().'member/login'); }
+		
 		$this->load->model('Perumahan_mdl','perm');
 	}	
 	
 	function index(){		
 		$data['menutitle']="Perumahan";
 		$data['tabtitle']="Kinerja";
-		$data['title']="TARGET DAN CAPAIAN KINERJA PEMBANGUNAN PERUMAHAN TAHUN 2010 - 2012";			
+		$data['title']="TARGET DAN CAPAIAN KINERJA";
+		$data['subtitle']="PEMBANGUNAN PERUMAHAN TAHUN 2010 - 2014";			
 		
         $data['html'] = $this->perm->chartBar();		
 		

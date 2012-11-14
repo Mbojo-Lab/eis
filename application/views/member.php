@@ -1,0 +1,1 @@
+<p>Selamat datang di halaman member, <?php echo $this->session->userdata('username') ?>, Anda login sebagai <?php echo $this->session->userdata('group') ?>, <?php echo anchor('member/logout','Logout') ?></p>

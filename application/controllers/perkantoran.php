@@ -2,16 +2,21 @@
 
 class Perkantoran extends CI_Controller {
 
-	public function index()
+	public function __construct(){
+		parent::__construct();
+		if (! $this->session->userdata('logged_in')){ redirect(base_url().'member/login'); }
+	}
+	
+	function index()
 	{		
-		$data['title']="Perkantoran";
+		$data['title']="Agenda Kementrian";
 		$this->load->view('header');
 		$this->load->view('perkantoran',$data);
 		$this->load->view('footer');
 	}
 	
 	function tabs($tabs=''){
-		$data['title']="Perkantoran";
+		$data['title']="Agenda Kementrian";
 		if ($tabs==2){
 			redirect(base_url()."index.php/perkantoran#tabs-perk2");
 		} else {

@@ -4,6 +4,8 @@ class Perpustakaan extends CI_Controller {
 	
 	public function __construct(){
 		parent::__construct();
+		if (! $this->session->userdata('logged_in')){ redirect(base_url().'member/login'); }
+		
 		$this->load->model('perpustakaan_mdl','perp');
 	}
 	
@@ -14,9 +16,8 @@ class Perpustakaan extends CI_Controller {
 		$data['title1']="KOLEKSI PERPUSTAKAAN";
 		$data['title2']="KOLEKSI MASUK";
 		$data['title3']="JUMLAH KUNJUNGAN PERPUSTAKAAN PER TAHUN";
-		
 		$data['rs'] = $this->perp->getKoleksi();
-		$data['html'] = $this->perp->getKoleksiMasuk();
+		//$data['html'] = $this->perp->getKoleksiMasuk();
 		$data['kunjungan'] = $this->perp->getKunjungan();
 		
 		$this->load->view('header');

@@ -61,6 +61,9 @@ $(function () {
             title: {
                 text: '<?=$title1 ?>'
             },
+			subtitle: {
+                text: '<?=$subtitle1 ?>'
+            },
             tooltip: {
 				enabled: false,
         	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
@@ -84,11 +87,12 @@ $(function () {
                 name: 'Kategori',
                 data: [
 				<?php 
-				
+				$tot=0;
 				if($rs):
 				$data = '';
 				foreach($rs as $r): 
-					$data .= "['".$r->bagian."', ".$r->jml."],";
+					$data .= "['".$r->unit_kerja."', ".$r->jml."],";
+					$tot += $r->jml;
 				endforeach; 
 				$data = substr($data,0,-1);
 				endif;	
@@ -138,6 +142,9 @@ $(function () {
             title: {
                 text: '<?=$title2 ?>'
             },
+			subtitle: {
+                text: '<?=$subtitle2 ?>'
+            },
             xAxis: {
 				title: {
                     text: 'Eselon'
@@ -176,7 +183,8 @@ $(function () {
             plotOptions: {
                 column: {
                     pointPadding: 0.2,
-                    borderWidth: 0
+                    borderWidth: 0,
+					stacking: 'normal'
                 },series: {
 					cursor: 'pointer',
 					point: {
@@ -201,10 +209,11 @@ $(function () {
 		<table style="width:100%">
         <tr>
         <td style="border-right:1px #D6D6D6 solid">
-		  <div id="container" style="min-width: 350px; height: 400px; margin: 0 auto"></div>
+		  <div id="container" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
         </td>
         <td>
           <div id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+          <h3 align="right" style="color:#4572A7; margin-top:-3px;">Jumlah total pegawai : <?=$tot?> &nbsp; &nbsp; </h3>
         <?=$html?>
         </td>
         </tr>
