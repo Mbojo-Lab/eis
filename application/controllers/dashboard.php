@@ -10,6 +10,7 @@ class Dashboard extends CI_Controller {
 		$this->load->model('geospasial_mdl','gis');
 		$this->load->model('kepegawaian_mdl','sdm');
 		$this->load->model('Perumahan_mdl','perm');
+		$this->load->model('monitoring_mdl','mon');
 		$this->load->model('perpustakaan_mdl','perp');
 	}
 	
@@ -30,6 +31,10 @@ class Dashboard extends CI_Controller {
 		
         $data['html_peru'] = $this->perm->chartBar();		
 		
+		//MONITORING
+		$data['rsMon1'] = $this->mon->getAll('Swakelola');
+		$data['rsMon2'] = $this->mon->getAll('Kontraktual');
+			
 		//PERPUSTAKAAN
 		$data['title_perp1']="KOLEKSI PERPUSTAKAAN";
 		$data['title_perp2']="JUMLAH KUNJUNGAN PERPUSTAKAAN PER TAHUN";

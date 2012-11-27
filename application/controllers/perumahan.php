@@ -58,6 +58,16 @@ class Perumahan extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	function form2(){
+		$data['menutitle']="Form Kegiatan Perumahan";
+		$data['html']= $this->perm->getKegiatan();
+		
+		$this->load->view('header_admin');
+		$this->load->view('perumahan_frm',$data);
+		$this->load->view('perumahan_fmj',$data);		
+		$this->load->view('footer');
+	}
+	
 	function getDetail(){
 		$tahun = $_REQUEST['tahun'];
 		$id_keg = $_REQUEST['id_keg'];

@@ -488,10 +488,48 @@ $(function () {
   </div>
   <div class="toggle_container">
     <div id="tabs-mon1" class="block">
-    
+      <div id="dt1" class="no_margin">
+        <table class=" datatable">
+        <thead>
+            <tr>
+                <th width="30">No.</th>
+                <th>Nama Kegiatan</th>
+                <th>Anggaran</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php $no=1; foreach ($rsMon1 as $r){  ?>
+            <tr class="gradeX">
+                <td><?=$no?></td>
+                <td><?=$r->nama_keg?></td>
+                <td align="right"><?=number_format($r->anggaran)?></td>
+            </tr>
+        <?php $no += 1;} ?>
+        </tbody>
+    	</table>
+      </div>
     </div>
     <div id="tabs-mon2" class="block">
-    
+    	<div id="dt2" class="no_margin">
+        <table class=" datatable">
+        <thead>
+            <tr>
+                <th width="30">No.</th>
+                <th>Nama Kegiatan</th>
+                <th>Anggaran</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php $no=1; foreach ($rsMon2 as $r){  ?>
+            <tr class="gradeX">
+                <td><?=$no?></td>
+                <td><?=$r->nama_keg?></td>
+                <td align="right"><?=number_format($r->anggaran)?></td>
+            </tr>
+        <?php $no += 1;} ?>
+        </tbody>
+    	</table>
+      </div>
     </div>
   </div>  
 </div>                

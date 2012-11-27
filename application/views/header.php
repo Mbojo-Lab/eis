@@ -27,7 +27,7 @@
 
 
 
-		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/layout_switcher.php?default=layout_fixed.css" >
+		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/layout_switcher.php?default=layout_fixed.css">
 		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/nav_switcher.php?default=nav_top.css" >
 		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/skin_switcher.php?default=switcher.css" >
 		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/theme_switcher.php?default=theme_green.css" >
@@ -57,13 +57,37 @@
 
 		<?php if ($this->session->userdata('group')=="admin"){?>
         <li><a href="<?=base_url()?>geospasial"><img src="<?=base_url()?>assets/images/icons/small/grey/google_maps.png"/><span>GeoSpasial</span></a></li>        
+        <li><a><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kepegawaian</span></a>
+        	<ul class="open_multiple">
+                <li><a href="<?=base_url()?>kepegawaian/form" class="pjax"><span>Form Kepegawaian1</span></a></li>
+		        <li><a href="<?=base_url()?>kepegawaian/form2" class="pjax"><span>Form Kepegawaian2</span></a></li>
+                <li><a href="<?=base_url()?>kepegawaian" class="pjax"><span>Laporan</span></a></li>
+            </ul>
+        </li>
         <li><a href="<?=base_url()?>aset"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>
-        Aset Manajemen</span></a></li>
-        <li><a href="<?=base_url()?>perumahan/form" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>Form Perumahan</span></a></li>
-		<li><a href="<?=base_url()?>perumahan" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/apartment_building.png"/><span>Perumahan</span></a></li>
-		<li><a href="<?=base_url()?>monitoring"><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Pengendalian dan Evaluasi Program</span></a></li>
-        <li><a href="<?=base_url()?>perkantoran/form" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>Form Agenda Menteri</span></a></li>
-		<li><a href="<?=base_url()?>perkantoran" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda Menteri</span></a></li>
+        Aset Manajemen</span></a></li>        
+        <li><a><img src="<?=base_url()?>assets/images/icons/small/grey/apartment_building.png"/><span>Perumahan</span></a>
+            <ul class="open_multiple">
+                <li><a href="<?=base_url()?>perumahan/form2" class="pjax"><span>Form Kegiatan</span></a></li>
+                <li><a href="<?=base_url()?>perumahan/form" class="pjax"><span>Form Perumahan</span></a></li>
+                <li><a href="<?=base_url()?>perumahan" class="pjax"><span>Perumahan</span></a></li>
+            </ul>
+        </li>
+        </li>
+		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Pengendalian dan Evaluasi Program</span></a>
+        	<ul class="open_multiple">
+                <li><a href="<?=base_url()?>monitoring/form" class="pjax"><span>Form Upload Kegiatan</span></a></li>
+                <li><a href="<?=base_url()?>monitoring/swakelola" class="pjax"><span>Swakelola</span></a></li>
+                <li><a href="<?=base_url()?>monitoring/kontraktual" class="pjax"><span>Kontraktual</span></a></li>
+            </ul>
+        </li>  
+        <li><a href="<?=base_url()?>perpustakaan"><img src="<?=base_url()?>assets/images/icons/small/grey/file_cabinet.png"/><span>Perpustakaan</span></a></li>      
+		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda Menteri</span></a>
+            <ul class="open_multiple">
+                <li><a href="<?=base_url()?>perkantoran/form" class="pjax"><span>Form Agenda Menteri</span></a></li>
+                <li><a href="<?=base_url()?>perkantoran" class="pjax"><span>Agenda Menteri</span></a></li>
+            </ul>
+        </li>
         <?php } ?>
         <?php if ($this->session->userdata('group')=="sdm"){?>
         <li><a href="<?=base_url()?>kepegawaian/form" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>Form Kepegawaian1</span></a></li>

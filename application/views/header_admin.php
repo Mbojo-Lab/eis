@@ -17,12 +17,16 @@
 
 	<!-- Styles -->
 
-		<link rel="stylesheet" href="<?=base_url()?>assets/styles/adminica/reset2.css">
+		<link rel="stylesheet" href="<?=base_url()?>assets/styles/adminica/reset.css">
+   		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
+
 
 		<link rel="stylesheet" href="<?=base_url()?>assets/styles/adminica/all.css">
 
-		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/nav_switcher.php?default=nav_top.css" >
+        <link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/nav_switcher.php?default=nav_top.css" >
 		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/theme_switcher.php?default=theme_green.css" >
+   		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/bg_switcher.php?default=bg_honeycomb.css" >
+
         
         
        <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/scripts/jeasyui/themes/main.css">
@@ -31,7 +35,8 @@
         <link type="text/css" href="<?=base_url()?>assets/scripts/jeasyui/themes/redmond/jquery-ui-1.8.4.custom.css" rel="Stylesheet" />
         
 		
-
+		<script src="<?=base_url()?>assets/scripts/plugins-min.js"></script>
+        <script src="<?=base_url()?>assets/scripts/adminica/adminica_all-min.js"></script>
    		<script type="text/javascript" src="<?=base_url()?>assets/scripts/jeasyui/jquery.min.js"></script>       
         <script type="text/javascript" src="<?=base_url()?>assets/scripts/jeasyui/jquery-ui-1.8.4.custom.min.js"></script>
         <script type="text/javascript" src="<?=base_url()?>assets/scripts/jeasyui/jquery.grid.min.js"></script>
@@ -62,13 +67,36 @@
 
 		<?php if ($this->session->userdata('group')=="admin"){?>
         <li><a href="<?=base_url()?>geospasial"><img src="<?=base_url()?>assets/images/icons/small/grey/google_maps.png"/><span>GeoSpasial</span></a></li>        
+        <li><a><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kepegawaian</span></a>
+        	<ul class="open_multiple">
+                <li><a href="<?=base_url()?>kepegawaian/form" class="pjax"><span>Form Kepegawaian1</span></a></li>
+		        <li><a href="<?=base_url()?>kepegawaian/form2" class="pjax"><span>Form Kepegawaian2</span></a></li>
+                <li><a href="<?=base_url()?>kepegawaian" class="pjax"><span>Laporan</span></a></li>
+            </ul>
+        </li>
         <li><a href="<?=base_url()?>aset"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>
-        Aset Manajemen</span></a></li>
-        <li><a href="<?=base_url()?>perumahan/form" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>Form Perumahan</span></a></li>
-		<li><a href="<?=base_url()?>perumahan" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/apartment_building.png"/><span>Perumahan</span></a></li>
-		<li><a href="<?=base_url()?>monitoring"><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Pengendalian dan Evaluasi Program</span></a></li>
-        <li><a href="<?=base_url()?>perkantoran/form" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>Form Agenda Menteri</span></a></li>
-		<li><a href="<?=base_url()?>perkantoran" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda Menteri</span></a></li>
+        Aset Manajemen</span></a></li>        
+		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/apartment_building.png"/><span>Perumahan</span></a>
+        	<ul class="open_multiple">
+            	<li><a href="<?=base_url()?>perumahan/form2" class="pjax"><span>Form Kegiatan</span></a></li>
+				<li><a href="<?=base_url()?>perumahan/form" class="pjax"><span>Form Perumahan</span></a></li>
+				<li><a href="<?=base_url()?>perumahan" class="pjax"><span>Perumahan</span></a></li>
+			</ul>
+        </li>
+		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Pengendalian dan Evaluasi Program</span></a>
+        	<ul class="open_multiple">
+                <li><a href="<?=base_url()?>monitoring/form" class="pjax"><span>Form Upload Kegiatan</span></a></li>
+                <li><a href="<?=base_url()?>monitoring/swakelola" class="pjax"><span>Swakelola</span></a></li>
+                <li><a href="<?=base_url()?>monitoring/kontraktual" class="pjax"><span>Kontraktual</span></a></li>
+            </ul>
+        </li>
+        <li><a href="<?=base_url()?>perpustakaan"><img src="<?=base_url()?>assets/images/icons/small/grey/file_cabinet.png"/><span>Perpustakaan</span></a></li>
+		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda Menteri</span></a>
+            <ul class="open_multiple">
+                <li><a href="<?=base_url()?>perkantoran/form" class="pjax"><span>Form Agenda Menteri</span></a></li>
+                <li><a href="<?=base_url()?>perkantoran" class="pjax"><span>Agenda Menteri</span></a></li>
+            </ul>
+        </li>
         <?php } ?>
         <?php if ($this->session->userdata('group')=="sdm"){?>
         <li><a href="<?=base_url()?>kepegawaian/form" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>Form Kepegawaian1</span></a></li>
