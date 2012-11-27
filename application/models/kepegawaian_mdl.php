@@ -10,6 +10,24 @@ class Kepegawaian_mdl extends CI_Model {
         parent::__construct();	
 		$this->load->database();
     }
+	
+	function getRekapUK(){
+		$q = "SELECT *
+			  FROM sdm_rekap_unit_stat
+			  ORDER BY no";
+		$rs = $this->db->query($q)->result();
+		
+		return $rs;
+	}
+	
+	function getRekapJJK(){
+		$q = "SELECT *
+			  FROM sdm_rekap_jab_jk
+			  ORDER BY no";
+		$rs = $this->db->query($q)->result();
+		
+		return $rs;
+	}
     
     function getJmlBagian(){
 		$q = "SELECT no, unit_kerja, (jml_pns + jml_honor) AS jml 
@@ -45,5 +63,33 @@ class Kepegawaian_mdl extends CI_Model {
 		
 		return $rs[0]['tot'];
     }
+	
+	function ubah($data){
+		$this->db->where('no', $data['no']);
+		$this->db->update('sdm_rekap_unit_stat', $data);
+		
+		
+		/*$q = "UPDATE sdm_rekap_unit_stat SET
+			  jml_pns='".$data['jml_pns']."', 
+			  jml_honor='".$data['jml_honor']."'
+			  WHERE no='".$data['no']."'";
+		$rs = $this->db->query($q);
+		
+		return $q;*/
+	}
+	
+	function ubah2($data){
+		$this->db->where('no', $data['no']);
+		$this->db->update('sdm_rekap_jab_jk', $data);
+		
+		
+		/*$q = "UPDATE sdm_rekap_unit_stat SET
+			  jml_pns='".$data['jml_pns']."', 
+			  jml_honor='".$data['jml_honor']."'
+			  WHERE no='".$data['no']."'";
+		$rs = $this->db->query($q);
+		
+		return $q;*/
+	}
 }
 ?>

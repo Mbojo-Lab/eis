@@ -16,7 +16,7 @@ class Dashboard extends CI_Controller {
 	function index(){	  
         //GEOSPASIAL
 		$data['title']="GeoSpasial";
-		$data['rs'] = $this->gis->ambildata(1);
+		$data['rs'] = $this->gis->ambildata(12);
 		
 	    //KEPEGAWAIAN
 		$data['title_kep1']="REKAPITULASI PEGAWAI KEMENPERA";

@@ -26,12 +26,76 @@ class Kepegawaian extends CI_Controller {
 	}
 	
 	function form(){
-		$this->load->view('jqgrid_dist');
-		$this->load->view('kepegawaian_frm');
-	
+		$data['menutitle']="Kepegawaian";
+		$data['NmMenu'] = "Form Kepegawaian Menurut Unit Kerja";
+		$this->load->view('header_admin',$data);
+		$this->load->view('kepegawaian_frm',$data);
+		$this->load->view('mst_fcj',$data);
+		$this->load->view('kepegawaian_fmj',$data);		
+		$this->load->view('footer');
 	}
 	
-}
+	function form2(){
+		$data['menutitle']="Kepegawaian";
+		$data['NmMenu'] = "Form Kepegawaian Menurut Jabatan dan Jenis Kelamin";
+		$this->load->view('header_admin',$data);
+		$this->load->view('kepegawaian_frm',$data);
+		$this->load->view('mst_fcj',$data);
+		$this->load->view('kepegawaian_fmj2',$data);		
+		$this->load->view('footer');
+	}
+	
+	function grid(){
+		$rs = $this->sdm->getRekapUK();
+		echo json_encode($rs);
+	}
+	
+	function grid2(){
+		$rs = $this->sdm->getRekapJJK();
+		echo json_encode($rs);
+	}
+	
+	function ubah(){
+		$no = intval($_REQUEST['no']);  
+		$unit_kerja = $_REQUEST['unit_kerja'];  
+		$jml_pns = intval($_REQUEST['jml_pns']);  
+		$jml_honor = intval($_REQUEST['jml_honor']);  
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+		$array = array(  
+			'no' => $no,  
+			'unit_kerja' => $unit_kerja,  
+			'jml_pns' => $jml_pns,  
+			'jml_honor' => $jml_honor
+			);
+		$datano = $this->sdm->ubah($array);
+		
+		echo json_encode(array(  
+			'no' => $no,  
+			'unit_kerja' => $unit_kerja,  
+			'jml_pns' => $jml_pns,  
+			'jml_honor' => $jml_honor
+		));  
+	}
+	
+	function ubah2(){
+		$no = intval($_REQUEST['no']);  
+		$jabatan = $_REQUEST['jabatan'];  
+		$jml_pria = intval($_REQUEST['jml_pria']);  
+		$jml_wanita = intval($_REQUEST['jml_wanita']);  
+
+		$array = array(  
+			'no' => $no,  
+			'jabatan' => $jabatan,  
+			'jml_pria' => $jml_pria,  
+			'jml_wanita' => $jml_wanita
+			);
+		$datano = $this->sdm->ubah2($array);
+		
+		echo json_encode(array(  
+			'no' => $no,  
+			'jabatan' => $jabatan,  
+			'jml_pria' => $jml_pria,  
+			'jml_wanita' => $jml_wanita
+		));  
+	}
+}

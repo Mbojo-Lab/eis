@@ -10,9 +10,13 @@ class Geospasial_mdl extends CI_Model {
     function ambildata($group,$no=''){		
 		$q = "SELECT *
 			  FROM gis a
-			  INNER JOIN gis_group b ON a.id_gis_group=b.id_gis_group 
-			  WHERE a.id_gis_group='$group' 
-			  AND a.no LIKE '%$no%'";
+			  INNER JOIN kegiatan b ON a.id_gis_group=b.id
+			  WHERE a.id_gis_group='$group' ";
+		if ($no!=""){
+			
+			$q .= "AND a.no LIKE '%$no%'";
+		}
+			  
 		
 		$rs = $this->db->query($q)->result();		
 		return $rs;

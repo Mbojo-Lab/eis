@@ -38,7 +38,7 @@ function peta_awal(id,group,no){
 
 
 $(document).ready(function(){
-	peta_awal("petaku",1,'');
+	peta_awal("petaku",12,'');
 	
 });
 
@@ -71,7 +71,8 @@ function ambildatabase(group,no){
 }
 
 function setinfo(petak, nomor){
-	var message = "<b>"+titlex[nomor]+"</b><br>Alamat : "+alamatx[nomor]+"<br>Keterangan:"+keteranganx[nomor];
+	//var message = "<b>"+titlex[nomor]+"</b><br>Alamat : "+alamatx[nomor]+"<br>Keterangan:"+keteranganx[nomor];
+	var message = "<b>"+alamatx[nomor]+"</b>";
 	var infowindow = new google.maps.InfoWindow(
 	  { content: message,
 		size: new google.maps.Size(50,50)
@@ -408,9 +409,9 @@ $(function () {
 
 				<div class="box grid_8 tabs">
 					<ul class="tab_header clearfix">
-						<li><a href="#tabs-1" onclick="peta_awal('petaku',1);">DAK</a></li>
-    <li><a href="#tabs-2" onclick="peta_awal('petaku2',2);">Pembangunan Rusunawa</a></li>
-    <li><a href="#tabs-3" onclick="peta_awal('petaku3',3);">PSU</a></li>
+						<li><a href="#tabs-1" onclick="peta_awal('petaku',12);">DAK</a></li>
+    <li><a href="#tabs-2" onclick="peta_awal('petaku2',8);">Pembangunan Rusunawa</a></li>
+    <li><a href="#tabs-3" onclick="peta_awal('petaku3',11);">PSU</a></li>
 					</ul>
 					<div class="controls">
 						<a href="#" class="grabber"></a>
@@ -459,10 +460,10 @@ $(function () {
   </div>
   <div class="toggle_container">
     <div id="tabs-as1" class="block">
-    TES....
+    
     </div>
     <div id="tabs-as2" class="block">
-    TES....2
+    
     </div>
   </div>  
 </div>                
@@ -487,10 +488,10 @@ $(function () {
   </div>
   <div class="toggle_container">
     <div id="tabs-mon1" class="block">
-    TES....
+    
     </div>
     <div id="tabs-mon2" class="block">
-    TES....2
+    
     </div>
   </div>  
 </div>                
@@ -521,7 +522,8 @@ $(function () {
 	<script type="text/javascript">
         $(document).ready(function() {
             $("#tabs-perk1").eventCalendar({
-                eventsjson: '<?=base_url()?>assets/files/events.json.php'
+                eventsjson: '<?=base_url()?>assets/files/events.json.php',
+				showDescription: true
             });
         });
     </script>

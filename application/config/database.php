@@ -44,8 +44,9 @@
 | The $active_record variables lets you determine whether or not to load
 | the active record class
 */
-$active_group = "sdm";
 $active_record = TRUE;
+
+$active_group = "sdm";
 
 $db['sdm']['hostname'] = "localhost";
 $db['sdm']['username'] = "root";
@@ -61,7 +62,6 @@ $db['sdm']['char_set'] = "utf8";
 $db['sdm']['dbcollat'] = "utf8_general_ci";
 
 $active_group = "perpus";
-$active_record = TRUE;
 
 $db['perpus']['hostname'] = "localhost";
 $db['perpus']['username'] = "root";
@@ -77,8 +77,8 @@ $db['perpus']['char_set'] = "utf8";
 $db['perpus']['dbcollat'] = "utf8_general_ci";
 
 
- $active_group = 'default';
-$active_record = TRUE;
+$active_group = 'default';
+
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'postgres';

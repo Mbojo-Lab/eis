@@ -11,7 +11,7 @@ class Geospasial extends CI_Controller {
 	
 	function index(){		
 		$data['title']="GeoSpasial";
-		$data['rs'] = $this->gis->ambildata(1);
+		$data['rs'] = $this->gis->ambildata(12);
 		
 		$this->load->view('header');
 		$this->load->view('geospasial',$data);
@@ -38,7 +38,7 @@ class Geospasial extends CI_Controller {
 			$json .= '{';
 			$json .= '"no":"'.$r->no.'",
 				"title":"'.htmlspecialchars($r->title).'",
-				"jenis":"'.htmlspecialchars($r->gis_group).'",
+				"jenis":"'.htmlspecialchars($r->nama).'",
 				"alamat":"'.htmlspecialchars($r->address).'",
 				"keterangan":"'.htmlspecialchars($r->desc).'",
 				"x":"'.$r->x.'",

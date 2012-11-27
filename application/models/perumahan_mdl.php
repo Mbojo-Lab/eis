@@ -295,20 +295,21 @@ class Perumahan_mdl extends CI_Model {
 	}
 	
 	function chartBar(){
-		$q = "SELECT id,nama 
+		/*$q = "SELECT id,nama 
 			  FROM kegiatan WHERE parent_id=0 ";
 		$rs = $this->db->query($q)->result();
-		
+		*/
 		$html = '<table id="datatable_peru" style="display:none"><thead><tr><th></th>';
-		
+		$html .= '<th>Target</th><th>Realisasi</th>';
+		/*
 		foreach ($rs as $r){
 			$html .= '<th>'.$r->nama.'</th>';
-		}
+		}*/
 		
 		$html .= '</tr></thead><tbody>';
 		
 		$q = "SELECT tahun,SUM(tg_anggaran) AS target, SUM(re_anggaran) AS realisasi 
-			  FROM anggaran  GROUP BY tahun";
+			  FROM anggaran GROUP BY tahun ORDER BY tahun";
 		$rs = $this->db->query($q)->result();
 		
 		foreach ($rs as $r){
@@ -319,6 +320,68 @@ class Perumahan_mdl extends CI_Model {
 		
 		return $html;
 		
+	}
+	
+	function getKegiatan(){
+		$q = "SELECT id,nama
+			  FROM kegiatan ORDER BY parent_id, no_urut";
+		$rs = $this->db->query($q)->result();
+		
+		$html="";
+		foreach ($rs as $r){
+			if (! $this->cekChild($r->id)){
+				$html .= "<option value=\"".$r->id."\">".$r->nama."</option>";
+			}
+		}
+		return $html;
+	}
+	
+	function getDetail($data){
+		//$rs = $this->db->get_where('anggaran', $where)->result_array();
+		
+		$q = "SELECT *
+			  FROM anggaran a LEFT JOIN gis b ON a.id_keg = b.id_gis_group WHERE tahun='".$data['tahun']."' AND id_keg=".$data['id_keg']."";
+		$rs = $this->db->query($q)->result_array();
+		
+		return $rs[0];
+	}
+	
+	function simpan($data){
+		
+		$sql[]="UPDATE anggaran SET 
+				target='".$data['target']."', 
+				tg_anggaran='".$data['tg_anggaran']."',
+				realisasi='".$data['realisasi']."', 
+				re_anggaran='".$data['re_anggaran']."' 
+				WHERE id_keg=".$data['id_keg']." AND tahun='".$data['tahun']."'"; 
+		
+		
+		$new = $this->db->query("SELECT id FROM anggaran ORDER BY id DESC")->result_array();
+		$newid = $new[0]['id']+1;		
+		
+		$sql[] = "INSERT INTO anggaran (
+		id,target,tg_anggaran,realisasi,re_anggaran,tahun,id_keg
+		) VALUES (
+		'$newid','".$data['target']."', '".$data['tg_anggaran']."','".$data['realisasi']."', '".$data['re_anggaran']."','".$data['tahun']."', '".$data['id_keg']."' )";
+		
+		
+		$sql[]="UPDATE gis SET 
+				address='".$data['address']."', 
+				x='".$data['x']."',
+				y='".$data['y']."'
+				WHERE id_gis_group=".$data['id_keg'].""; 
+		
+		$new = $this->db->query("SELECT no FROM gis ORDER BY no DESC")->result_array();
+		$newno = $new[0]['no']+1;
+		
+		$sql[] = "INSERT INTO gis ( no,title,address,x,y,id_gis_group
+		) VALUES (
+		'$newno', '".$data['id_keg']."', '".$data['address']."', '".$data['x']."','".$data['y']."', '".$data['id_keg']."' )";
+		
+		foreach ($sql as $q)
+			$rs = $this->db->query($q);
+			
+		return true;
 	}
 
 }

@@ -168,6 +168,73 @@ $(function () {
 
 </script>
 
-<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
-<?=$html ?>
+<div class="box grid_16 tabs">
+  <ul class="tab_header clearfix">
+    <li><a href="#tabs-peru1">Perumahan</a></li>
+    <li><a href="#tabs-peru2">Form Perumahan</a></li>
+  </ul>
+  <div class="controls">
+    <a href="#" class="grabber"></a>
+    <a href="#" class="toggle"></a>
+    <a href="#" class="show_all_tabs"></a>
+  </div>
+  <div class="toggle_container">
+    <div id="tabs-peru1" class="block">
+		<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+		<?=$html ?>
+    </div> 
+    <div id="tabs-peru2" class="block">
+        <div class="section">
+        	<div style="width:500px"  class="flat_area grid_16">
+                <div region="center" border="false" style="padding:10px;background:#ececec;border:1px solid #ccc;">
+                <form id="fm" method="post" onSubmit="return false">
+                    <table>
+                    <tr>
+                      <td width="72"><b>Tahun</b></td>
+                      <td colspan="3"><input type="text" id="tahun" name="tahun" style="width:100px;" onchange="getDetail()"/></td>
+                    </tr>
+                    <tr>
+                      <td><b>Kegiatan</b></td>
+                      <td colspan="3">
+                        <select id="id_keg" name="id_keg" style="width:350px" onchange="getDetail()">
+                          <option value=""></option>
+                          <?=$html?>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><b>Target</b></td>
+                      <td width="155"><input type="text" id="target" name="target" style="width:100px;" /></td>
+                      <td width="33"><b>Pagu</b></td>
+                      <td width="277"><input type="text" id="tg_anggaran" name="tg_anggaran" style="width:100px;" /></td>
+                    </tr>
+                    <tr>
+                      <td><b>Realitas</b></td>
+                      <td><input type="text" id="realisasi" name="realisasi" style="width:100px;" /></td>
+                      <td><b>Pagu</b></td>
+                      <td><input type="text" id="re_anggaran" name="re_anggaran" style="width:100px;" /></td>
+                    </tr>
+                    <tr>
+                      <td colspan="4"><b>Lokasi</b></td>
+                    </tr>
+                    <tr>
+                      <td valign="top"> - Alamat</td>
+                      <td colspan="3"><textarea id="alamat" name="alamat" style="width:350px;height:80px"></textarea></td>
+                    </tr>
+                    <tr>
+                      <td> - Koordinat</td>
+                      <td colspan="3"><b>X</b> <input type="text" id="x" name="x" style="width:155px;" />, <b>Y</b> <input type="text" id="y" name="y" style="width:155px;" /></td>
+                    </tr>
+                    </table>
+                    </form>
+                </div>
+                <div region="south" border="false" style="text-align:right;padding:5px 0;">
+                    <a class="easyui-linkbutton" iconCls="icon-ok" href="javascript:void(0)" onclick="simpan()">Simpan</a>
+                    <a class="easyui-linkbutton" iconCls="icon-cancel" href="javascript:void(0)" onclick="kosong()">Batal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>        
 <br />&nbsp;

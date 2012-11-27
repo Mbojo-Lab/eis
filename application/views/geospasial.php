@@ -33,8 +33,7 @@ function peta_awal(id,group,no){
 
 
 $(document).ready(function(){
-	peta_awal("petaku",1,'');
-	
+	peta_awal("petaku",12,'');
 });
 
 function ambildatabase(group,no){
@@ -66,7 +65,8 @@ function ambildatabase(group,no){
 }
 
 function setinfo(petak, nomor){
-	var message = "<b>"+titlex[nomor]+"</b><br>Alamat : "+alamatx[nomor]+"<br>Keterangan:"+keteranganx[nomor];
+	//var message = "<b>"+titlex[nomor]+"</b><br>Alamat : "+alamatx[nomor]+"<br>Keterangan:"+keteranganx[nomor];
+	var message = "<b>"+alamatx[nomor]+"</b>";
 	var infowindow = new google.maps.InfoWindow(
 	  { content: message,
 		size: new google.maps.Size(50,50)
@@ -87,9 +87,9 @@ function ambil_list(id,group){
 
 <div class="box grid_16 tabs">
   <ul class="tab_header clearfix">
-    <li><a href="#tabs-1" onclick="peta_awal('petaku',1);">DAK</a></li>
-    <li><a href="#tabs-2" onclick="peta_awal('petaku2',2);">Pembangunan Rusunawa</a></li>
-    <li><a href="#tabs-3" onclick="peta_awal('petaku3',3);">PSU</a></li>
+    <li><a href="#tabs-1" onclick="peta_awal('petaku',12);">DAK</a></li>
+    <li><a href="#tabs-2" onclick="peta_awal('petaku2',8);">Pembangunan Rusunawa</a></li>
+    <li><a href="#tabs-3" onclick="peta_awal('petaku3',11);">PSU</a></li>
   </ul>
   <div class="controls">
     <a href="#" class="grabber"></a>

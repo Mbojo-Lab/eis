@@ -2,16 +2,9 @@
     <h2><?=$menutitle?></h2>
 </div>
 
-<div class="box grid_16 tabs">
-  <ul class="tab_header clearfix">
-    <li><a href="#tabs-kep1"><?=$tabtitle?></a></li>
-  </ul>
-  <div class="controls">
-    <a href="#" class="grabber"></a>
-    <a href="#" class="toggle"></a>
-    <a href="#" class="show_all_tabs"></a>
-  </div>
-  <div class="toggle_container">
+<div class="box grid_16">
+  <h2 class="box_head">Jumlah Pegawai</h2>
+  
     <div id="tabs-kep1" class="block">
         <div class="section">
 <script type="text/javascript">
@@ -218,7 +211,6 @@ $(function () {
         </td>
         </tr>
         </table>
-		</div>
     </div>
   </div>
 </div>    
