@@ -55,7 +55,7 @@
 	<ul class="clearfix">
 		<li class="icon_only"><a href="<?=base_url()?>" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/laptop.png"/><span class="display_none">Dashboard</span></a></li>
 
-		<?php if ($this->session->userdata('group')=="admin"){?>
+		<?php if ($this->session->userdata('group')=="Admin"){?>
         <li><a href="<?=base_url()?>geospasial"><img src="<?=base_url()?>assets/images/icons/small/grey/google_maps.png"/><span>GeoSpasial</span></a></li>        
         <li><a><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kepegawaian</span></a>
         	<ul class="open_multiple">
@@ -76,7 +76,7 @@
         </li>
 		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Pengendalian dan Evaluasi Program</span></a>
         	<ul class="open_multiple">
-                <li><a href="<?=base_url()?>monitoring/form" class="pjax"><span>Form Upload Kegiatan</span></a></li>
+                <li><a href="<?=base_url()?>monitoring/form" class="pjax"><span>Form Upload Program</span></a></li>
                 <li><a href="<?=base_url()?>monitoring/swakelola" class="pjax"><span>Swakelola</span></a></li>
                 <li><a href="<?=base_url()?>monitoring/kontraktual" class="pjax"><span>Kontraktual</span></a></li>
             </ul>
@@ -88,13 +88,14 @@
                 <li><a href="<?=base_url()?>perkantoran" class="pjax"><span>Agenda Menteri</span></a></li>
             </ul>
         </li>
+        <li><a href="<?=base_url()?>user/form"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Users</span></a></li>      
         <?php } ?>
-        <?php if ($this->session->userdata('group')=="sdm"){?>
+        <?php if ($this->session->userdata('group')=="SDM"){?>
         <li><a href="<?=base_url()?>kepegawaian/form" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>Form Kepegawaian1</span></a></li>
         <li><a href="<?=base_url()?>kepegawaian/form2" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>Form Kepegawaian2</span></a></li>
         <li><a href="<?=base_url()?>kepegawaian"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kepegawaian</span></a></li>
         <?php } ?>        
-	    <?php if ($this->session->userdata('group')=="eksekutif"){?>
+	    <?php if ($this->session->userdata('group')=="Eksekutif"){?>
         <li><a href="<?=base_url()?>geospasial"><img src="<?=base_url()?>assets/images/icons/small/grey/google_maps.png"/><span>GeoSpasial</span></a></li>        
         <li><a href="<?=base_url()?>kepegawaian"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kepegawaian</span></a></li>
         <li><a href="<?=base_url()?>aset"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>

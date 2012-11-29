@@ -383,6 +383,90 @@ class Perumahan_mdl extends CI_Model {
 			
 		return true;
 	}
+	
+	function cekAnak($id){
+		$q = "SELECT * FROM kegiatan WHERE parent_id = '$id'";
+		$rs = $this->db->query($q)->result_array();
+		
+		if ($rs){
+			return true;
+		} else{
+			return false;
+		}
+	}
+	
+	function cctree($parent){		
+		$q = "SELECT * FROM kegiatan WHERE parent_id = '$parent' ORDER BY no_urut";
+		$rs = $this->db->query($q)->result_array();
+		
+		$jml=count($rs);
+		$no=1;
+		$json = "[";
+		if ($rs):
+			
+			foreach ($rs as $r):
+				$json .= '{
+						"id":"'.$r['id'].'",
+						"text":"'.$r['no']." ".$r['nama'].'"';
+						
+				/*if ($r['posisi']=="parent"){ 
+					$json .= ',"state":"closed"';
+				}*/		
+				
+				if ($this->cekAnak($r['id'])){	
+					$json .= ',"children":';
+					$json .= $this->cctree($r['id']);
+				}
+				
+				$json .= ' }';
+				if ($no!=$jml){$json .= ",";}	  
+				$no += 1;
+			endforeach;
+		endif;
+		$json .= "]";
+		return $json;
+	}
+	
+	function tree(){
+		$q = "SELECT * FROM kegiatan WHERE parent_id = '0' ORDER BY no_urut ";
+		$rs = $this->db->query($q)->result_array();
+		
+		$jml=count($rs);
+		$no=1;
+		$json = "[";
+		if ($rs):
+			
+			foreach ($rs as $r):
+				$json .= '{
+						"id":"'.$r['id'].'",
+						"text":"'.$r['no']." ".$r['nama'].'"';
+						
+				/*if ($r['posisi']=="parent"){ 
+					$json .= ',"state":"closed"';
+				}*/
+				
+				if ($this->cekAnak($r['id'])){	
+					$json .= ',"children":';
+					$json .= $this->cctree($r['id']);
+				}
+				
+				$json .= ' }';
+				if ($no!=$jml){$json .= ",";}	  
+				$no += 1;
+			endforeach;
+		endif;
+		$json .= "]";
+		
+		return $json;
+		
+	}
+
+	function getKeg($id){
+		$q = "SELECT * FROM kegiatan WHERE id='$id' ";
+		$rs = $this->db->query($q)->result_array();
+		
+		return $rs[0];
+	}
 
 }
 ?>

@@ -227,6 +227,10 @@ function openurl(url){
 	window.open(url,'_blank');
 }
 
+function wopen(url){
+	window.open(url,'_self');
+}
+
 function enInput(){	
 	$(':input').attr('disabled',false);
 }

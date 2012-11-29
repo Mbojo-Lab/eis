@@ -492,15 +492,15 @@ $(function () {
         <table class=" datatable">
         <thead>
             <tr>
-                <th width="30">No.</th>
-                <th>Nama Kegiatan</th>
-                <th>Anggaran</th>
+                <th width="30">NO.</th>
+                <th>NAMA KEGIATAN</th>
+                <th>PAGU</th>
             </tr>
         </thead>
         <tbody>
         <?php $no=1; foreach ($rsMon1 as $r){  ?>
             <tr class="gradeX">
-                <td><?=$no?></td>
+                <td align="center"><?=$no?></td>
                 <td><?=$r->nama_keg?></td>
                 <td align="right"><?=number_format($r->anggaran)?></td>
             </tr>
@@ -514,15 +514,15 @@ $(function () {
         <table class=" datatable">
         <thead>
             <tr>
-                <th width="30">No.</th>
-                <th>Nama Kegiatan</th>
-                <th>Anggaran</th>
+                <th width="30">NO.</th>
+                <th>NAMA KEGIATAN</th>
+                <th>PAGU</th>
             </tr>
         </thead>
         <tbody>
         <?php $no=1; foreach ($rsMon2 as $r){  ?>
             <tr class="gradeX">
-                <td><?=$no?></td>
+                <td align="center"><?=$no?></td>
                 <td><?=$r->nama_keg?></td>
                 <td align="right"><?=number_format($r->anggaran)?></td>
             </tr>

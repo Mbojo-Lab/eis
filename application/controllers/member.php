@@ -23,8 +23,17 @@ class Member extends CI_Controller
  
     function login(){		
         $form_data = $this->input->post();
+		$password = $form_data['password'];
+		
+		$pengacak  = "K1234I4321K5678I8765N5891";
+		 
+		// cek kesesuaian password terenkripsi dari form login
+		// dengan password terenkripsi dari database
+		
+		$password = md5(md5($password) . $pengacak .  md5($pengacak) . $password);
+		
         if ($form_data){
-           if ($this->account_model->login($form_data['username'], $form_data['password'])){
+           if ($this->account_model->login($form_data['username'], $password)){
                 redirect(base_url().'dashboard');
             } else {
                 redirect(base_url().'member/login');

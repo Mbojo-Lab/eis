@@ -152,7 +152,7 @@ $(function () {
 					point: {
 						events: {
 							click: function() {
-								window.open('perumahan/kinerjaTabel/'+ this.category,'_self');
+								window.open('<?=base_url()?>perumahan/kinerjaTabel/'+ this.category,'_self');
 							}
 						}
 					}

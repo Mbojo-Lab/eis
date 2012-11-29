@@ -53,8 +53,8 @@ class Perumahan extends CI_Controller {
 		$data['html']= $this->perm->getKegiatan();
 		
 		$this->load->view('header_admin');
-		$this->load->view('perumahan_frm',$data);
-		$this->load->view('perumahan_fmj',$data);		
+		$this->load->view('perumahan/perumahan_frm',$data);
+		$this->load->view('perumahan/perumahan_fmj',$data);		
 		$this->load->view('footer');
 	}
 	
@@ -63,8 +63,8 @@ class Perumahan extends CI_Controller {
 		$data['html']= $this->perm->getKegiatan();
 		
 		$this->load->view('header_admin');
-		$this->load->view('perumahan_frm',$data);
-		$this->load->view('perumahan_fmj',$data);		
+		$this->load->view('perumahan/perumahan_frm2',$data);
+		$this->load->view('perumahan/perumahan_fcj',$data);	
 		$this->load->view('footer');
 	}
 	
@@ -120,6 +120,15 @@ class Perumahan extends CI_Controller {
 		}
 		
 		echo json_encode(array('success'=>$bol,'msg'=>$msg));
+	}
+	
+	function tree(){	
+		echo $this->perm->tree();
+	}
+	
+	function getKeg($id){
+		$rs = $this->perm->getKeg($id);
+		echo json_encode($rs);
 	}
 	
 }
