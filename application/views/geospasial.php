@@ -33,7 +33,7 @@ function peta_awal(id,group,no){
 
 
 $(document).ready(function(){
-	peta_awal("petaku",12,'');
+	peta_awal("petaku",39,'');
 });
 
 function ambildatabase(group,no){
@@ -87,7 +87,7 @@ function ambil_list(id,group){
 
 <div class="box grid_16 tabs">
   <ul class="tab_header clearfix">
-    <li><a href="#tabs-1" onclick="peta_awal('petaku',12);">DAK</a></li>
+    <li><a href="#tabs-1" onclick="peta_awal('petaku',39);">DAK</a></li>
     <li><a href="#tabs-2" onclick="peta_awal('petaku2',8);">Pembangunan Rusunawa</a></li>
     <li><a href="#tabs-3" onclick="peta_awal('petaku3',11);">PSU</a></li>
   </ul>

@@ -38,7 +38,7 @@ function peta_awal(id,group,no){
 
 
 $(document).ready(function(){
-	peta_awal("petaku",12,'');
+	peta_awal("petaku",39,'');
 	
 });
 
@@ -409,7 +409,7 @@ $(function () {
 
 				<div class="box grid_8 tabs">
 					<ul class="tab_header clearfix">
-						<li><a href="#tabs-1" onclick="peta_awal('petaku',12);">DAK</a></li>
+						<li><a href="#tabs-1" onclick="peta_awal('petaku',39);">DAK</a></li>
     <li><a href="#tabs-2" onclick="peta_awal('petaku2',8);">Pembangunan Rusunawa</a></li>
     <li><a href="#tabs-3" onclick="peta_awal('petaku3',11);">PSU</a></li>
 					</ul>
@@ -448,7 +448,7 @@ $(function () {
   
 </div>                
 
-<div class="box grid_8 tabs">
+<? /*<div class="box grid_8 tabs">
   <ul class="tab_header clearfix">
     <li><a href="#tabs-as1">Aset IT</a></li>
     <li><a href="#tabs-as2">Aset Non IT</a></li>
@@ -466,7 +466,7 @@ $(function () {
     
     </div>
   </div>  
-</div>                
+</div>                */?>
 
 <div class="box grid_8">
   <h2 class="box_head">Perumahan</h2>
@@ -475,6 +475,41 @@ $(function () {
     <?=$html_peru?>
   </div>
 </div>                
+
+<div class="box grid_8 tabs">
+  <ul class="tab_header clearfix">
+    <li><a href="#tabs-perp1">Koleksi Perpustakaan</a></li>
+    <li><a href="#tabs-perp2">Kunjungan Perpustakaan</a></li>
+  </ul>
+  <div class="controls">
+    <a href="#" class="grabber"></a>
+    <a href="#" class="toggle"></a>
+    <a href="#" class="show_all_tabs"></a>
+  </div>
+  <div class="toggle_container">
+    <div id="tabs-perp1" class="block">
+      <div id="container-perp1" style="min-width: 350px; height: 300px; margin: 0 auto"></div>
+    </div>
+    <div id="tabs-perp2" class="block">
+      <div id="container-perp2" style="min-width: 350px; height: 300px; margin: 0 auto"></div>
+    </div>
+  </div>  
+</div>
+
+<div class="box grid_8">
+  <h2 class="box_head">Schedule</h2>
+    <div id="tabs-perk1" class="block" style="min-height:440px;">
+	<script type="text/javascript">
+        $(document).ready(function() {
+            $("#tabs-perk1").eventCalendar({
+                eventsjson: '<?=base_url()?>assets/files/events.json.php',
+				showDescription: true
+            });
+        });
+    </script>
+    </div>
+</div>                                
+<script src="<?=base_url()?>assets/scripts/eventCalendar/jquery.eventCalendar.js" type="text/javascript"></script>
 
 <div class="box grid_8 tabs">
   <ul class="tab_header clearfix">
@@ -533,38 +568,3 @@ $(function () {
     </div>
   </div>  
 </div>                
-
-<div class="box grid_8 tabs">
-  <ul class="tab_header clearfix">
-    <li><a href="#tabs-perp1">Koleksi Perpustakaan</a></li>
-    <li><a href="#tabs-perp2">Kunjungan Perpustakaan</a></li>
-  </ul>
-  <div class="controls">
-    <a href="#" class="grabber"></a>
-    <a href="#" class="toggle"></a>
-    <a href="#" class="show_all_tabs"></a>
-  </div>
-  <div class="toggle_container">
-    <div id="tabs-perp1" class="block">
-      <div id="container-perp1" style="min-width: 350px; height: 300px; margin: 0 auto"></div>
-    </div>
-    <div id="tabs-perp2" class="block">
-      <div id="container-perp2" style="min-width: 350px; height: 300px; margin: 0 auto"></div>
-    </div>
-  </div>  
-</div>
-
-<div class="box grid_8">
-  <h2 class="box_head">Schedule</h2>
-    <div id="tabs-perk1" class="block">
-	<script type="text/javascript">
-        $(document).ready(function() {
-            $("#tabs-perk1").eventCalendar({
-                eventsjson: '<?=base_url()?>assets/files/events.json.php',
-				showDescription: true
-            });
-        });
-    </script>
-    </div>
-</div>                                
-<script src="<?=base_url()?>assets/scripts/eventCalendar/jquery.eventCalendar.js" type="text/javascript"></script>

@@ -42,7 +42,7 @@ function kosong(){
 function simpan(){
 	aksi=$('#aksi').val();
 	
-	parent_id=$('#no').val();
+	parent_id=$('#parent_id').combotree('getValue');
 	no=$('#no').val();
 	nama=$('#nama').val();
 	sat=$('#sat').val();
@@ -50,9 +50,16 @@ function simpan(){
 	posisi=$('#posisi').val();
 	
 	if (aksi=="tambah"){
-		$.getJSON('<?=base_url()?>perumahan/tambah',{
-			
+		$.post('<?=base_url()?>perumahan/getform/tambah',{
+			parent_id:parent_id,
+			no:no,
+			nama:nama,
+			sat:sat,
+			sasaran:sasaran,
+			posisi:posisi
 		},function(result){
+			//alert(result);
+			var result = eval('('+result+')');
 			if (result.success){
 				$('#dlg').dialog('close');		// close the dialog
 				$('#dg').datagrid('reload');	// reload the user data
@@ -65,8 +72,50 @@ function simpan(){
 			}
 		});
 	} else if (aksi=="ubah") {
-	
+		$.post('<?=base_url()?>perumahan/getform/ubah',{
+			parent_id:parent_id,
+			no:no,
+			nama:nama,
+			sat:sat,
+			sasaran:sasaran,
+			posisi:posisi
+		},function(result){
+			var result = eval('('+result+')');
+			if (result.success){
+				$('#dlg').dialog('close');		// close the dialog
+				$('#dg').datagrid('reload');	// reload the user data
+				$.messager.show({
+					title: 'Info',
+					msg: result.msg
+				});
+			} else {
+				$.messager.alert('error',result.msg);
+			}
+		});
 	} else if (aksi=="hapus") {
+		if ($('#parent_id').combotree('getValue') != '') {
+		$.messager.confirm('Confirm','Apakah anda yakin akan menghapus data ini?',function(r){  
+			if (r){ 
+				$.getJSON('<?=base_url()?>perumahan/hapus',{
+					id:parent_id
+				},function(result){
+					if (result.success){
+						$('#dlg').dialog('close');		// close the dialog
+						$('#dg').datagrid('reload');	// reload the user data
+						$.messager.show({
+							title: 'Info',
+							msg: result.msg
+						});
+					} else {
+						$.messager.alert('error',result.msg);
+					}
+				});
+			}
+		}); 	
+	} else {
+		$.messager.alert('Warning','Silahkan pilih data yang akan di hapus!');
+	}
+	
 		
 	}
 }

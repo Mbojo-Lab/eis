@@ -467,6 +467,36 @@ class Perumahan_mdl extends CI_Model {
 		
 		return $rs[0];
 	}
+	
+	function newID(){
+		$q = "SELECT * FROM kegiatan ORDER BY id DESC LIMIT 1";
+		$rs = $this->db->query($q)->result_array();
+		
+		$newid=1;
+		if ($rs){
+			$newid = $rs[0]['id']+1;
+		}
+		return $newid;
+	}
+	
+	function tambah($data){
+		$q = "INSERT INTO kegiatan (id,parent_id,no,nama,sat,sasaran,posisi) VALUES ('".$data['id']."','".$data['parent_id']."','".$data['no']."','".$data['nama']."','".$data['sat']."','".$data['sasaran']."','".$data['posisi']."')";
+		//$run = $this->db->insert('kegiatan', $data); 
+		$run=$this->db->query($q);
+		return $run;
+		//return  $q;
+	}
+	
+	function ubah($data,$id){
+		$run = $this->db->update('kegiatan', $data, array('id' => $id)); 
+		
+		return $run;
+	}
+	
+	function hapus($id){
+		$run = $this->db->delete('kegiatan', array('id' => $id)); 
+		return $run;
+	}
 
 }
 ?>

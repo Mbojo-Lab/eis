@@ -131,6 +131,85 @@ class Perumahan extends CI_Controller {
 		echo json_encode($rs);
 	}
 	
+	function getform($aksi){
+		$form_data = $this->input->post();
+		
+		$parent_id = $form_data['parent_id'];  
+		$no = $form_data['no'];
+		$nama = nl2br($form_data['nama']); 
+		$sat = $form_data['sat']; 
+		$sasaran = $form_data['sasaran']; 
+		$posisi = $form_data['posisi']; 
+		
+		if ($aksi=="tambah"){	
+			$data = array(  
+			'parent_id' => $parent_id,  
+			'no' => $no,
+			'nama' => $nama,
+			'sat' => $sat,
+			'sasaran' => $sasaran,
+			'posisi' => $posisi
+			);
+			$data['id'] = $this->perm->newID($data);	
+			$this->tambah($data);	
+		} else {
+			$data = array(  
+			'no' => $no,
+			'nama' => $nama,
+			'sat' => $sat,
+			'sasaran' => $sasaran,
+			'posisi' => $posisi
+			);
+			$this->ubah($data,$parent_id);
+		}
+	}
+	
+	function tambah($data){			
+		$success = $this->perm->tambah($data);	
+		//print_r($data);
+		
+		if ($success){				
+			$bol=true;
+			$msg="Tambah data berhasil.";
+		} else {
+			$bol=false;
+			$msg="Tambah data gagal.";		
+		}
+		
+		echo json_encode(array('success'=>$bol,'msg'=>$msg)); 	
+		
+		
+	}
+	
+	function ubah($data,$id){			
+		$success = $this->perm->ubah($data,$id);	
+		//print_r($data);
+		if ($success){				
+			$bol=true;
+			$msg="Ubah data berhasil.";
+		} else {
+			$bol=false;
+			$msg="Ubah data gagal.";		
+		}
+		
+		echo json_encode(array('success'=>$bol,'msg'=>$msg)); 
+	}
+	
+	function hapus(){
+		$id=$_REQUEST['id'];
+		$sucess = $this->perm->hapus($id);
+		
+		/*if ($success){				
+			$bol=true;
+			$msg="Hapus data berhasil.".$date;
+		} else {
+			$bol=false;
+			$msg="Hapus data GAGAL.".$date;
+		}*/
+		$msg="Hapus data berhasil.";
+		echo json_encode(array('success'=>true,'msg'=>$msg)); 
+	}
+	
 }
 
 /* End of file welcome.php */

@@ -19,13 +19,15 @@
       <td width="319"><input name="date0" type="hidden" id="date0">        
       <input name="date" type="text" id="date" class="easyui-datetimebox" style="width:150px"></td>
     </tr>
+    <tr><td colspan="2">&nbsp;</td></tr>
     <tr>
       <td>Kegiatan</td>
       <td><input name="title" type="text" class="easyui-validatebox" id="title" value="" style="width:200px"></td>
     </tr>
+    <tr><td colspan="2">&nbsp;</td></tr>
     <tr>
       <td valign="top">Keterangan</td>
-      <td><textarea name="description" id="description" style="width:200px; height:50px"></textarea></td>
+      <td><textarea name="description" id="description" style="width:300px; height:100px; border:1px solid #A4BED4"></textarea></td>
     </tr>
     </table>
     <input type="submit" id="btnSubmit" name="btnSubmit" style="display:none">

@@ -67,6 +67,10 @@ function ubah(){
 		$('#fm').form('load',row);
 		datetime = formatDate(new Date(parseInt(row.date)+(3600*7*1000)), '%d/%M/%Y %H:%m:%s');
 		$('#date').datetimebox('setValue',datetime);
+		
+		desc0 = row.description;
+		desc = desc0.replace(/<br \/>/g, "");
+		$('#description').val(desc);
 		url = '<?=base_url()?>perkantoran/getform/ubah';
 	}
 }

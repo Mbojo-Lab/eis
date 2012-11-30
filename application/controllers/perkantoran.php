@@ -54,7 +54,7 @@ class Perkantoran extends CI_Controller {
 		
 		$date0 = $form_data['date0'];  
 		$title = $form_data['title'];  
-		$description = $form_data['description']; 
+		$description = nl2br($form_data['description']); 
 
 		$data = array(  
 			'date' => $date,  

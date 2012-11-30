@@ -74,8 +74,8 @@
                 <li><a href="<?=base_url()?>kepegawaian" class="pjax"><span>Laporan</span></a></li>
             </ul>
         </li>
-        <li><a href="<?=base_url()?>aset"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>
-        Aset Manajemen</span></a></li>        
+        <? /*<li><a href="<?=base_url()?>aset"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>
+        Aset Manajemen</span></a></li>*/ ?>
 		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/apartment_building.png"/><span>Perumahan</span></a>
         	<ul class="open_multiple">
             	<li><a href="<?=base_url()?>perumahan/form2" class="pjax"><span>Form Kegiatan</span></a></li>
@@ -107,8 +107,8 @@
 	    <?php if ($this->session->userdata('group')=="Eksekutif"){?>
         <li><a href="<?=base_url()?>geospasial"><img src="<?=base_url()?>assets/images/icons/small/grey/google_maps.png"/><span>GeoSpasial</span></a></li>        
         <li><a href="<?=base_url()?>kepegawaian"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kepegawaian</span></a></li>
-        <li><a href="<?=base_url()?>aset"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>
-        Aset Manajemen</span></a></li>
+        <? /*<li><a href="<?=base_url()?>aset"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>
+        Aset Manajemen</span></a></li>*/?>
 		<li><a href="<?=base_url()?>perumahan" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/apartment_building.png"/><span>Perumahan</span></a></li>
 		<li><a href="<?=base_url()?>monitoring"><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Pengendalian dan Evaluasi Program</span></a></li>
         <li><a href="<?=base_url()?>perkantoran" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda Menteri</span></a></li>
