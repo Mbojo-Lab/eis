@@ -37,12 +37,7 @@
           <td width="126"><b>Sat</b>&nbsp;</td>
           <td><input type="text" id="sat" name="sat" style="width:150px" ></td>
         </tr>          
-        <tr><td colspan="3">&nbsp;</td></tr>
-        <tr>
-          <td width="126"><b>Sasaran</b>&nbsp;</td>
-          <td><input type="text" id="sasaran" name="sasaran" style="width:150px" ></td>
-        </tr>
-        <tr><td colspan="3">&nbsp;</td></tr>
+        <tr><td colspan="3">&nbsp;</td></tr>        
         <tr>
           <td width="126"><b>Status</b>&nbsp;</td>
           <td>

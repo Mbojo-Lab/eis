@@ -130,6 +130,8 @@ class Perumahan_mdl extends CI_Model {
 		  $grandtotReAnggaran += $totReAnggaran;
 		  
         endforeach; 
+		if ($grandtotTgAnggaran=='') $grandtotTgAnggaran = 0;
+		if ($grandtotReAnggaran=='') $grandtotReAnggaran = 0;	
 		
 		$html .= '<tr>
 					  <th colspan="2">TOTAL ALOKASI KEMENPERA ('.substr($totNama,0,-3).')</th>
@@ -234,6 +236,16 @@ class Perumahan_mdl extends CI_Model {
 		return $html;
     }
 	
+	function getGrid($id=0){
+		$q = "SELECT *
+			  FROM gis 
+			  WHERE id_gis_group = '$id'
+			  ORDER BY no";
+		$rs = $this->db->query($q)->result();
+		
+		return $rs;
+	}
+	
 	function getNilai($kolom, $id_keg, $tahun, $dec){
 		$cekChild = $this->cekChild($id_keg);	
 		
@@ -336,6 +348,14 @@ class Perumahan_mdl extends CI_Model {
 		return $html;
 	}
 	
+	function getNamaKeg($id=''){
+		$q = "SELECT id,nama
+			  FROM kegiatan WHERE id='$id'";
+		$rs = $this->db->query($q)->result();
+				
+		return $rs[0]->nama;
+	}
+	
 	function getDetail($data){
 		//$rs = $this->db->get_where('anggaran', $where)->result_array();
 		
@@ -347,36 +367,42 @@ class Perumahan_mdl extends CI_Model {
 	}
 	
 	function simpan($data){
+		if ($this->db->query("SELECT id FROM anggaran WHERE id_keg=".$data['id_keg']." AND tahun='".$data['tahun']."'")->result_array()){
 		
 		$sql[]="UPDATE anggaran SET 
 				target='".$data['target']."', 
+				sasaran='".$data['sasaran']."', 
 				tg_anggaran='".$data['tg_anggaran']."',
 				realisasi='".$data['realisasi']."', 
 				re_anggaran='".$data['re_anggaran']."' 
 				WHERE id_keg=".$data['id_keg']." AND tahun='".$data['tahun']."'"; 
-		
+				
+		} else {
 		
 		$new = $this->db->query("SELECT id FROM anggaran ORDER BY id DESC")->result_array();
 		$newid = $new[0]['id']+1;		
 		
 		$sql[] = "INSERT INTO anggaran (
-		id,target,tg_anggaran,realisasi,re_anggaran,tahun,id_keg
+		id,target,sasaran,tg_anggaran,realisasi,re_anggaran,tahun,id_keg
 		) VALUES (
-		'$newid','".$data['target']."', '".$data['tg_anggaran']."','".$data['realisasi']."', '".$data['re_anggaran']."','".$data['tahun']."', '".$data['id_keg']."' )";
+		'$newid','".$data['target']."','".$data['sasaran']."', '".$data['tg_anggaran']."','".$data['realisasi']."', '".$data['re_anggaran']."','".$data['tahun']."', '".$data['id_keg']."' )";
 		
-		
-		$sql[]="UPDATE gis SET 
-				address='".$data['address']."', 
-				x='".$data['x']."',
-				y='".$data['y']."'
-				WHERE id_gis_group=".$data['id_keg'].""; 
-		
-		$new = $this->db->query("SELECT no FROM gis ORDER BY no DESC")->result_array();
-		$newno = $new[0]['no']+1;
-		
-		$sql[] = "INSERT INTO gis ( no,title,address,x,y,id_gis_group
-		) VALUES (
-		'$newno', '".$data['id_keg']."', '".$data['address']."', '".$data['x']."','".$data['y']."', '".$data['id_keg']."' )";
+		}
+		/*
+		if ($this->db->query("SELECT no FROM gis WHERE id_gis_group=".$data['id_keg'])->result_array()){		
+			$sql[]="UPDATE gis SET 
+					address='".$data['address']."', 
+					x='".$data['x']."',
+					y='".$data['y']."'
+					WHERE id_gis_group=".$data['id_keg'].""; 
+		} else {			
+			$new = $this->db->query("SELECT no FROM gis ORDER BY no DESC")->result_array();
+			$newno = ($new)?$new[0]['no']+1:1;
+			
+			$sql[] = "INSERT INTO gis ( no,title,address,x,y,id_gis_group
+			) VALUES (
+			'$newno', '".$this->getNamaKeg($data['id_keg'])."', '".$data['address']."', '".$data['x']."','".$data['y']."', '".$data['id_keg']."' )";
+		}*/
 		
 		foreach ($sql as $q)
 			$rs = $this->db->query($q);
@@ -480,7 +506,7 @@ class Perumahan_mdl extends CI_Model {
 	}
 	
 	function tambah($data){
-		$q = "INSERT INTO kegiatan (id,parent_id,no,nama,sat,sasaran,posisi) VALUES ('".$data['id']."','".$data['parent_id']."','".$data['no']."','".$data['nama']."','".$data['sat']."','".$data['sasaran']."','".$data['posisi']."')";
+		$q = "INSERT INTO kegiatan (id,parent_id,no,nama,sat,posisi) VALUES ('".$data['id']."','".$data['parent_id']."','".$data['no']."','".$data['nama']."','".$data['sat']."','".$data['posisi']."')";
 		//$run = $this->db->insert('kegiatan', $data); 
 		$run=$this->db->query($q);
 		return $run;
@@ -496,6 +522,51 @@ class Perumahan_mdl extends CI_Model {
 	function hapus($id){
 		$run = $this->db->delete('kegiatan', array('id' => $id)); 
 		return $run;
+	}
+	
+	function newIdGrid($id=0){
+		$q = "SELECT * FROM gis WHERE id_gis_group='$id' ORDER BY no DESC LIMIT 1";
+		$rs = $this->db->query($q)->result_array();
+		
+		$newid=1;
+		if ($rs){
+			$newid = $rs[0]['no']+1;
+		}
+		return $newid;
+	}
+	
+	function tambahGrid($data){
+		$new = $this->db->query("SELECT no FROM gis WHERE id_gis_group='".$data['id_gis_group']."' ORDER BY no DESC")->result_array();
+		$newno = ($new)?$new[0]['no']+1:1;
+			
+		$q = "INSERT INTO gis ( no,title,address,x,y,id_gis_group,provinsi,kota,nilai,ket
+		) VALUES (
+		'$newno', '".$this->getNamaKeg($data['id_gis_group'])."', '".$data['address']."', '".$data['x']."','".$data['y']."', '".$data['id_gis_group']."', '".$data['provinsi']."', '".$data['kota']."', '".$data['nilai']."', '".$data['ket']."' )";
+		
+		//$q = "INSERT INTO gis (no,nama,sat,posisi) VALUES ('".$data['id']."','".$data['parent_id']."','".$data['no']."','".$data['nama']."','".$data['sat']."','".$data['posisi']."')";
+		//$run = $this->db->insert('kegiatan', $data); 
+		$run=$this->db->query($q);
+		return $run;
+		
+	}
+	
+	function ubahGrid($data){
+		$this->db->where('no', $data['no']);
+		$this->db->update('gis', $data);
+		
+		
+		/*$q = "UPDATE sdm_rekap_unit_stat SET
+			  jml_pns='".$data['jml_pns']."', 
+			  jml_honor='".$data['jml_honor']."'
+			  WHERE no='".$data['no']."'";
+		$rs = $this->db->query($q);
+		
+		return $q;*/
+	}
+	
+	function hapusGrid($id_keg,$no){
+		$run = $this->db->delete('gis', array('id_gis_group' => $id_keg, 'no' => $no)); 
+		return $this->db->last_query();;
 	}
 
 }

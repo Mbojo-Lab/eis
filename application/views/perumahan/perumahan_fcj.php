@@ -46,7 +46,7 @@ function simpan(){
 	no=$('#no').val();
 	nama=$('#nama').val();
 	sat=$('#sat').val();
-	sasaran=$('#sasaran').val();
+	//sasaran=$('#sasaran').val();
 	posisi=$('#posisi').val();
 	
 	if (aksi=="tambah"){
@@ -55,10 +55,9 @@ function simpan(){
 			no:no,
 			nama:nama,
 			sat:sat,
-			sasaran:sasaran,
+			//sasaran:sasaran,
 			posisi:posisi
 		},function(result){
-			//alert(result);
 			var result = eval('('+result+')');
 			if (result.success){
 				$('#dlg').dialog('close');		// close the dialog
@@ -67,6 +66,7 @@ function simpan(){
 					title: 'Info',
 					msg: result.msg
 				});
+				location.reload(true);
 			} else {
 				$.messager.alert('error',result.msg);
 			}
@@ -77,7 +77,7 @@ function simpan(){
 			no:no,
 			nama:nama,
 			sat:sat,
-			sasaran:sasaran,
+			//sasaran:sasaran,
 			posisi:posisi
 		},function(result){
 			var result = eval('('+result+')');
@@ -88,6 +88,7 @@ function simpan(){
 					title: 'Info',
 					msg: result.msg
 				});
+				location.reload(true);
 			} else {
 				$.messager.alert('error',result.msg);
 			}
@@ -106,6 +107,7 @@ function simpan(){
 							title: 'Info',
 							msg: result.msg
 						});
+						location.reload(true);
 					} else {
 						$.messager.alert('error',result.msg);
 					}

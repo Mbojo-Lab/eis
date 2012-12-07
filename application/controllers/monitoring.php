@@ -8,12 +8,27 @@ class Monitoring extends CI_Controller
 		if (! $this->session->userdata('logged_in')){ redirect(base_url().'member/login'); }
 		
 		$this->load->model('monitoring_mdl','mdl');
-	}
+	} 
 	
 	function index(){		
-		$data['title']="Monitoring";
+		$data['menutitle']="Monitoring";
+		$data['title']="Perbandingan Jumlah Pagu Kegiatan";
+		$data['subtitle']="Per Tahun";
+		
+		$data['html'] = $this->mdl->getJmlPagu();
 		$this->load->view('header');
-		$this->load->view('monitoring/monitoring',$data);
+		$this->load->view('monitoring/mon_cart',$data);
+		$this->load->view('footer');
+	}
+	
+	function subChart($tahun,$jenis){
+		$data['menutitle']="Monitoring";
+		$data['title']="Perbandingan Jumlah Pagu Kegiatan Tahun $tahun ";
+		$data['subtitle']="Jenis Kegiatan $jenis";
+		
+		$data['html'] = $this->mdl->getJmlPagu2($tahun,$jenis);
+		$this->load->view('header');
+		$this->load->view('monitoring/mon_cart2',$data);
 		$this->load->view('footer');
 	}
 	

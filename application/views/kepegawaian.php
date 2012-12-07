@@ -193,6 +193,101 @@ $(function () {
     
         Highcharts.visualize(table, options);
 		
+		<?php if ($rs2){ ?>
+		//STACKED KOLOM
+		chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container3',
+                type: 'column'
+            },
+            title: {
+                text: 'Absensi Kehadiran'
+            },
+            xAxis: {
+				<?php
+				foreach ($rs2 as $r2){
+					$cat[] = "'".$r2['jabatan']."'";
+				}
+				
+				$category = implode(", ", $cat);
+				?>
+                categories: [<?=$category?>]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Jumlah Kehadiran'
+                },
+                stackLabels: {
+                    enabled: true,
+                    style: {
+                        fontWeight: 'bold',
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                    }
+                }
+            },
+            legend: {
+                align: 'right',
+                x: -100,
+                verticalAlign: 'top',
+                y: 20,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColorSolid) || 'white',
+                borderColor: '#CCC',
+                borderWidth: 1,
+                shadow: false
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>'+ this.x +'</b><br/>'+
+                        this.series.name +': '+ this.y +'<br/>'+
+                        'Total: '+ this.point.stackTotal;
+                }
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal',
+                    dataLabels: {
+                        enabled: true,
+                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                    }
+                }
+            },
+            series: [{
+                name: 'Hadir',
+				<?php
+				foreach ($rs2 as $r2){
+					$hadir[] = $r2['hadir'];
+				}
+				
+				$data_hadir = implode(", ", $hadir);
+				?>
+                data: [<?=$data_hadir?>]
+            }, {
+                name: 'Tidak Hadir',
+                <?php
+				foreach ($rs2 as $r2){
+					$tidak_hadir[] = $r2['tidak_hadir'];
+				}
+				
+				$data_tdkhadir = implode(", ", $tidak_hadir);
+				?>
+                data: [<?=$data_tdkhadir?>]
+			}, {
+                name: 'Terlambat',
+				<?php
+				foreach ($rs2 as $r2){
+					$terlambat[] = $r2['terlambat'];
+				}
+				
+				$data_terlambat = implode(", ", $terlambat);
+				?>
+                data: [<?=$data_terlambat?>]		
+            }]
+        });
+		<?php } ?>
+		
+		
     });
     
 });
@@ -209,6 +304,18 @@ $(function () {
           <h3 align="right" style="color:#4572A7; margin-top:-3px;">Jumlah total pegawai : <?=$tot?> &nbsp; &nbsp; </h3>
         <?=$html?>
         </td>
+        </tr>
+        <tr style="background-color:#333" height="2"><td colspan="2"></td>
+        </tr>
+        <tr>
+          <td colspan="2"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          <select name="tipe" id="tipe" style="width:150px;" onchange="window.open('<?=base_url()?>kepegawaian/absensi/'+this.value,'_self')">
+            <option value="h" >Hari ini</option>
+            <option value="m" <? if ($tipe=='m'){echo 'selected';}?>>Minggu ini</option>
+            <option value="b" <? if ($tipe=='b'){echo 'selected';}?>>Bulan ini</option>
+          </select>
+          <div id="container3" style="min-width: 300px; height: 400px; margin: 0 auto"><? if (! $rs2) echo "<center>Maaf, Data Kosong.</center>";?></div>
+          </td>
         </tr>
         </table>
     </div>

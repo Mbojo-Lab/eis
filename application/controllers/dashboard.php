@@ -32,8 +32,9 @@ class Dashboard extends CI_Controller {
         $data['html_peru'] = $this->perm->chartBar();		
 		
 		//MONITORING
-		$data['rsMon1'] = $this->mon->getAll('Swakelola');
-		$data['rsMon2'] = $this->mon->getAll('Kontraktual');
+		$data['title_mon']="Perbandingan Jumlah Pagu Kegiatan";
+		$data['subtitle_mon']="Per Tahun";
+		$data['html_mon'] = $this->mon->getJmlPagu();
 			
 		//PERPUSTAKAAN
 		$data['title_perp1']="KOLEKSI PERPUSTAKAAN";

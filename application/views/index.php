@@ -23,11 +23,11 @@ var url;
 var gambar_tanda;
 var nomor;
 function peta_awal(id,group,no){
-    var bandung = new google.maps.LatLng(-6.9128, 107.6206);
-	var kemenpera = new google.maps.LatLng(-6.237256219278669,106.79896159467694);
+    //var bandung = new google.maps.LatLng(-6.9128, 107.6206);
+	//var kemenpera = new google.maps.LatLng(-6.237256219278669,106.79896159467694);
 	var awal = new google.maps.LatLng(<?=$rs[0]->x?>,<?=$rs[0]->y?>);
     var petaoption = {
-        zoom: 14,
+        zoom: 4,
         center: awal,
         mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -72,7 +72,7 @@ function ambildatabase(group,no){
 
 function setinfo(petak, nomor){
 	//var message = "<b>"+titlex[nomor]+"</b><br>Alamat : "+alamatx[nomor]+"<br>Keterangan:"+keteranganx[nomor];
-	var message = "<b>"+alamatx[nomor]+"</b>";
+	var message = "<b>Kegiatan:</b><br>"+titlex[nomor]+"<br><b>Lokasi:</b><br>"+alamatx[nomor]+"";
 	var infowindow = new google.maps.InfoWindow(
 	  { content: message,
 		size: new google.maps.Size(50,50)
@@ -285,7 +285,7 @@ $(function () {
         Highcharts.visualize(table_peru, options_peru);
 		//END PERUMAHAN
 		
-		// Build the chart Perpustakaan
+		<?php /*// Build the chart Perpustakaan
         chart = new Highcharts.Chart({
             chart: {
                 renderTo: 'container-perp1',
@@ -391,8 +391,100 @@ $(function () {
                 data: [<?=$kunjungan['jml'] ?>]
             
             }]
-        });
-		//END PERPUSTAKAAN
+        });*/?>
+		
+		//MONITORING
+		Highcharts.visualize = function(table, options) {
+            // the categories
+            options.xAxis.categories = [];
+            $('tbody th', table).each( function(i) {
+                options.xAxis.categories.push(this.innerHTML);
+            });
+    
+            // the data series
+            options.series = [];
+            $('tr', table).each( function(i) {
+                var tr = this;
+                $('th, td', tr).each( function(j) {
+                    if (j > 0) { // skip first column
+                        if (i == 0) { // get the name and init the series
+                            options.series[j - 1] = {
+                                name: this.innerHTML,
+                                data: []
+                            };
+                        } else { // add values
+                            options.series[j - 1].data.push(parseFloat(this.innerHTML));
+                        }
+                    }
+                });
+            });
+    
+            var chart = new Highcharts.Chart(options);
+        }
+    
+        var table = document.getElementById('datatable_mon'),
+        options = {
+            chart: {
+                renderTo: 'container_mon',
+                type: 'column'
+            },
+			credits:{
+				enabled: false,
+			},
+            title: {
+                text: '<?=$title_mon?>'
+            },
+			subtitle: {
+                text: '<?=$subtitle_mon?>'
+            },
+            xAxis: {
+            },
+            yAxis: {
+                title: {
+                    text: 'Jumlah Pagu'
+                },
+				labels: {
+					formatter: function() {
+						return nformat2(this.value,0);
+					}
+				},
+                stackLabels: {
+                    enabled: true,
+                    style: {
+                        fontWeight: 'bold',
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'						
+                    },
+					formatter: function() {
+						return nformat2(this.total,0);
+					}
+                }
+            },
+            tooltip: {
+				//enabled:false,
+                formatter: function() {
+                    return '<b>'+ this.series.name +'</b><br/>'+
+                        nformat2(this.y, 2) +' '+ this.x.toLowerCase();
+                }
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+					//stacking: 'normal'
+                },series: {
+					cursor: 'pointer',
+					point: {
+						events: {
+							click: function() {
+								window.open('<?=base_url()?>monitoring/subChart/'+ this.category+'/'+this.series.name,'_self');
+							}
+						}
+					}
+				}				
+            }
+        };
+    
+        Highcharts.visualize(table, options);	
 		
     });
     
@@ -475,7 +567,7 @@ $(function () {
     <?=$html_peru?>
   </div>
 </div>                
-
+<? /*
 <div class="box grid_8 tabs">
   <ul class="tab_header clearfix">
     <li><a href="#tabs-perp1">Koleksi Perpustakaan</a></li>
@@ -495,6 +587,15 @@ $(function () {
     </div>
   </div>  
 </div>
+*/ ?>
+<div class="box grid_8 tabs">
+  <h2 class="box_head">Pengendalian dan Evaluasi Program</h2>
+  <div id="tabs-mon1" class="block">
+    <div id="container_mon" style="min-width: 400px; height: 300px; margin: 0 auto"></div>
+      <?=$html_mon?>      
+  </div>  
+</div>                
+
 
 <div class="box grid_8">
   <h2 class="box_head">Schedule</h2>
@@ -510,61 +611,3 @@ $(function () {
     </div>
 </div>                                
 <script src="<?=base_url()?>assets/scripts/eventCalendar/jquery.eventCalendar.js" type="text/javascript"></script>
-
-<div class="box grid_8 tabs">
-  <ul class="tab_header clearfix">
-    <li><a href="#tabs-mon1">Kegiatan Swakelola</a></li>
-    <li><a href="#tabs-mon2">Kontraktual</a></li>
-  </ul>
-  <div class="controls">
-    <a href="#" class="grabber"></a>
-    <a href="#" class="toggle"></a>
-    <a href="#" class="show_all_tabs"></a>
-  </div>
-  <div class="toggle_container">
-    <div id="tabs-mon1" class="block">
-      <div id="dt1" class="no_margin">
-        <table class=" datatable">
-        <thead>
-            <tr>
-                <th width="30">NO.</th>
-                <th>NAMA KEGIATAN</th>
-                <th>PAGU</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php $no=1; foreach ($rsMon1 as $r){  ?>
-            <tr class="gradeX">
-                <td align="center"><?=$no?></td>
-                <td><?=$r->nama_keg?></td>
-                <td align="right"><?=number_format($r->anggaran)?></td>
-            </tr>
-        <?php $no += 1;} ?>
-        </tbody>
-    	</table>
-      </div>
-    </div>
-    <div id="tabs-mon2" class="block">
-    	<div id="dt2" class="no_margin">
-        <table class=" datatable">
-        <thead>
-            <tr>
-                <th width="30">NO.</th>
-                <th>NAMA KEGIATAN</th>
-                <th>PAGU</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php $no=1; foreach ($rsMon2 as $r){  ?>
-            <tr class="gradeX">
-                <td align="center"><?=$no?></td>
-                <td><?=$r->nama_keg?></td>
-                <td align="right"><?=number_format($r->anggaran)?></td>
-            </tr>
-        <?php $no += 1;} ?>
-        </tbody>
-    	</table>
-      </div>
-    </div>
-  </div>  
-</div>                

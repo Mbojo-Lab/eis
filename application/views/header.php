@@ -61,6 +61,7 @@
         	<ul class="open_multiple">
                 <li><a href="<?=base_url()?>kepegawaian/form" class="pjax"><span>Form Kepegawaian1</span></a></li>
 		        <li><a href="<?=base_url()?>kepegawaian/form2" class="pjax"><span>Form Kepegawaian2</span></a></li>
+                <li><a href="<?=base_url()?>kepegawaian/form_absensi" class="pjax"><span>Form Absensi</span></a></li>
                 <li><a href="<?=base_url()?>kepegawaian" class="pjax"><span>Laporan</span></a></li>
             </ul>
         </li>
@@ -77,11 +78,12 @@
 		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Pengendalian dan Evaluasi Program</span></a>
         	<ul class="open_multiple">
                 <li><a href="<?=base_url()?>monitoring/form" class="pjax"><span>Form Upload Program</span></a></li>
-                <li><a href="<?=base_url()?>monitoring/swakelola" class="pjax"><span>Swakelola</span></a></li>
-                <li><a href="<?=base_url()?>monitoring/kontraktual" class="pjax"><span>Kontraktual</span></a></li>
+                <li><a href="<?=base_url()?>monitoring" class="pjax"><span>Laporan</span></a></li>
             </ul>
-        </li>  
+        </li> 
+        <? /* 
         <li><a href="<?=base_url()?>perpustakaan"><img src="<?=base_url()?>assets/images/icons/small/grey/file_cabinet.png"/><span>Perpustakaan</span></a></li>      
+		*/ ?>
 		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda Menteri</span></a>
             <ul class="open_multiple">
                 <li><a href="<?=base_url()?>perkantoran/form" class="pjax"><span>Form Agenda Menteri</span></a></li>
@@ -93,6 +95,7 @@
         <?php if ($this->session->userdata('group')=="SDM"){?>
         <li><a href="<?=base_url()?>kepegawaian/form" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>Form Kepegawaian1</span></a></li>
         <li><a href="<?=base_url()?>kepegawaian/form2" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>Form Kepegawaian2</span></a></li>
+        <li><a href="<?=base_url()?>kepegawaian/form_absensi" class="pjax"><span>Form Absensi</span></a></li>
         <li><a href="<?=base_url()?>kepegawaian"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kepegawaian</span></a></li>
         <?php } ?>        
 	    <?php if ($this->session->userdata('group')=="Eksekutif"){?>
@@ -103,7 +106,8 @@
 		<li><a href="<?=base_url()?>perumahan" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/apartment_building.png"/><span>Perumahan</span></a></li>
 		<li><a href="<?=base_url()?>monitoring"><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Pengendalian dan Evaluasi Program</span></a></li>
         <li><a href="<?=base_url()?>perkantoran" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda Menteri</span></a></li>
-        <li><a href="<?=base_url()?>perpustakaan"><img src="<?=base_url()?>assets/images/icons/small/grey/file_cabinet.png"/><span>Perpustakaan</span></a></li>
+        <? /*<li><a href="<?=base_url()?>perpustakaan"><img src="<?=base_url()?>assets/images/icons/small/grey/file_cabinet.png"/><span>Perpustakaan</span></a></li>
+		*/?>
         <?php } ?>
         <li><a href="<?=base_url()?>member/logout" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/locked_2.png"/><span>Logout</span></a></li>
 	</ul>

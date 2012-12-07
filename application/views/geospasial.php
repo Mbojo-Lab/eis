@@ -18,11 +18,11 @@ var url;
 var gambar_tanda;
 var nomor;
 function peta_awal(id,group,no){
-    var bandung = new google.maps.LatLng(-6.9128, 107.6206);
-	var kemenpera = new google.maps.LatLng(-6.237256219278669,106.79896159467694);
+   // var bandung = new google.maps.LatLng(-6.9128, 107.6206);
+	//var kemenpera = new google.maps.LatLng(-6.237256219278669,106.79896159467694);
 	var awal = new google.maps.LatLng(<?=$rs[0]->x?>,<?=$rs[0]->y?>);
     var petaoption = {
-        zoom: 14,
+        zoom: 4,
         center: awal,
         mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -66,7 +66,7 @@ function ambildatabase(group,no){
 
 function setinfo(petak, nomor){
 	//var message = "<b>"+titlex[nomor]+"</b><br>Alamat : "+alamatx[nomor]+"<br>Keterangan:"+keteranganx[nomor];
-	var message = "<b>"+alamatx[nomor]+"</b>";
+	var message = "<b>Kegiatan:</b><br>"+titlex[nomor]+"<br><b>Lokasi:</b><br>"+alamatx[nomor]+"";
 	var infowindow = new google.maps.InfoWindow(
 	  { content: message,
 		size: new google.maps.Size(50,50)

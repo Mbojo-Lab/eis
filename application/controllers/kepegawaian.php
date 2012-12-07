@@ -16,9 +16,57 @@ class Kepegawaian extends CI_Controller {
 		$data['subtitle1']="MENURUT UNIT KERJA";
 		$data['title2']="REKAPITULASI PEGAWAI KEMENPERA";
 		$data['subtitle2']="MENURUT JABATAN";
+		$data['title3']="ABSENSI KEHADIRAN";
+		$data['subtitle3']="JUMLAH";
 		
 		$data['rs'] = $this->sdm->getJmlBagian();
 		$data['html'] = $this->sdm->getJmlEselon();
+		$data['rs2'] = $this->sdm->getAbsen();
+		$data['tipe']='h';
+		
+		$this->load->view('header');
+		$this->load->view('kepegawaian',$data);
+		$this->load->view('footer');
+	}
+	
+	function form_absensi(){
+		$data['title']="Absensi Pegawai";
+		$data['NmMenu']="Form Upload Data Absensi";
+		$data['hasil']="";
+		
+		$this->load->view('header_admin');
+		$this->load->view('absensi_frm',$data);
+		$this->load->view('footer');
+	}
+	
+	function upload($sukses){
+		$gagal = $this->uri->segment(4,0);	
+		
+		$data['title']="Absensi Pegawai";
+		$data['NmMenu']="Form Upload Data Absensi";
+		$data['hasil']="Upload data sukses: <b>".$sukses."</b>, gagal: <b>".$gagal."</b>";
+		
+		$this->load->view('header_admin');
+		$this->load->view('absensi_frm',$data);
+			
+		$this->load->view('footer');
+	}
+	
+	function absensi($tipe='h'){		
+		$data['menutitle']="Kepegawaian";
+		$data['tabtitle']="Jumlah Pegawai";
+		$data['title1']="REKAPITULASI PEGAWAI KEMENPERA";
+		$data['subtitle1']="MENURUT UNIT KERJA";
+		$data['title2']="REKAPITULASI PEGAWAI KEMENPERA";
+		$data['subtitle2']="MENURUT JABATAN";
+		$data['title3']="ABSENSI KEHADIRAN";
+		$data['subtitle3']="JUMLAH";
+		
+		$data['rs'] = $this->sdm->getJmlBagian();
+		$data['html'] = $this->sdm->getJmlEselon();
+		$data['rs2'] = $this->sdm->getAbsen($tipe);
+		//print_r($data['rs2']);
+		$data['tipe'] = $tipe;
 		
 		$this->load->view('header');
 		$this->load->view('kepegawaian',$data);

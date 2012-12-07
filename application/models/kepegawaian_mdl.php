@@ -14,7 +14,7 @@ class Kepegawaian_mdl extends CI_Model {
 	function getRekapUK(){
 		$q = "SELECT *
 			  FROM sdm_rekap_unit_stat
-			  ORDER BY no";
+			  ORDER BY unit_kerja";
 		$rs = $this->db->query($q)->result();
 		
 		return $rs;
@@ -23,7 +23,7 @@ class Kepegawaian_mdl extends CI_Model {
 	function getRekapJJK(){
 		$q = "SELECT *
 			  FROM sdm_rekap_jab_jk
-			  ORDER BY no";
+			  ORDER BY jabatan";
 		$rs = $this->db->query($q)->result();
 		
 		return $rs;
@@ -41,7 +41,7 @@ class Kepegawaian_mdl extends CI_Model {
 	function getJmlEselon(){
 		$q = "SELECT no,jabatan,(jml_pria + jml_wanita) AS jml
 			  FROM sdm_rekap_jab_jk
-			  ORDER BY no ASC";
+			  ORDER BY jabatan ASC";
 		$rs = $this->db->query($q)->result();
 		$rs0 = $this->db->query($q);
 		$html = '<table id="datatable" style="display:none"><thead><tr><th></th><th>Jumlah</th></tr></thead><tbody>';
@@ -55,6 +55,28 @@ class Kepegawaian_mdl extends CI_Model {
 		
 		return $html;
     }
+	
+	function getAbsen($tipe='h'){
+		$q = "SELECT jabatan,SUM(hadir) AS hadir,SUM(tidak_hadir) AS tidak_hadir,SUM(terlambat) AS terlambat
+			  FROM absen ";
+		if ($tipe=="h"){
+			$tgl = date('Y-m-d');
+			$q .= "WHERE tgl = '$tgl' ";
+		} else if($tipe=="m"){
+			$tgl = date('Y-m-d');
+			$week = date('W');
+			$q .= "WHERE EXTRACT(WEEK FROM TIMESTAMP '".$tgl."') = $week ";
+		} else {
+			$tgl = date('Y-m-d');
+			$month = date('n');
+			$q .= "WHERE EXTRACT(month FROM TIMESTAMP '".$tgl."') = $month ";
+		}	  
+		
+		$q .= "GROUP BY jabatan ORDER BY jabatan";
+		$rs = $this->db->query($q)->result_array();
+		
+		return $rs;
+	}
 	
 	function getJmlTot(){
 		$q = "SELECT SUM(jml_pria + jml_wanita) AS tot
