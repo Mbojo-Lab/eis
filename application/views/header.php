@@ -84,10 +84,10 @@
         <? /* 
         <li><a href="<?=base_url()?>perpustakaan"><img src="<?=base_url()?>assets/images/icons/small/grey/file_cabinet.png"/><span>Perpustakaan</span></a></li>      
 		*/ ?>
-		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda Menteri</span></a>
+		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda</span></a>
             <ul class="open_multiple">
-                <li><a href="<?=base_url()?>perkantoran/form" class="pjax"><span>Form Agenda Menteri</span></a></li>
-                <li><a href="<?=base_url()?>perkantoran" class="pjax"><span>Agenda Menteri</span></a></li>
+                <li><a href="<?=base_url()?>perkantoran/form" class="pjax"><span>Form Agenda Pertemuan Penting</span></a></li>
+                <li><a href="<?=base_url()?>perkantoran" class="pjax"><span>Agenda Pertemuan Penting</span></a></li>
             </ul>
         </li>
         <li><a href="<?=base_url()?>user/form"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Users</span></a></li>      
@@ -105,7 +105,7 @@
         Aset Manajemen</span></a></li>*/ ?>
 		<li><a href="<?=base_url()?>perumahan" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/apartment_building.png"/><span>Perumahan</span></a></li>
 		<li><a href="<?=base_url()?>monitoring"><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Pengendalian dan Evaluasi Program</span></a></li>
-        <li><a href="<?=base_url()?>perkantoran" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda Menteri</span></a></li>
+        <li><a href="<?=base_url()?>perkantoran" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda Pertemuan Penting</span></a></li>
         <? /*<li><a href="<?=base_url()?>perpustakaan"><img src="<?=base_url()?>assets/images/icons/small/grey/file_cabinet.png"/><span>Perpustakaan</span></a></li>
 		*/?>
         <?php } ?>

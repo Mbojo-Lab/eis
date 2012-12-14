@@ -39,8 +39,11 @@ class Geospasial extends CI_Controller {
 			$json .= '"no":"'.$r->no.'",
 				"title":"'.htmlspecialchars($r->title).'",
 				"jenis":"'.htmlspecialchars($r->nama).'",
+				"provinsi":"'.$r->provinsi.'",
+				"kota":"'.htmlspecialchars($r->kota).'",
 				"alamat":"'.htmlspecialchars($r->address).'",
-				"keterangan":"'.htmlspecialchars($r->desc).'",
+				"nilai":"'.htmlspecialchars($r->nilai).'",
+				"keterangan":"'.htmlspecialchars($r->ket).'",
 				"x":"'.$r->x.'",
 				"y":"'.$r->y.'"
 			},';

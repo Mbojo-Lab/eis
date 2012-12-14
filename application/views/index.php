@@ -13,7 +13,10 @@ var jenis = "Adsl";
 var noregx = new Array();
 var titlex = new Array();
 var groupx = new Array();
+var provinsix = new Array();
+var kotax = new Array();
 var alamatx = new Array();
+var nilaix = new Array();
 var keteranganx = new Array();
 var almpopx = new Array();
 var rectangle;
@@ -52,7 +55,10 @@ function ambildatabase(group,no){
         success: function(msg){
             for(i=0;i<msg.wilayah.petak.length;i++){
 				titlex[i] = msg.wilayah.petak[i].title;
+				provinsix[i] = msg.wilayah.petak[i].provinsi;
+				kotax[i] = msg.wilayah.petak[i].kota;
 				alamatx[i] = msg.wilayah.petak[i].alamat;
+				nilaix[i] = msg.wilayah.petak[i].nilai;
 				keteranganx[i] = msg.wilayah.petak[i].keterangan;
                 
 				//alert(alamatx[i]);
@@ -72,7 +78,7 @@ function ambildatabase(group,no){
 
 function setinfo(petak, nomor){
 	//var message = "<b>"+titlex[nomor]+"</b><br>Alamat : "+alamatx[nomor]+"<br>Keterangan:"+keteranganx[nomor];
-	var message = "<b>Kegiatan:</b><br>"+titlex[nomor]+"<br><b>Lokasi:</b><br>"+alamatx[nomor]+"";
+	var message = "<b>Kegiatan:</b><br>"+titlex[nomor]+"<br><b>Provinsi:</b><br>"+provinsix[nomor]+"<br><b>Kota:</b><br>"+kotax[nomor]+"<br><b>Lokasi:</b><br>"+alamatx[nomor]+"<br><b>Nilai:</b><br>"+nilaix[nomor]+"";
 	var infowindow = new google.maps.InfoWindow(
 	  { content: message,
 		size: new google.maps.Size(50,50)

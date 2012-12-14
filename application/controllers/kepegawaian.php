@@ -21,11 +21,11 @@ class Kepegawaian extends CI_Controller {
 		
 		$data['rs'] = $this->sdm->getJmlBagian();
 		$data['html'] = $this->sdm->getJmlEselon();
-		$data['rs2'] = $this->sdm->getAbsen();
+		$data['rs2'] = $this->sdm->getAbsenNew();
 		$data['tipe']='h';
 		
 		$this->load->view('header');
-		$this->load->view('kepegawaian',$data);
+		$this->load->view('kepegawaian/kepegawaian',$data);
 		$this->load->view('footer');
 	}
 	
@@ -35,7 +35,7 @@ class Kepegawaian extends CI_Controller {
 		$data['hasil']="";
 		
 		$this->load->view('header_admin');
-		$this->load->view('absensi_frm',$data);
+		$this->load->view('kepegawaian/absensi_frm',$data);
 		$this->load->view('footer');
 	}
 	
@@ -47,7 +47,7 @@ class Kepegawaian extends CI_Controller {
 		$data['hasil']="Upload data sukses: <b>".$sukses."</b>, gagal: <b>".$gagal."</b>";
 		
 		$this->load->view('header_admin');
-		$this->load->view('absensi_frm',$data);
+		$this->load->view('kepegawaian/absensi_frm',$data);
 			
 		$this->load->view('footer');
 	}
@@ -64,12 +64,13 @@ class Kepegawaian extends CI_Controller {
 		
 		$data['rs'] = $this->sdm->getJmlBagian();
 		$data['html'] = $this->sdm->getJmlEselon();
-		$data['rs2'] = $this->sdm->getAbsen($tipe);
+		$data['rs2'] = $this->sdm->getAbsenNew($tipe);
 		//print_r($data['rs2']);
 		$data['tipe'] = $tipe;
+		$data['absen'] = 'absen';
 		
 		$this->load->view('header');
-		$this->load->view('kepegawaian',$data);
+		$this->load->view('kepegawaian/kepegawaian',$data);
 		$this->load->view('footer');
 	}
 	
@@ -77,9 +78,9 @@ class Kepegawaian extends CI_Controller {
 		$data['menutitle']="Kepegawaian";
 		$data['NmMenu'] = "Form Kepegawaian Menurut Unit Kerja";
 		$this->load->view('header_admin',$data);
-		$this->load->view('kepegawaian_frm',$data);
+		$this->load->view('kepegawaian/kepegawaian_frm',$data);
 		$this->load->view('mst_fcj',$data);
-		$this->load->view('kepegawaian_fmj',$data);		
+		$this->load->view('kepegawaian/kepegawaian_fmj',$data);		
 		$this->load->view('footer');
 	}
 	
@@ -87,9 +88,9 @@ class Kepegawaian extends CI_Controller {
 		$data['menutitle']="Kepegawaian";
 		$data['NmMenu'] = "Form Kepegawaian Menurut Jabatan dan Jenis Kelamin";
 		$this->load->view('header_admin',$data);
-		$this->load->view('kepegawaian_frm',$data);
+		$this->load->view('kepegawaian/kepegawaian_frm',$data);
 		$this->load->view('mst_fcj',$data);
-		$this->load->view('kepegawaian_fmj2',$data);		
+		$this->load->view('kepegawaian/kepegawaian_fmj2',$data);		
 		$this->load->view('footer');
 	}
 	
@@ -146,4 +147,36 @@ class Kepegawaian extends CI_Controller {
 			'jml_wanita' => $jml_wanita
 		));  
 	}
+	
+	function cron(){
+		$rs=$this->sdm->getxml();
+		//foreach ($rs as $r1){
+			//print_r($r1)."<br>&nbsp;<br>";
+			//foreach ($r1 as $r2){
+				//print_r($r2)."<br>&nbsp;<br>";
+				//foreach ($r2 as $r3){
+					//print_r($r3)."<br>&nbsp;<br>";
+				//}
+			//}
+		//}
+		/*foreach ($rs['detail'] as $r1){
+			foreach ($r1 as $r2){
+				print_r($r2)."<br>&nbsp;<br>";
+			}
+		}*/
+	}
+	
+	function pegawailist($unitkerja){
+		$status0=$this->uri->segment(4,0);
+		$status=urldecode($status0);
+		
+		$data['title']="Absensi Kehadiran Unit Kerja $unitkerja dengan Status ".htmlspecialchars($status);
+		
+		$data['rs'] = $this->sdm->getAbsenList($unitkerja,$status);
+		$data['status']=$status;
+		$this->load->view('header');
+		$this->load->view('kepegawaian/pegawai_list',$data);
+		$this->load->view('footer');
+	}
+	
 }

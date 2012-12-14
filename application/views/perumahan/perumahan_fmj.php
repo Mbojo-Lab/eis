@@ -58,8 +58,8 @@ function setdg(id){
 			{field:'provinsi',title:'Provinsi',width:80,editor:'validatebox'},
 			{field:'kota',title:'Kota',width:80,editor:'validatebox'},
 			{field:'address',title:'Lokasi',width:80,editor:'validatebox'},
-			{field:'x',title:'X',width:80,editor:'numberbox'},
-			{field:'y',title:'Y',width:80,editor:'numberbox'},
+			{field:'x',title:'X',width:80,editor:'validatebox'},
+			{field:'y',title:'Y',width:80,editor:'validatebox'},
 			{field:'nilai',title:'Nilai',width:80,editor:'numberbox'},
 			{field:'ket',title:'Keterangan',width:80,editor:'validatebox'}
 		]],

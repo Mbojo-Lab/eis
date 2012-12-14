@@ -11,7 +11,7 @@ Target Server Type    : PGSQL
 Target Server Version : 80414
 File Encoding         : 65001
 
-Date: 2012-12-07 17:11:59
+Date: 2012-12-10 16:49:39
 */
 
 
@@ -97,7 +97,6 @@ ALTER TABLE "public"."anggaran" OWNER TO "postgres";;
 -- Records of anggaran
 -- ----------------------------
 INSERT INTO "anggaran" VALUES ('1', '2012', '1', '187.14', '1', '59.73', '4', null);
-INSERT INTO "anggaran" VALUES ('2', '2012', '172', '1162.71', '0', '156.22', '8', null);
 INSERT INTO "anggaran" VALUES ('3', '2012', '64', '45.51', '0', '0.00', '10', null);
 INSERT INTO "anggaran" VALUES ('4', '2012', '95904', '653.93', '0', '0.00', '11', null);
 INSERT INTO "anggaran" VALUES ('5', '2012', '150', '252.00', '0', '0.00', '12', null);
@@ -157,36 +156,18 @@ INSERT INTO "anggaran" VALUES ('59', '2010', null, '179.16', null, null, '31', n
 INSERT INTO "anggaran" VALUES ('60', '2010', '189166', '7091.12', null, '530.16', '37', null);
 INSERT INTO "anggaran" VALUES ('61', '2010', '30600', '191.24', null, null, '39', null);
 INSERT INTO "anggaran" VALUES ('62', null, '1', '1.00', '1', '1.00', null, null);
-INSERT INTO "anggaran" VALUES ('63', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('64', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('65', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('66', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('67', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('68', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('69', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('70', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('71', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('72', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('73', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('74', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('75', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('76', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('77', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('78', '2012', '172', '1162.71', '0', '156.22', '8', null);
+INSERT INTO "anggaran" VALUES ('73', '2012', '172', '1162.71', '0', '156.22', '8', '100');
 INSERT INTO "anggaran" VALUES ('79', '2012', '30600', '191.24', '0', '0.00', '39', null);
 INSERT INTO "anggaran" VALUES ('80', '2012', '30600', '191.24', '0', '0.00', '39', null);
 INSERT INTO "anggaran" VALUES ('81', '2012', '30600', '191.24', '0', '0.00', '39', null);
 INSERT INTO "anggaran" VALUES ('82', '2012', '30600', '191.24', '0', '0.00', '39', null);
 INSERT INTO "anggaran" VALUES ('83', '2012', '30600', '191.24', '0', '0.00', '39', null);
 INSERT INTO "anggaran" VALUES ('84', '2012', '30600', '191.24', '0', '0.00', '39', null);
-INSERT INTO "anggaran" VALUES ('85', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('86', '2012', '172', '1162.71', '0', '156.22', '8', null);
 INSERT INTO "anggaran" VALUES ('87', '2012', '9762', '333.50', '0', '23.37', '22', null);
 INSERT INTO "anggaran" VALUES ('88', '2012', '9762', '333.50', '0', '23.37', '22', null);
 INSERT INTO "anggaran" VALUES ('89', '2012', '0', '0.00', '0', '0.00', '18', null);
 INSERT INTO "anggaran" VALUES ('90', '2012', '0', '0.00', '0', '0.00', '18', null);
 INSERT INTO "anggaran" VALUES ('91', '2012', '95904', '653.93', '0', '0.00', '11', null);
-INSERT INTO "anggaran" VALUES ('92', '2012', '172', '1162.71', '0', '156.22', '8', null);
 INSERT INTO "anggaran" VALUES ('93', '2012', '30600', '191.24', '0', '0.00', '39', null);
 INSERT INTO "anggaran" VALUES ('94', '2012', '30600', '191.24', '0', '0.00', '39', null);
 INSERT INTO "anggaran" VALUES ('95', '2012', '95904', '653.93', '0', '0.00', '11', null);
@@ -197,16 +178,7 @@ INSERT INTO "anggaran" VALUES ('99', '2012', '30600', '191.24', '0', '0.00', '39
 INSERT INTO "anggaran" VALUES ('100', '2012', '30600', '191.24', '0', '0.00', '39', null);
 INSERT INTO "anggaran" VALUES ('101', '2012', '30600', '191.24', '0', '0.00', '39', null);
 INSERT INTO "anggaran" VALUES ('102', '2012', '30600', '191.24', '0', '0.00', '39', null);
-INSERT INTO "anggaran" VALUES ('103', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('104', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('105', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('106', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('107', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('108', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('109', '2012', '172', '1162.71', '0', '156.22', '8', null);
-INSERT INTO "anggaran" VALUES ('110', '2012', '172', '1162.71', '0', '156.22', '8', null);
 INSERT INTO "anggaran" VALUES ('111', '2012', '95904', '653.93', '0', '0.00', '11', null);
-INSERT INTO "anggaran" VALUES ('112', '2012', '172', '1162.71', '0', '156.22', '8', null);
 INSERT INTO "anggaran" VALUES ('113', '2012', '30600', '191.24', '0', '0.00', '39', null);
 INSERT INTO "anggaran" VALUES ('114', '2012', '30600', '191.24', '0', '0.00', '39', null);
 INSERT INTO "anggaran" VALUES ('115', '2012', '30600', '191.24', '0', '0.00', '39', null);
@@ -231,7 +203,7 @@ ALTER TABLE "public"."ci_sessions" OWNER TO "postgres";;
 -- ----------------------------
 -- Records of ci_sessions
 -- ----------------------------
-INSERT INTO "ci_sessions" VALUES ('b71e7b9f28feb8bf2470734fcc5b9d64', '::1', 'Mozilla/5.0 (Windows NT 6.1; rv:16.0) Gecko/20100101 Firefox/16.0', '1354874759', 'a:6:{s:9:"user_data";s:0:"";s:9:"logged_in";i:1;s:7:"id_user";N;s:5:"group";s:5:"Admin";s:8:"username";s:5:"admin";s:12:"nama_lengkap";s:5:"Admin";}');
+INSERT INTO "ci_sessions" VALUES ('9bc7529331c4a9ac6ab8ff4e50d3fbff', '::1', 'Mozilla/5.0 (Windows NT 6.1; rv:16.0) Gecko/20100101 Firefox/16.0', '1355132869', 'a:6:{s:9:"user_data";s:0:"";s:9:"logged_in";i:1;s:7:"id_user";N;s:5:"group";s:5:"Admin";s:8:"username";s:5:"admin";s:12:"nama_lengkap";s:5:"Admin";}');
 
 -- ----------------------------
 -- Table structure for "gis"
@@ -260,8 +232,8 @@ ALTER TABLE "public"."gis" OWNER TO "postgres";;
 -- ----------------------------
 INSERT INTO "gis" VALUES ('1', 'PSU Kawasan Perumahan dan Permukiman', '1.098565', '104.030113', 'Kota Batam', null, '39', null, null, null);
 INSERT INTO "gis" VALUES ('2', '- Pembangunan baru', '1.559866', '104.498291', 'Kab. Bintan, Kab Tanjung Pinang, Kota Batam, Kota Tanjung Pinang', null, '8', null, null, null);
+INSERT INTO "gis" VALUES ('2', 'PSU Kawasan Perumahan dan Permukiman', '-6', '107', 'Ciliwung', 'Kegiatan', '39', 'DKI Jakarta', 'Jakarta ', '1000');
 INSERT INTO "gis" VALUES ('4', '- Pembangunan baru', '4', '5', '3', '7', '8', '1', '2', '6');
-INSERT INTO "gis" VALUES ('5', '- Pembangunan baru', '5', '6', '4', '8', '8', '2', '3', '7');
 INSERT INTO "gis" VALUES ('6', 'Fasilitasi Pembangunan PSU kawasan Perumahan dan Permukiman', '1.34021', '104.02771', 'Kab. Bintan, Kab. Natuna, Kota batam', null, '11', null, null, null);
 
 -- ----------------------------

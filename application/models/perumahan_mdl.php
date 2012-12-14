@@ -184,15 +184,17 @@ class Perumahan_mdl extends CI_Model {
 			$html .= '</td><td align="right">';
 		   
 		   
-		   if ($r->sasaran != ''){
-			   $r->sasaran=number_format($r->sasaran);
+		   if ($r->sasaran2 != ''){
+			   $r->sasaran2=number_format($r->sasaran2);
 		   }
 			
 		    if ($r->font=='bold'){ 
-		  	  $html .= "<b>".$r->sasaran."</b>";
+		  	  $html .= "<b>".$r->sasaran2."</b>";
 		    } else { 
-		  	  $html .= $r->sasaran;
+		  	  $html .= $r->sasaran2;
 		    }
+			
+			//$html .= $this->getSasaran($r->id,$tahun);
 			
 			$html .= '</td><td align="right">';
 		   
@@ -276,6 +278,18 @@ class Perumahan_mdl extends CI_Model {
 			}
 		}
 	
+	}
+	
+	function getSasaran($id_keg, $tahun){
+		$q = "SELECT sasaran FROM anggaran 
+			  WHERE id_keg='$id_keg' AND tahun='$tahun' ";
+		$rs = $this->db->query($q)->result();
+		if ($rs){
+			foreach ($rs as $r){ 
+				//return number_format($r->$kolom,$dec);
+				return $r->sasaran;					
+			}
+		}
 	}
 		
 	function cekChild($id){
@@ -551,10 +565,10 @@ class Perumahan_mdl extends CI_Model {
 	}
 	
 	function ubahGrid($data){
-		$this->db->where('no', $data['no']);
-		$this->db->update('gis', $data);
+		//$this->db->where('no', $data['no']);
+		//$this->db->update('gis', $data);
 		
-		
+		$this->db->update('gis', $data, array('no' => $data['no'], 'id_gis_group' => $data['id_gis_group']));
 		/*$q = "UPDATE sdm_rekap_unit_stat SET
 			  jml_pns='".$data['jml_pns']."', 
 			  jml_honor='".$data['jml_honor']."'
@@ -562,11 +576,12 @@ class Perumahan_mdl extends CI_Model {
 		$rs = $this->db->query($q);
 		
 		return $q;*/
+		return $this->db->last_query();
 	}
 	
 	function hapusGrid($id_keg,$no){
 		$run = $this->db->delete('gis', array('id_gis_group' => $id_keg, 'no' => $no)); 
-		return $this->db->last_query();;
+		return $this->db->last_query();
 	}
 
 }

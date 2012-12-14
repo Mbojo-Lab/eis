@@ -223,8 +223,8 @@ class Perumahan extends CI_Controller {
 			$hasil = $this->perm->ubahGrid($array);
 		}
 		
-		echo $no;  
-		//echo $hasil;  
+		//echo $no;  
+		print_r($hasil);  
 	}
 	
 	function hapusGrid($id_keg){

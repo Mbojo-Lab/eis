@@ -2,11 +2,18 @@
     <h2><?=$menutitle?></h2>
 </div>
 
-<div class="box grid_16">
-  <h2 class="box_head">Jumlah Pegawai</h2>
-  
-    <div id="tabs-kep1" class="block">
-        <div class="section">
+<div class="box grid_16 tabs">
+  <ul class="tab_header clearfix">
+    <li><a href="#tabs-kep1">Jumlah Pegawai Menurut Jabatan</a></li>
+    <li><a href="#tabs-kep2">Jumlah Pegawai Menurut Unit Kerja</a></li>    
+    <li><a href="#tabs-kep3">Absensi Kehadiran</a></li>
+  </ul>
+  <div class="controls">
+    <a href="#" class="grabber"></a>
+    <a href="#" class="toggle"></a>
+    <a href="#" class="show_all_tabs"></a>
+  </div>
+  <div class="toggle_container">  
 <script type="text/javascript">
 function nformat2(num,curr) {				
 	
@@ -34,67 +41,13 @@ function nformat2(num,curr) {
 		return num;
 	} 
 }
-
+</script>
+  
+    <div id="tabs-kep1" class="block">
+        <div class="section">
+<script type="text/javascript">		
 $(function () {
     var chart;
-    
-    $(document).ready(function () {
-    	
-    	// Build the chart
-        chart = new Highcharts.Chart({
-            chart: {
-                renderTo: 'container',
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
-            },
-			credits:{
-				enabled: false
-			},
-            title: {
-                text: '<?=$title1 ?>'
-            },
-			subtitle: {
-                text: '<?=$subtitle1 ?>'
-            },
-            tooltip: {
-				enabled: false,
-        	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-            	percentageDecimals: 1
-            },			
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-						formatter: function() {
-							return nformat2(this.y,0);
-						}
-                    },
-                    showInLegend: true
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Kategori',
-                data: [
-				<?php 
-				$tot=0;
-				if($rs):
-				$data = '';
-				foreach($rs as $r): 
-					$data .= "['".$r->unit_kerja."', ".$r->jml."],";
-					$tot += $r->jml;
-				endforeach; 
-				$data = substr($data,0,-1);
-				endif;	
-				echo $data;			                
-				?>
-				]
-            }]
-        });
-		
 		Highcharts.visualize = function(table, options) {
             // the categories
             options.xAxis.categories = [];
@@ -192,7 +145,97 @@ $(function () {
         };
     
         Highcharts.visualize(table, options);
-		
+});
+</script>
+<div id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+          <h3 align="right" style="color:#4572A7; margin-top:-3px;">Jumlah total pegawai : 
+		  <?php 
+				$tot=0;
+				if($rs):
+				foreach($rs as $r): 
+					$tot += $r->jml;
+				endforeach; 
+				endif;	  
+				?>
+				<?=$tot?> &nbsp; &nbsp; </h3>
+        <?=$html?>
+        </div>
+    </div>
+        
+    <div id="tabs-kep2" class="block">
+        <div class="section">
+<script type="text/javascript">
+$(function () {
+    var chart;
+    
+    $(document).ready(function () {
+    	
+    	// Build the chart
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+			credits:{
+				enabled: false
+			},
+            title: {
+                text: '<?=$title1 ?>'
+            },
+			subtitle: {
+                text: '<?=$subtitle1 ?>'
+            },
+            tooltip: {
+				enabled: false,
+        	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+            	percentageDecimals: 1
+            },			
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+						formatter: function() {
+							return nformat2(this.y,0);
+						}
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Kategori',
+                data: [
+				<?php 
+				$tot=0;
+				if($rs):
+				$data = '';
+				foreach($rs as $r): 
+					$data .= "['".$r->unit_kerja."', ".$r->jml."],";
+					$tot += $r->jml;
+				endforeach; 
+				$data = substr($data,0,-1);
+				endif;	
+				echo $data;			                
+				?>
+				]
+            }]
+        });
+	});
+});
+</script>
+<div id="container" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
+		  </div>
+      </div>      
+      <div id="tabs-kep3" class="block">
+          <div class="section">
+         
+<script type="text/javascript">	
+$(function () {
+    var chart;	
 		<?php if ($rs2){ ?>
 		//STACKED KOLOM
 		chart = new Highcharts.Chart({
@@ -200,13 +243,19 @@ $(function () {
                 renderTo: 'container3',
                 type: 'column'
             },
+			credits:{
+				enabled: false,
+			},
             title: {
                 text: 'Absensi Kehadiran'
+            },
+			subtitle: {
+                text: 'Menurut Unit Kerja'
             },
             xAxis: {
 				<?php
 				foreach ($rs2 as $r2){
-					$cat[] = "'".$r2['jabatan']."'";
+					$cat[] = "'".$r2['unitkerja']."'";
 				}
 				
 				$category = implode(", ", $cat);
@@ -251,7 +300,18 @@ $(function () {
                         enabled: true,
                         color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
                     }
-                }
+                },series: {
+					cursor: 'pointer',
+					point: {
+						events: {
+							click: function() {
+								window.open('<?=base_url()?>kepegawaian/pegawailist/'+ this.category+'/'+this.series.name,'_self');
+								//alert('tes '+this.series.name);
+							}
+						}
+					}
+				}
+				
             },
             series: [{
                 name: 'Hadir',
@@ -286,38 +346,20 @@ $(function () {
             }]
         });
 		<?php } ?>
-		
-		
-    });
     
 });
 </script>
-<script src="<?=base_url()?>assets/scripts/highchart/highcharts.js"></script>
-<script src="<?=base_url()?>assets/scripts/highchart/modules/exporting.js"></script>
-		<table style="width:100%">
-        <tr>
-        <td style="border-right:1px #D6D6D6 solid">
-		  <div id="container" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
-        </td>
-        <td>
-          <div id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
-          <h3 align="right" style="color:#4572A7; margin-top:-3px;">Jumlah total pegawai : <?=$tot?> &nbsp; &nbsp; </h3>
-        <?=$html?>
-        </td>
-        </tr>
-        <tr style="background-color:#333" height="2"><td colspan="2"></td>
-        </tr>
-        <tr>
-          <td colspan="2"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          <select name="tipe" id="tipe" style="width:150px;" onchange="window.open('<?=base_url()?>kepegawaian/absensi/'+this.value,'_self')">
+		<select name="tipe" id="tipe" style="width:150px;" onchange="window.open('<?=base_url()?>kepegawaian/absensi/'+this.value+'#tabs-kep3','_self')">
             <option value="h" >Hari ini</option>
             <option value="m" <? if ($tipe=='m'){echo 'selected';}?>>Minggu ini</option>
             <option value="b" <? if ($tipe=='b'){echo 'selected';}?>>Bulan ini</option>
           </select>
           <div id="container3" style="min-width: 300px; height: 400px; margin: 0 auto"><? if (! $rs2) echo "<center>Maaf, Data Kosong.</center>";?></div>
-          </td>
-        </tr>
-        </table>
-    </div>
+          </div>
+          </div>
+<script src="<?=base_url()?>assets/scripts/highchart/highcharts.js"></script>
+<script src="<?=base_url()?>assets/scripts/highchart/modules/exporting.js"></script>
+		
+		  
   </div>
 </div>    
