@@ -362,6 +362,20 @@ class Perumahan_mdl extends CI_Model {
 		return $html;
 	}
 	
+		function getKegiatan1(){
+		$q = "SELECT * from gis_group";
+		$rs = $this->db->query($q)->result();
+		
+		$html="";
+		foreach ($rs as $r){
+			
+				$html .= "<option value=\"".$r->gis_group."\">".$r->gis_group."</option>";
+			
+		}
+		return $html;
+	}
+	
+	
 	function getNamaKeg($id=''){
 		$q = "SELECT id,nama
 			  FROM kegiatan WHERE id='$id'";
@@ -520,7 +534,7 @@ class Perumahan_mdl extends CI_Model {
 	}
 	
 	function tambah($data){
-		$q = "INSERT INTO kegiatan (id,parent_id,no,nama,sat,posisi) VALUES ('".$data['id']."','".$data['parent_id']."','".$data['no']."','".$data['nama']."','".$data['sat']."','".$data['posisi']."')";
+		$q = "INSERT INTO kegiatan (id,parent_id,no,nama,sat,posisi,kategori,status) VALUES ('".$data['id']."','".$data['parent_id']."','".$data['no']."','".$data['nama']."','".$data['sat']."','".$data['posisi']."','".$data['kategori']."','".$data['status']."')";
 		//$run = $this->db->insert('kegiatan', $data); 
 		$run=$this->db->query($q);
 		return $run;

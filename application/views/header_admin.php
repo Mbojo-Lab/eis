@@ -72,6 +72,7 @@
                 <li><a href="<?=base_url()?>kepegawaian/form" class="pjax"><span>Form Kepegawaian1</span></a></li>
 		        <li><a href="<?=base_url()?>kepegawaian/form2" class="pjax"><span>Form Kepegawaian2</span></a></li>
                 <li><a href="<?=base_url()?>kepegawaian/form_absensi" class="pjax"><span>Form Absensi</span></a></li>
+				<li><a href="<?=base_url()?>unit/form" class="pjax"><span>Form Unit Kerja</span></a></li>
                 <li><a href="<?=base_url()?>kepegawaian" class="pjax"><span>Laporan</span></a></li>
             </ul>
         </li>
@@ -104,6 +105,7 @@
         <li><a href="<?=base_url()?>kepegawaian/form" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>Form Kepegawaian1</span></a></li>
         <li><a href="<?=base_url()?>kepegawaian/form2" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/create_write.png"/><span>Form Kepegawaian2</span></a></li>
         <li><a href="<?=base_url()?>kepegawaian/form_absensi" class="pjax"><span>Form Absensi</span></a></li>
+		<li><a href="<?=base_url()?>unit/form" class="pjax"><span>Form Unit Kerja</span></a></li>
         <li><a href="<?=base_url()?>kepegawaian"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Kepegawaian</span></a></li>
         <?php } ?>        
 	    <?php if ($this->session->userdata('group')=="Eksekutif"){?>

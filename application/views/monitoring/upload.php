@@ -35,6 +35,14 @@ $(function(){
     <tr><td colspan="2">&nbsp;</td></tr>
     <tr>
       <td> 
+    Unit Kerja </td><td>: <select id="unit_kerja" name="unit_kerja" style="width:200px;">
+      <option value=""></option>
+      <?=$html?>
+    </select>
+      </td>
+    </tr>
+	<tr>
+      <td> 
     Unit Bagian </td><td>: <select id="bagian" name="bagian" style="width:200px;">
       <option value=""></option>
       <option value="Program">Program</option>

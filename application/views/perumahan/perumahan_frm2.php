@@ -46,7 +46,25 @@
             <option value="parent">Parent</option>
           </select></td>
         </tr>          
-        </table>
+        <tr>
+          <td width="126"><b>Kategori</b>&nbsp;</td>
+          <td>
+          <select id="kategori" name="kategori">
+            <option value="" checked="checked"></option>
+           <?=$html?>
+          </select></td>
+        </tr>
+		
+		<tr>
+			<td width="126"><b>Status-Geo</b>&nbsp;</td>
+			<td>
+			<select id="status" name="status">
+				<option value="geo" checked="checked">Geo</option>
+				<option value="non-geo">Non-Geo</option>
+			</select>
+			</td>
+		</tr>
+		</table>
         </form>
         <div region="south" border="false" style="padding:5px 0;">
             <a class="easyui-linkbutton" iconCls="icon-ok" href="javascript:void(0)" onclick="simpan()">Simpan</a>

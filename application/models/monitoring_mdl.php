@@ -59,6 +59,18 @@ class Monitoring_mdl extends CI_Model {
 		return $html;
     }
 	
+	function getUnit(){
+		$q = "SELECT * from unit_kerja";
+		$rs = $this->db->query($q)->result();
+		
+		$html="";
+		foreach ($rs as $r){
+			
+				$html .= "<option value=\"".$r->unit_kerja."\">".$r->keterangan."</option>";
+			
+		}
+		return $html;
+	}
 	
 }
 ?>

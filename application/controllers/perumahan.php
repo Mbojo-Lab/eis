@@ -60,8 +60,8 @@ class Perumahan extends CI_Controller {
 	
 	function form2(){
 		$data['menutitle']="Form Kegiatan Perumahan";
-		$data['html']= $this->perm->getKegiatan();
-		
+		$data['html']= $this->perm->getKegiatan1();
+				
 		$this->load->view('header_admin');
 		$this->load->view('perumahan/perumahan_frm2',$data);
 		$this->load->view('perumahan/perumahan_fcj',$data);	
@@ -136,6 +136,8 @@ class Perumahan extends CI_Controller {
 		$sat = $form_data['sat']; 
 		//$sasaran = $form_data['sasaran']; 
 		$posisi = $form_data['posisi']; 
+		$kategori = $form_data['kategori'];
+		$status = $form_data['status'];
 		
 		if ($parent_id=='') $parent_id=0;
 		//if ($sasaran=='') $sasaran=0;
@@ -147,7 +149,9 @@ class Perumahan extends CI_Controller {
 			'nama' => $nama,
 			'sat' => $sat,
 			//'sasaran' => $sasaran,
-			'posisi' => $posisi
+			'posisi' => $posisi,
+			'kategori' => $kategori,
+			'status' => $status
 			);
 			$data['id'] = $this->perm->newID($data);	
 			$this->tambah($data);	
@@ -157,8 +161,11 @@ class Perumahan extends CI_Controller {
 			'nama' => $nama,
 			'sat' => $sat,
 			//'sasaran' => $sasaran,
-			'posisi' => $posisi
+			'posisi' => $posisi,
+			'kategori' => $kategori,
+			'status' => $status
 			);
+			
 			$this->ubah($data,$parent_id);
 		}
 	}

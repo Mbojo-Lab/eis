@@ -21,6 +21,8 @@ $('#parent_id').combotree({
 			  $('#sat').val(result.sat);
 			  $('#sasaran').val(result.sasaran);
 			  $('#posisi').val(result.posisi);
+			  $('#kategori').val(result.kategori);
+			  $('#status').val(result.status);
 			});
 			
 		}
@@ -48,6 +50,8 @@ function simpan(){
 	sat=$('#sat').val();
 	//sasaran=$('#sasaran').val();
 	posisi=$('#posisi').val();
+	kategori=$('#kategori').val();
+	status=$('#status').val();
 	
 	if (aksi=="tambah"){
 		$.post('<?=base_url()?>perumahan/getform/tambah',{
@@ -56,7 +60,9 @@ function simpan(){
 			nama:nama,
 			sat:sat,
 			//sasaran:sasaran,
-			posisi:posisi
+			posisi:posisi,
+			kategori:kategori,
+			status:status
 		},function(result){
 			var result = eval('('+result+')');
 			if (result.success){
@@ -78,7 +84,9 @@ function simpan(){
 			nama:nama,
 			sat:sat,
 			//sasaran:sasaran,
-			posisi:posisi
+			posisi:posisi,
+			kategori:kategori,
+			status:status
 		},function(result){
 			var result = eval('('+result+')');
 			if (result.success){

@@ -36,7 +36,7 @@ class Monitoring extends CI_Controller
 		$data['title']="Pengendalian dan Evaluasi Program";
 		$data['NmMenu']="Form Upload Program";
 		$data['hasil']="";
-		
+		$data['html']= $this->mdl->getUnit();
 		$this->load->view('header_admin');
 		$this->load->view('monitoring/upload',$data);
 		$this->load->view('footer');
@@ -49,7 +49,7 @@ class Monitoring extends CI_Controller
 		$data['title']="Pengendalian dan Evaluasi Program";
 		$data['NmMenu']="Form Upload Program";
 		$data['hasil']="Upload data sukses: <b>".$sukses."</b>, gagal: <b>".$gagal."</b>";
-		
+		$data['html']= $this->mdl->getUnit();
 		$this->load->view('header_admin');
 		$this->load->view('monitoring/upload',$data);
 			
