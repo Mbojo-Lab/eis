@@ -38,9 +38,10 @@ class Kepegawaian_mdl extends CI_Model {
 		return $rs;
     }
 	
-	function getJmlEselon(){
+	function getJmlEselon($bln=12){		
 		$q = "SELECT no,jabatan,(jml_pria + jml_wanita) AS jml
 			  FROM sdm_rekap_jab_jk
+			  WHERE bulan='$bln'
 			  ORDER BY jabatan ASC";
 		$rs = $this->db->query($q)->result();
 		$rs0 = $this->db->query($q);
@@ -54,6 +55,16 @@ class Kepegawaian_mdl extends CI_Model {
 		$html .= '</tbody></table>';
 		
 		return $html;
+    }
+	
+	function getJmlPeg($bln=12){		
+		$q = "SELECT SUM(jml_pria + jml_wanita) AS jml
+			  FROM sdm_rekap_jab_jk
+			  WHERE bulan='$bln'";
+		$rs = $this->db->query($q)->result();
+		
+		
+		return $rs[0]->jml;
     }
 	
 	function getAbsen($tipe='h'){

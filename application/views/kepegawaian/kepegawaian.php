@@ -149,15 +149,7 @@ $(function () {
 </script>
 <div id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
           <h3 align="right" style="color:#4572A7; margin-top:-3px;">Jumlah total pegawai : 
-		  <?php 
-				$tot=0;
-				if($rs):
-				foreach($rs as $r): 
-					$tot += $r->jml;
-				endforeach; 
-				endif;	  
-				?>
-				<?=$tot?> &nbsp; &nbsp; </h3>
+		  	<?=$tot_peg?> &nbsp; &nbsp; </h3>
         <?=$html?>
         </div>
     </div>

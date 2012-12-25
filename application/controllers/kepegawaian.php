@@ -21,6 +21,7 @@ class Kepegawaian extends CI_Controller {
 		
 		$data['rs'] = $this->sdm->getJmlBagian();
 		$data['html'] = $this->sdm->getJmlEselon();
+		$data['tot_peg'] = $this->sdm->getJmlPeg();
 		$data['rs2'] = $this->sdm->getAbsenNew();
 		$data['tipe']='h';
 		

@@ -27,11 +27,9 @@
 
 
 
-		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/layout_switcher.php?default=layout_fixed.css">
-		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/nav_switcher.php?default=nav_top.css" >
-		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/skin_switcher.php?default=switcher.css" >
-		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/theme_switcher.php?default=theme_green.css" >
-		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/bg_switcher.php?default=bg_honeycomb.css" >
+		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/nav_top.css" >
+		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/switcher.css" >
+		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/theme_green.css" >
 
 		<link rel="stylesheet" href="<?=base_url()?>assets/styles/adminica/colours.css"> 
 		<script src="<?=base_url()?>assets/scripts/plugins-min.js"></script>
@@ -45,7 +43,7 @@
 
 <div id="topbar" class="clearfix">
 
-	<a href="dashboard_sorter.php" class="logo"><span>Executive Information System<br><h3>Kementrian Perumahan Rakyat</h3></span></a>
+	<a class="logo"><span>Executive Information System<br><h3>Kementrian Perumahan Rakyat</h3></span></a>
 
 </div><!-- #topbar --><!-- Closing Div for Stack Nav, you can boxes under the stack before this -->
 

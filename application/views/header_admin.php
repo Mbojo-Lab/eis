@@ -23,9 +23,9 @@
 
 		<link rel="stylesheet" href="<?=base_url()?>assets/styles/adminica/all.css">
 
-        <link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/nav_switcher.php?default=nav_top.css" >
-		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/theme_switcher.php?default=theme_green.css" >
-   		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/bg_switcher.php?default=bg_honeycomb.css" >
+        <link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/nav_top.css" >
+		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/switcher.css" >
+		<link rel="stylesheet" href="<?=base_url()?>assets/styles/themes/theme_green.css" >
 
         
         
