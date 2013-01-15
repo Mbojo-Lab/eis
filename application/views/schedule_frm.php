@@ -3,7 +3,8 @@
 </div>
 
 <div id="w" class="flat_area grid_16">
-<table id="dg" singleSelect="true"></table>              
+<table id="dg" singleSelect="true"></table>  
+
 </div>
 <div id="toolbar">  
     <a href="javascript:void(0)" id="btnTbh" class="easyui-linkbutton" iconCls="icon-add" plain="true" title="Tambah">Tambah</a>  

@@ -7,6 +7,7 @@
     <li><a href="#tabs-kep1">Jumlah Pegawai Menurut Jabatan</a></li>
     <li><a href="#tabs-kep2">Jumlah Pegawai Menurut Unit Kerja</a></li>    
     <li><a href="#tabs-kep3">Absensi Kehadiran</a></li>
+	<li><a href="#tabs-kep4">Sisa Pensiun</a></li>
   </ul>
   <div class="controls">
     <a href="#" class="grabber"></a>
@@ -15,6 +16,31 @@
   </div>
   <div class="toggle_container">  
 <script type="text/javascript">
+function dump(arr,level) {
+	var dumped_text = "";
+	if(!level) level = 0;
+	
+	//The padding given at the beginning of the line.
+	var level_padding = "";
+	for(var j=0;j<level+1;j++) level_padding += "    ";
+	
+	if(typeof(arr) == 'object') { //Array/Hashes/Objects 
+		for(var item in arr) {
+			var value = arr[item];
+			
+			if(typeof(value) == 'object') { //If it is an array,
+				dumped_text += level_padding + "'" + item + "' ...\n";
+				dumped_text += dump(value,level+1);
+			} else {
+				dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+			}
+		}
+	} else { //Stings/Chars/Numbers etc.
+		dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
+	}
+	return dumped_text;
+}
+
 function nformat2(num,curr) {				
 	
 	num = num.toString().replace(/\$|\,/g,'');
@@ -40,6 +66,13 @@ function nformat2(num,curr) {
 	} else {
 		return num;
 	} 
+}
+
+function cari(){
+	bln=$('#bln').val();
+	thn=$('#thn').val();
+	
+	window.open('<?=base_url()?>kepegawaian/index/'+bln+'/'+thn+'#tabs-kep4','_self');
 }
 </script>
   
@@ -149,7 +182,7 @@ $(function () {
 </script>
 <div id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
           <h3 align="right" style="color:#4572A7; margin-top:-3px;">Jumlah total pegawai : 
-		  	<?=$tot_peg?> &nbsp; &nbsp; </h3>
+		  	<?=$totpeg?> &nbsp; &nbsp; </h3>
         <?=$html?>
         </div>
     </div>
@@ -191,22 +224,36 @@ $(function () {
                     dataLabels: {
                         enabled: true,
 						formatter: function() {
-							return nformat2(this.y,0);
+							return this.point.name+": "+nformat2(this.y,0);
 						}
                     },
                     showInLegend: true
-                }
+                }/*,series: {
+					cursor: 'pointer',
+					point: {
+						events: {
+							click: function() {
+								//alert(this.series.data);
+								var index;
+								var a = this.series.data;
+								for (index = 0; index < a.length; ++index) {
+								    alert(a[index]);
+								}
+							}
+						}
+					}
+				}*/
             },
             series: [{
                 type: 'pie',
-                name: 'Kategori',
+                name: 'Kategori',				
                 data: [
 				<?php 
 				$tot=0;
 				if($rs):
 				$data = '';
 				foreach($rs as $r): 
-					$data .= "['".$r->unit_kerja."', ".$r->jml."],";
+					$data .= "{name:'".$r->unit_kerja."', y:".$r->jml."},";
 					$tot += $r->jml;
 				endforeach; 
 				$data = substr($data,0,-1);
@@ -228,6 +275,7 @@ $(function () {
 <script type="text/javascript">	
 $(function () {
     var chart;	
+	<? if ($tipe=='h'){ ?>
 		<?php if ($rs2){ ?>
 		//STACKED KOLOM
 		chart = new Highcharts.Chart({
@@ -338,7 +386,107 @@ $(function () {
             }]
         });
 		<?php } ?>
-    
+	<?php } else if ($tipe=='m'){ ?>
+		$(document).ready(function() {
+	        chart = new Highcharts.Chart({
+	            chart: {
+	                renderTo: 'container3',
+	                type: 'line',
+	                marginRight: 130,
+	                marginBottom: 25
+	            },
+				credits:{
+					enabled: false,
+				},
+	            title: {
+	                text: 'Rekapitulasi Absensi Mingguan',
+	                x: -20 //center
+	            },
+	            subtitle: {
+	                text: 'Kementerian Perumahan Rakyat',
+	                x: -20
+	            },
+	            xAxis: {
+	                categories: [<?=$rsM[1]?>]
+	            },
+	            yAxis: {
+	                title: {
+	                    text: 'Jumlah'
+	                },
+	                plotLines: [{
+	                    value: 0,
+	                    width: 1,
+	                    color: '#808080'
+	                }]
+	            },
+	            tooltip: {
+	                formatter: function() {
+	                        return '<b>'+ this.series.name +'</b><br/>'+
+	                        this.x +': '+ this.y +'orang';
+	                }
+	            },
+	            legend: {
+	                layout: 'vertical',
+	                align: 'right',
+	                verticalAlign: 'top',
+	                x: -10,
+	                y: 100,
+	                borderWidth: 0
+	            },
+	            series: <?=$rsM[0]?>
+	        });
+	    });
+    <?php } else if ($tipe=='b'){ ?>
+		$(document).ready(function() {
+	        chart = new Highcharts.Chart({
+	            chart: {
+	                renderTo: 'container3',
+	                type: 'line',
+	                marginRight: 130,
+	                marginBottom: 25
+	            },
+				credits:{
+					enabled: false,
+				},
+	            title: {
+	                text: 'Rekapitulasi Absensi Bulanan',
+	                x: -20 //center
+	            },
+	            subtitle: {
+	                text: 'Kementerian Perumahan Rakyat',
+	                x: -20
+	            },
+	            xAxis: {
+	                categories: [<?=$rsB[1]?>]
+	            },
+	            yAxis: {
+	                title: {
+	                    text: 'Jumlah'
+	                },
+	                plotLines: [{
+	                    value: 0,
+	                    width: 1,
+	                    color: '#808080'
+	                }]
+	            },
+	            tooltip: {
+	                formatter: function() {
+	                        return '<b>'+ this.series.name +'</b><br/>'+
+	                        this.x +': '+ this.y +'orang';
+	                }
+	            },
+	            legend: {
+	                layout: 'vertical',
+	                align: 'right',
+	                verticalAlign: 'top',
+	                x: -10,
+	                y: 100,
+	                borderWidth: 0
+	            },
+	            series: <?=$rsB[0]?>
+	        });
+	    });
+	<?php } ?>
 });
 </script>
 		<select name="tipe" id="tipe" style="width:150px;" onchange="window.open('<?=base_url()?>kepegawaian/absensi/'+this.value+'#tabs-kep3','_self')">
@@ -349,6 +497,48 @@ $(function () {
           <div id="container3" style="min-width: 300px; height: 400px; margin: 0 auto"><? if (! $rs2) echo "<center>Maaf, Data Kosong.</center>";?></div>
           </div>
           </div>
+		  <div id="tabs-kep4" class="block">
+          <div class="box grid_16">
+			<br>
+		    <center><b>REKAPITULASI JUMLAH PEJABAT STRUKTURAL<br>
+			KEMENTERIAN PERUMAHAN RAKYAT<br>
+( SESUAI PRAKIRAAN RENCANA PENSIUN )</b></center>
+<br>&nbsp;<br>
+		<div style="float:left">
+		Tanggal 
+		<select id="bln" name="bln"> 
+		  <option value=""></option>
+		  <option value="01">Januari</option>
+		  <option value="02">Februari</option>
+		  <option value="03">Maret</option>
+		  <option value="04">April</option>
+		  <option value="05">Mei</option>
+		  <option value="06">Juni</option>
+		  <option value="07">Juli</option>
+		  <option value="08">Agustus</option>
+		  <option value="09">September</option>
+		  <option value="10">Oktober</option>
+		  <option value="11">November</option>
+		  <option value="12">Desember</option>
+		</select>
+		<select id="thn" name="thn">
+			<option value=""></option>
+		<?php
+		  for ($i=date('Y');$i<date('Y')+5;$i++){
+		  	echo "<option value='$i'>$i</option>";
+			} 
+		?>
+		  	
+		</select>		
+		&nbsp;
+		</div>
+		<div>
+<input type="button" id="cari" name="cari" value="Submit" onclick="cari()">
+		</div><br><br>
+			<?=$table_pensiun?>
+			
+		  </div>
+		  </div>
 <script src="<?=base_url()?>assets/scripts/highchart/highcharts.js"></script>
 <script src="<?=base_url()?>assets/scripts/highchart/modules/exporting.js"></script>
 		

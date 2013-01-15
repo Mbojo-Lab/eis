@@ -1,8 +1,8 @@
 <div class="flat_area grid_16">
     <h2><?=$title?></h2>
 </div>
-
-<script type="text/javascript">
+        <script src="<?php echo base_url(); ?>assets/js/jquery-1.4.1.min.js">
+<script type="text/javascript" language="javascript">
 $(function(){
 	$("#w").panel({
 		title:"<?=$NmMenu?>",
@@ -16,7 +16,9 @@ $(function(){
 		maximizable:false
 	});
 });
-</script>
+
+			
+		</script>
 <div class="flat_area grid_16">
 	<?php if ($hasil!=""){?>
 	<div class="alert" style="background-color:#3D8336; width:390px">
@@ -32,26 +34,38 @@ $(function(){
     Tahun Program</td><td>: <input type="text" id="tahun" name="tahun" class="easyui-numberbox" style="width:50px;">
       </td>
     </tr>
-    <tr><td colspan="2">&nbsp;</td></tr>
     <tr>
-      <td> 
-    Unit Kerja </td><td>: <select id="unit_kerja" name="unit_kerja" style="width:200px;">
-      <option value=""></option>
-      <?=$html?>
-    </select>
-      </td>
-    </tr>
-	<tr>
-      <td> 
-    Unit Bagian </td><td>: <select id="bagian" name="bagian" style="width:200px;">
-      <option value=""></option>
-      <option value="Program">Program</option>
-      <option value="Anggaran">Anggaran</option>
-      <option value="Data dan Pelaporan">Data dan Pelaporan</option>
-    </select>
-      </td>
-    </tr>
-    <tr><td colspan="2">&nbsp;</td></tr>
+            <td>Unit Kerja</td>
+            <td>: 
+                <select name="unit_kerja" id="unit_kerja">
+                <option value="">Pilih Unit Kerja</option>
+                <?php
+                    foreach ($unit_kerja->result() as $row)
+                    echo "<option value='".$row->unit_kerja."'>".$row->keterangan."</option>";
+                ?>
+            </select>
+                    </td>
+        </tr>
+        <tr>
+            <td>Unit Bagian</td>
+            <td>: 
+                <select name="unit_bagian" id="unit_bagian">
+                <option value="">Pilih Unit Bagian</option>
+            </select>
+            </td>
+        </tr>
+          
+        <script language="javascript">
+        $(document).ready(function(){      
+        $('#unit_kerja').change(function(){
+            $.post("<?php echo base_url();?>index.php/monitoring/get_bagian/"+$('#unit_kerja').val(),{},function(obj){
+                $('#unit_bagian').html(obj);
+			
+            });
+			
+		});
+        });
+        </script>
     <tr>
       <td>
     File Excel (2003) </td><td>: <input type="file" id="datax" name="datax" />

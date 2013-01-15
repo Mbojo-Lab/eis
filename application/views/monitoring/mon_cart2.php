@@ -85,7 +85,7 @@ $(function () {
             },
             xAxis: {
 				title: {
-                    text: 'Bagian'
+                    text: 'Unit Kerja'
                 }
             },
             yAxis: {
@@ -128,7 +128,7 @@ $(function () {
 					point: {
 						events: {
 							click: function() {
-								//window.open('perumahan/kinerjaTabel/'+ this.category,'_self');
+								window.open('<?=base_url()?>monitoring/subChart1/<?php echo $tahun; ?>/'+ this.category+'/<?php echo $jenis; ?>','_self');
 							}
 						}
 					}

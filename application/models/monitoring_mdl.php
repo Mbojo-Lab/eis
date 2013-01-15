@@ -40,13 +40,33 @@ class Monitoring_mdl extends CI_Model {
     }
 	
 	function getJmlPagu2($tahun,$jenis){
-		$q = "SELECT bagian, SUM(anggaran) AS jml
+		$q = "SELECT unit_kerja, SUM(anggaran) AS jml
 			  FROM kegiatan_mon km
 			  WHERE tahun='$tahun' AND jenis_keg='$jenis'
+			  GROUP BY unit_kerja";
+		$rs = $this->db->query($q)->result();
+		$rs0 = $this->db->query($q);
+		$html = '<table id="datatable_mon" style="display:none"><thead><tr><th></th><th>Swakelola</th><th>Kontraktual</th></tr></thead><tbody>';
+		
+		foreach ($rs as $r){
+			$jml=($r->jml)?$r->jml:0;
+			$html .= '<tr><th>'.$r->unit_kerja.'</th>';
+			$html .= '<td>'.$jml.'</td></tr>';
+		}
+		
+		$html .= '</tbody></table>';
+		
+		return $html;
+    }
+	
+	function getJmlPagu3($tahun,$unit_kerja,$jenis){
+		$q = "SELECT bagian, SUM(anggaran) AS jml
+			  FROM kegiatan_mon km
+			  WHERE tahun='$tahun' AND unit_kerja = '$unit_kerja' AND jenis_keg='$jenis'
 			  GROUP BY bagian";
 		$rs = $this->db->query($q)->result();
 		$rs0 = $this->db->query($q);
-		$html = '<table id="datatable" style="display:none"><thead><tr><th></th><th>Bagian</th></tr></thead><tbody>';
+		$html = '<table id="datatable_mon" style="display:none"><thead><tr><th></th><th>Swakelola</th><th>Kontraktual</th></tr></thead><tbody>';
 		
 		foreach ($rs as $r){
 			$jml=($r->jml)?$r->jml:0;
@@ -59,17 +79,38 @@ class Monitoring_mdl extends CI_Model {
 		return $html;
     }
 	
-	function getUnit(){
-		$q = "SELECT * from unit_kerja";
-		$rs = $this->db->query($q)->result();
+	function get_unit(){
+        $this->db->order_by("unit_kerja", "ASC");
+        return $this->db->get("unit_kerja");       
+    }
+     
+    function get_bagian() {
+        $this->db->order_by("unit_bagian", "ASC");
+        return $this->db->get("unit_bagian");       
+    }
+     
+    function get_bagian_by_unit($id) {
+        $this->db->order_by("unit_kerja", "ASC");
+        $this->db->where("unit_kerja", $id);
+        $query = $this->db->get("unit_bagian");
+        if ($query->num_rows() > 0) return $query->result();             
+    }
+	
+	function simpan($data){
+	
+		//$new = $this->db->query("SELECT id FROM anggaran_baru ORDER BY id DESC")->result_array();
+		//$newid = $new[0]['id']+1;		
 		
-		$html="";
-		foreach ($rs as $r){
+		$sql[] = "INSERT INTO kegiatan_mon (
+		jenis_keg, nama_keg, anggaran, bagian, tahun, unit_kerja
+		) VALUES (
+		'".$data['jenis_keg']."','".$data['nama_keg']."','".$data['anggaran']."','".$data['bagian']."','".$data['tahun']."',
+		'".$data['unit_kerja']."' )";
+		
+		foreach ($sql as $q)
+			$rs = $this->db->query($q);
 			
-				$html .= "<option value=\"".$r->unit_kerja."\">".$r->keterangan."</option>";
-			
-		}
-		return $html;
+		return true;
 	}
 	
 }

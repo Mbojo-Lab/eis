@@ -3,95 +3,83 @@
 <!-- Theme CSS file: it makes eventCalendar nicer -->
 <link rel="stylesheet" href="<?=base_url()?>assets/scripts/eventCalendar/css/eventCalendar_theme_responsive.css">
 <!-- GEO SPACIAL-->
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript">
-var peta;
-var pertama = 0;
-var tanda1;
-var tanda2;
-var jenis = "Adsl";
-var noregx = new Array();
-var titlex = new Array();
-var groupx = new Array();
-var provinsix = new Array();
-var kotax = new Array();
-var alamatx = new Array();
-var nilaix = new Array();
-var keteranganx = new Array();
-var almpopx = new Array();
-var rectangle;
-var i;
-var petak;
-var url;
-var gambar_tanda;
-var nomor;
-function peta_awal(id,group,no){
-    //var bandung = new google.maps.LatLng(-6.9128, 107.6206);
-	//var kemenpera = new google.maps.LatLng(-6.237256219278669,106.79896159467694);
-	var awal = new google.maps.LatLng(<?=$rs[0]->x?>,<?=$rs[0]->y?>);
-    var petaoption = {
-        zoom: 4,
-        center: awal,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-    peta = new google.maps.Map(document.getElementById(id),petaoption);
-    ambildatabase(group,no);
-	//ambil_list('list',group);
+<style>
+.gmap3{
+	margin: 2px auto;
+	border: 0px dashed #C0C0C0;
+	width: 99%;
+	height: 400px;
 }
-
-
-$(document).ready(function(){
-	peta_awal("petaku",39,'');
+</style>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script type="text/javascript" src="<?=base_url()?>assets/scripts/maps/gmap3.js"></script> 
 	
-});
+	<script type="text/javascript">
+		$(function(){
+			$('input:checkbox').click(function() {
+				var filters = [];
+				$('input:checkbox:checked').each(function(i, checkbox) {
+					filters.push($(checkbox).val());
+				});
+				if ( filters.length > 0 ) {
+					alert("tes");
+				} else {
+					alert("tes");
+				}
+			});
+			
 
-function ambildatabase(group,no){
-	url = "<?=base_url()?>index.php/geospasial/ambildata/"+group+"/"+no;
-    //window.open(url,'_blank');
-    $.ajax({
-        url: url,
-        dataType: 'json',
-        cache: false,
-        success: function(msg){
-            for(i=0;i<msg.wilayah.petak.length;i++){
-				titlex[i] = msg.wilayah.petak[i].title;
-				provinsix[i] = msg.wilayah.petak[i].provinsi;
-				kotax[i] = msg.wilayah.petak[i].kota;
-				alamatx[i] = msg.wilayah.petak[i].alamat;
-				nilaix[i] = msg.wilayah.petak[i].nilai;
-				keteranganx[i] = msg.wilayah.petak[i].keterangan;
-                
-				//alert(alamatx[i]);
-				var point = new google.maps.LatLng(
-                    parseFloat(msg.wilayah.petak[i].x),
-                    parseFloat(msg.wilayah.petak[i].y));
-                tanda = new google.maps.Marker({
-                    position: point,
-                    map: peta
-                });
-                setinfo(tanda,i);
+$("#map").gmap3({
+  map:{
+    options:{
+      center:{lat:-4.477856,lng:121.977537},
+      zoom:4,
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    }
+  },
+  polygon: {
+    values: [
+	<?
+	foreach ($rs as $r):
+	if ($r->koordinat != ""){			
+	?>
+      {	        
+			options:{
+	          strokeColor: "#FF0000",
+	          strokeOpacity: 0.8,
+	          strokeWeight: 2,
+	          fillColor: "#FF0000",
+	          fillOpacity: 0.35,
+	          paths:[
+	              <?=$r->koordinat?>
+	          ]
+	        },onces:{
+	            click: function(polygon, event){				  
+	              var vertices = polygon.getPath(),
+	                contentString = 'Provinsi <?=$r->nm_prov?></br>Clicked Location: ' + event.latLng.lat() + ',' + event.latLng.lng() + '</br>';
+				  				  
+				 window.open('<?=base_url()?>geospasial','_self');
+				  
+	            }
+	          }	
+      },
+	  <? } endforeach;?>
+    ],
+    onces:{
+      click: function(polygon){
+        polygon.setOptions({
+            fillColor: "#FFAF9F",
+            strokeColor: "#FF512F"
+        });
+      }
+    }
+  }
+});			
+			
+			
+		});
+	</script>
 
-            }
-        }
-    });
-}
-
-function setinfo(petak, nomor){
-	//var message = "<b>"+titlex[nomor]+"</b><br>Alamat : "+alamatx[nomor]+"<br>Keterangan:"+keteranganx[nomor];
-	var message = "<b>Kegiatan:</b><br>"+titlex[nomor]+"<br><b>Provinsi:</b><br>"+provinsix[nomor]+"<br><b>Kota:</b><br>"+kotax[nomor]+"<br><b>Lokasi:</b><br>"+alamatx[nomor]+"<br><b>Nilai:</b><br>"+nilaix[nomor]+"";
-	var infowindow = new google.maps.InfoWindow(
-	  { content: message,
-		size: new google.maps.Size(50,50)
-	  });
-	google.maps.event.addListener(petak, 'mouseover', function() {
-	infowindow.open(peta,petak);
-	});
-}
-
-function ambil_list(id,group){
-	$('#'+id).load('<?=base_url()?>/index.php/geospasial/ambil_list/'+group);
-}
-</script>
 <!-- END GEOSPACIAL-->    
 <script type="text/javascript">
 function nformat2(num,curr) {				
@@ -505,41 +493,75 @@ $(function () {
 					</h2>
 				</div>
 
-				<div class="box grid_8 tabs">
-					<ul class="tab_header clearfix">
-						<li><a href="#tabs-1" onclick="peta_awal('petaku',39);">DAK</a></li>
-    <li><a href="#tabs-2" onclick="peta_awal('petaku2',8);">Pembangunan Rusunawa</a></li>
-    <li><a href="#tabs-3" onclick="peta_awal('petaku3',11);">PSU</a></li>
-					</ul>
-					<div class="controls">
-						<a href="#" class="grabber"></a>
-						<a href="#" class="toggle"></a>
-						<a href="#" class="show_all_tabs"></a>
-					</div>
-					<div class="toggle_container">
-						<div id="tabs-1" class="block">
-                          <div class="section">
-                            <div id="petaku" style="width:100% ; height:292px"></div>
-                          </div>  
-                        </div>
-                        <div id="tabs-2" class="block">
-                            <div class="section">
-                                <div id="petaku2" style="width:100% ; height:292px"></div>
-                            </div>
-                        </div>
-                        <div id="tabs-3" class="block">
-                            <div class="section">
-                                <div id="petaku3" style="width:100% ; height:292px"></div>
-                            </div>
-                        </div>
-					</div>
-				</div>
+<div class="box grid_8">
+	<h2 class="box_head"><?=$title?></h2>
+	<div id="map" class="gmap3"></div>
+</div>  
+
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+<script type="text/javascript" src="<?=base_url()?>assets/scripts/maps/demos/js/demo.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/scripts/maps/ui/jquery.ui.map.js"></script>
+<script type="text/javascript">
+$(function() { 
+	demo.add(function() {			
+		$('#map_canvas').gmap({'disableDefaultUI':true}).bind('init', function(evt, map) { 
+			
+			$('#map_canvas').gmap('addControl', 'radios', google.maps.ControlPosition.TOP_LEFT);
+			var southWest = map.getBounds().getSouthWest();
+			var northEast = map.getBounds().getNorthEast();
+			var lngSpan = northEast.lng() - southWest.lng();
+			var latSpan = northEast.lat() - southWest.lat();
+			var images = ['http://google-maps-icons.googlecode.com/files/home.png', 'http://google-maps-icons.googlecode.com/files/realestate.png', 'http://google-maps-icons.googlecode.com/files/apartment.png'];
+			var tags = ['DAK', 'Rusunawa', 'PSU'];
+			
+			$.each(tags, function(i, tag) {
+				
+				$('#radios').append(('<label style="margin-right:5px;display:block;"><input type="checkbox" style="margin-right:3px" value="{0}"/>{1}</label>').format(tag, tag));
+			});
+			
+			<? foreach ($rs as $r) { ?>
+				$('#map_canvas').gmap('addMarker', { 'icon': images[(Math.floor(Math.random()*3))], 'tags':['<?=$r->kategori?>'], 'bound':false, 'position': new google.maps.LatLng(<?=$r->x.", ".$r->y?>) } ).click(function() {
+					var visibleInViewport = ( $('#map_canvas').gmap('inViewport', $(this)[0]) ) ? '<?=$r->nm_keg?>' : 'I\'m sad and hidden.';
+					$('#map_canvas').gmap('openInfoWindow', { 'content': $(this)[0].tags + '<br/>' +visibleInViewport }, this);
+				});
+				
+			<? } ?>
+			
+			$('input:checkbox').click(function() {
+				$('#map_canvas').gmap('closeInfoWindow');
+				$('#map_canvas').gmap('set', 'bounds', null);
+				var filters = [];
+				$('input:checkbox:checked').each(function(i, checkbox) {
+					filters.push($(checkbox).val());
+				});
+				if ( filters.length > 0 ) {
+					$('#map_canvas').gmap('find', 'markers', { 'property': 'tags', 'value': filters, 'operator': 'OR' }, function(marker, found) {
+						if (found) {
+							$('#map_canvas').gmap('addBounds', marker.position);
+							//$('#map_canvas').gmap('option', 'zoom', 9);
+						}
+						marker.setVisible(found); 
+					});
+				} else {
+					$.each($('#map_canvas').gmap('get', 'markers'), function(i, marker) {
+						$('#map_canvas').gmap('addBounds', marker.position);
+						marker.setVisible(true); 
+					});
+				}
+			});
+			
+			
+		});
+	}).load();
+});
+</script>  
                 
 <div class="box grid_8">
   <h2 class="box_head">Jumlah Pegawai</h2>
   
     <div id="tabs-kep1" class="block">            	
-    	<div id="container-kep1" style="min-width: 300px; height: 300px; margin: 0 auto"></div>
+    	<div id="container-kep1" style="min-width: 300px; height: 380px; margin: 0 auto"></div>
         <h3 align="right" style="color:#4572A7; margin-top:-3px;">Jumlah total pegawai : <?=$totpeg?> &nbsp; &nbsp; </h3>
         <?=$html_kep1?>
     </div>

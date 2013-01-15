@@ -17,13 +17,13 @@ class Dashboard extends CI_Controller {
 	function index(){	  
         //GEOSPASIAL
 		$data['title']="GeoSpasial";
-		$data['rs'] = $this->gis->ambildata(39);
+		$data['rs'] = $this->gis->prov();
 		
 	    //KEPEGAWAIAN
 		$data['title_kep1']="REKAPITULASI PEGAWAI KEMENPERA";
 		$data['subtitle_kep1']="MENURUT JABATAN";
-		$data['html_kep1'] = $this->sdm->getJmlEselon();
-		$data['totpeg'] = $this->sdm->getJmlTot();
+		$data['html_kep1'] = $this->sdm->getJmlEselon(date('m'), date('Y'));
+		$data['totpeg'] = $this->sdm->getJmlTot(date('m'), date('Y'));
 		
 		//PERUMAHAN
 		$data['title_peru']="TARGET DAN CAPAIAN KINERJA ";

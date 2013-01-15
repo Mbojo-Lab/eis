@@ -114,8 +114,8 @@ class Perumahan_mdl extends CI_Model {
 			
 			$html .= $this->tampilsub($r->id, $tahun);	
 			
-			$totTgAnggaran = $this->getNilai('tg_anggaran',$r->id,$tahun,2);
-			$totReAnggaran = $this->getNilai('re_anggaran',$r->id,$tahun,2);
+			$totTgAnggaran = $this->getNilai2('volume',$r->nama,$tahun,2);
+			$totReAnggaran = $this->getNilai2('anggaran',$r->nama,$tahun,2);
 			$html .= '<tr>
 						  <th colspan="2">TOTAL ALOKASI KEMENPERA ('.$r->nama.')</th>
 						  <th></th>
@@ -199,33 +199,33 @@ class Perumahan_mdl extends CI_Model {
 			$html .= '</td><td align="right">';
 		   
 		    if ($r->font=='bold'){ 
-		  	  $html .= "<b>".number_format($this->getNilai('target',$r->id,$tahun,0))."</b>";
+		  	  $html .= "<b>".number_format($this->getNilai2('volume',$r->nama,$tahun,0))."</b>";
 		    } else { 
-		  	  $html .= number_format($this->getNilai('target',$r->id,$tahun,0));
+		  	  $html .= number_format($this->getNilai2('volume',$r->nama,$tahun,0));
 		    }
 			
 			$html .= '</td><td align="right">';
 		   
 		    if ($r->font=='bold'){ 
-		  	  $html .= "<b>".number_format($this->getNilai('tg_anggaran',$r->id,$tahun,2),2)."</b>";
+		  	  $html .= "<b>".number_format($this->getNilai2('anggaran',$r->nama,$tahun,2),2)."</b>";
 		    } else { 
-		  	  $html .= number_format($this->getNilai('tg_anggaran',$r->id,$tahun,2),2);
+		  	  $html .= number_format($this->getNilai2('anggaran',$r->nama,$tahun,2),2);
 		    }
 			
 			$html .= '</td><td align="right">';
 		   
 		    if ($r->font=='bold'){ 
-		  	  $html .= "<b>".number_format($this->getNilai('realisasi',$r->id,$tahun,0))."</b>";
+		  	  $html .= "<b>".number_format($this->getNilai3('nilai_rencana',$r->nama,$tahun,0))."</b>";
 		    } else { 
-		  	  $html .= number_format($this->getNilai('realisasi',$r->id,$tahun,0));
+		  	  $html .= number_format($this->getNilai3('nilai_rencana',$r->nama,$tahun,0));
 		    }
 			
 			$html .= '</td><td align="right">';
 		   
 		    if ($r->font=='bold'){ 
-		  	  $html .= "<b>".number_format($this->getNilai('re_anggaran',$r->id,$tahun,2),2)."</b>";
+		  	  $html .= "<b>".number_format($this->getNilai3('nilai_rencana',$r->nama,$tahun,2),2)."</b>";
 		    } else { 
-		  	  $html .= number_format($this->getNilai('re_anggaran',$r->id,$tahun,2),2);
+		  	  $html .= number_format($this->getNilai3('nilai_realisasi',$r->nama,$tahun,2),2);
 		    }
 			
 			$html .= '</td></tr>';
@@ -278,6 +278,34 @@ class Perumahan_mdl extends CI_Model {
 			}
 		}
 	
+	}
+	
+	function getNilai2($kolom, $nm_keg, $tahun, $dec){
+			$q = "SELECT SUM($kolom) AS $kolom
+			      FROM anggaran_baru a 
+				  WHERE kegiatan='$nm_keg' AND tahun='$tahun' ";
+			$rs = $this->db->query($q)->result();
+
+			if ($rs){
+				foreach ($rs as $r){ 
+					//return number_format($r->anggaran,$dec);					
+					return $r->$kolom;					
+				}
+			}	
+	}
+	
+	function getNilai3($kolom, $nm_keg, $tahun, $dec){
+			$q = "SELECT SUM($kolom) AS $kolom
+			      FROM realisasi a 
+				  WHERE nm_keg='$nm_keg' AND tahun='$tahun' ";
+			$rs = $this->db->query($q)->result();
+
+			if ($rs){
+				foreach ($rs as $r){ 
+					//return number_format($r->anggaran,$dec);					
+					return $r->$kolom;					
+				}
+			}	
 	}
 	
 	function getSasaran($id_keg, $tahun){
@@ -334,12 +362,16 @@ class Perumahan_mdl extends CI_Model {
 		
 		$html .= '</tr></thead><tbody>';
 		
-		$q = "SELECT tahun,SUM(tg_anggaran) AS target, SUM(re_anggaran) AS realisasi 
-			  FROM anggaran GROUP BY tahun ORDER BY tahun";
+		$q = "SELECT a.tahun,SUM(anggaran) AS target, SUM(nilai_realisasi) AS realisasi 
+			  FROM anggaran_baru a
+			  LEFT JOIN realisasi b ON b.tahun=a.tahun AND b.nm_keg=a.kegiatan 
+			  GROUP BY a.tahun ORDER BY a.tahun";
 		$rs = $this->db->query($q)->result();
 		
 		foreach ($rs as $r){
-			$html .= '<tr><th>'.$r->tahun.'</th><td>'.$r->target.'</td><td>'.$r->realisasi.'</td></tr>';
+			$real=$r->realisasi;
+			if ($real == "") $real=0; 
+			$html .= '<tr><th>'.$r->tahun.'</th><td>'.$r->target.'</td><td>'.$real.'</td></tr>';
 		}
 		
 		$html .= '</tbody></table>';
@@ -362,7 +394,7 @@ class Perumahan_mdl extends CI_Model {
 		return $html;
 	}
 	
-		function getKegiatan1(){
+	function getKegiatan1(){
 		$q = "SELECT * from gis_group";
 		$rs = $this->db->query($q)->result();
 		

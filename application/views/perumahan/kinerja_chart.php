@@ -139,7 +139,8 @@ $(function () {
 				//enabled:false,
                 formatter: function() {
                     return '<b>'+ this.series.name +'</b><br/>'+
-                        nformat2(this.y, 2) +' '+ this.x.toLowerCase();
+                        //nformat2(this.y, 2) +' '+ this.x.toLowerCase();
+						nformat2(this.y, 2)
                 }
             },
             plotOptions: {

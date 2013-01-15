@@ -10,12 +10,22 @@ class Geospasial extends CI_Controller {
 	}
 	
 	function index(){		
-		$data['title']="GeoSpasial";
-		$data['rs'] = $this->gis->ambildata(39);
+		$data['title']="GeoSpasial";		
+		
+		$data['rs'] = $this->gis->prov();
+		$data['html'] = $this->gis->gis();
 		
 		$this->load->view('header');
 		$this->load->view('geospasial',$data);
 		$this->load->view('footer');
+	}
+	
+	function ajax(){
+		$prov=$_REQUEST['prov'];
+		$filter=$_REQUEST['filter'];
+		$html=$this->gis->gis($prov,$filter);
+		
+		echo $html;
 	}
 	
 	function tabs($tabs=''){

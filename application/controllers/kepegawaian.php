@@ -20,13 +20,20 @@ class Kepegawaian extends CI_Controller {
 		$data['subtitle3']="JUMLAH";
 		
 		$data['rs'] = $this->sdm->getJmlBagian();
-		$data['html'] = $this->sdm->getJmlEselon();
-		$data['tot_peg'] = $this->sdm->getJmlPeg();
+		$data['html'] = $this->sdm->getJmlEselon(date('m'),date('Y'));
+		$data['totpeg'] = $this->sdm->getJmlTot(date('m'),date('Y'));
 		$data['rs2'] = $this->sdm->getAbsenNew();
+		
+		$bln = $this->uri->segment(3,0);	
+		if ($bln==0) $bln=date('m');
+		$thn = $this->uri->segment(4,0);	
+		if ($thn==0) $thn=date('Y');
+		$data['table_pensiun'] = $this->sdm->getview_pensiun2($bln, $thn);
 		$data['tipe']='h';
 		
 		$this->load->view('header');
 		$this->load->view('kepegawaian/kepegawaian',$data);
+		
 		$this->load->view('footer');
 	}
 	
@@ -63,12 +70,22 @@ class Kepegawaian extends CI_Controller {
 		$data['title3']="ABSENSI KEHADIRAN";
 		$data['subtitle3']="JUMLAH";
 		
+		
+		$bln=date('m');
+		$thn=date('Y');
 		$data['rs'] = $this->sdm->getJmlBagian();
-		$data['html'] = $this->sdm->getJmlEselon();
+		$data['html'] = $this->sdm->getJmlEselon($bln, $thn);
+		$data['totpeg'] = $this->sdm->getJmlTot($bln, $thn);
 		$data['rs2'] = $this->sdm->getAbsenNew($tipe);
-		//print_r($data['rs2']);
+		$data['rsM'] = $this->sdm->getAbsenM();
+		$data['rsB'] = $this->sdm->getAbsenB();
+		//print_r($data['rs2']);		
+		
+		$data['table_pensiun'] = $this->sdm->getview_pensiun2($bln, $thn);
 		$data['tipe'] = $tipe;
 		$data['absen'] = 'absen';
+		
+		
 		
 		$this->load->view('header');
 		$this->load->view('kepegawaian/kepegawaian',$data);
@@ -178,6 +195,11 @@ class Kepegawaian extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('kepegawaian/pegawai_list',$data);
 		$this->load->view('footer');
+	}
+	
+	function tes(){
+		print_r($this->sdm->getAbsenB());
+		
 	}
 	
 }
