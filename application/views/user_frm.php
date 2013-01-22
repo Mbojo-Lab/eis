@@ -31,11 +31,28 @@
     <tr>
       <td valign="top">Group</td>
       <td>
-      <select name="group" class="easyui-validatebox" id="password" style="width:200px">
+      <select name="group" class="easyui-validatebox" id="group" style="width:200px">
         <option value=""></option>
         <option value="Eksekutif">Eksekutif</option>
         <option value="SDM">SDM</option>
+		<option value="Perumahan">Perumahan</option>
+		<option value="Agenda">Agenda</option>
         <option value="Admin">Admin</option>
+      </select>
+      </td>
+    </tr>
+	<tr>
+      <td valign="top">Unit Kerja</td>
+      <td>
+      <select name="unit_kerja" class="easyui-validatebox" id="unit_kerja" style="width:200px">
+        <option value=""></option>
+		<?php
+		foreach ($rs as $r){
+		?>
+			<option value="<?=$r->unit_kerja?>"><?=$r->unit_kerja?></option>
+		<?php	
+		}
+		?>
       </select>
       </td>
     </tr>

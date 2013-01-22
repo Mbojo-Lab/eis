@@ -11,6 +11,86 @@ class Perumahan_mdl extends CI_Model {
 		$this->load->database();
     }
     
+	
+function tampil_progres(){
+		$q = "SELECT * FROM realisasi
+			   ORDER BY id ASC";
+		$rs = $this->db->query($q)->result();
+		
+		$html = '<table class="static2">
+        <tr>
+          <th rowspan="2">No.</th>
+          <th rowspan="2">LOKASI</th>
+          <th rowspan="2">DATA KONTRAK</th>
+          <th colspan="2">PROGRES KEGIATAN</th>
+	      <th rowspan="2">KEGIATAN</th>
+          <th rowspan="2">PERMASALAHAN DAN TINDAK LANJUT</th>
+		  
+        </tr>
+		<tr>
+			<th>Persentase Progress</th>
+			<th>Nilai Progress</th>
+		</tr>
+		';
+         
+        $deviasi=0;
+		foreach($rs as $r): 
+$a = $r->prog_rencana;
+$b = $r->prog_realisasi;
+$deviasi = $a - $b;         
+		$html .= '<tr><td align="left">';
+		  
+		  	 	  $html .= $r->id;
+		    		    
+			$html .= '</td><td style="width:290px">';
+		   
+		      	  $html .= $r->lokasi;
+		    	  $html .= '<br>No Kontrak : ';
+				  $html .= $r->no_kontrak;
+				  $html .= '<br>Koordinat : ';
+				  $html .= $r->x;
+				  $html .= ' | ';
+				  $html .= $r->y;
+			$html .= '</td><td>';
+			   	  $html .= 'Tgl Kontrak : ';
+				  $html .= $r->tgl_kontrak;
+				  $html .= '<br>Mulai : ';
+				  $html .= $r->tgl_mulai;
+				  $html .= '<br>Berakhir : ';
+				  $html .= $r->tgl_akhir;
+				  $html .= '<br>Durasi: ';
+				  $html .= $r->durasi;
+			$html .= '</td><td colspan="1">';
+				  $html .= 'Rencana : ';
+				  $html .= $r->prog_rencana;
+				  $html .= ' %';
+				  $html .= '<br>Realisasi : ';
+				  $html .= $r->prog_realisasi;
+				  $html .= ' %';
+				  $html .= '<br>Deviasi : ';
+				  $html .= $deviasi;
+				  $html .= ' %';
+			$html .= '</td><td colspan="1">';	  
+				  $html .= 'Nilai Rencana : ';
+				  $html .= $r->nilai_rencana;
+				  $html .= '<br>Nilai Realisasi : ';
+				  $html .= $r->nilai_realisasi;
+			$html .= '</td><td align="center" style="width:100px">';
+				  $html .= $r->keterangan;
+			$html .= '</td><td align="center" style="width:150px">';
+				  $html .= $r->permasalahan;
+			
+						
+			$html .= '</td></tr>';
+			
+		  
+        endforeach; 
+				
+        $html .= '</table>';
+		
+		return $html;
+    }
+	
     function tampil($tahun){
 		$q = "SELECT * FROM kegiatan
 			  WHERE parent_id=0
@@ -565,6 +645,15 @@ class Perumahan_mdl extends CI_Model {
 		return $newid;
 	}
 	
+	function getAll(){
+		//$q = $this->db->get('agenda')->result();
+		
+		$this->db->select()->from('kegiatan')->order_by('id','ASC');
+		
+		$q = $this->db->get()->result();
+		return $q;
+	}
+	
 	function tambah($data){
 		$q = "INSERT INTO kegiatan (id,parent_id,no,nama,sat,posisi,kategori,status) VALUES ('".$data['id']."','".$data['parent_id']."','".$data['no']."','".$data['nama']."','".$data['sat']."','".$data['posisi']."','".$data['kategori']."','".$data['status']."')";
 		//$run = $this->db->insert('kegiatan', $data); 
@@ -574,8 +663,10 @@ class Perumahan_mdl extends CI_Model {
 	}
 	
 	function ubah($data,$id){
-		$run = $this->db->update('kegiatan', $data, array('id' => $id)); 
-		
+	$q = "UPDATE kegiatan set parent_id='".$data['parent_id']."',no='".$data['no']."', nama='".$data['nama']."', sat='".$data['sat']."', posisi='".$data['posisi']."', kategori='".$data['kategori']."', status='".$data['status']."' where id = '".$data['id']."' ";
+	
+		//$run = $this->db->update('kegiatan', $data, array('id' => $id)); 
+		$run=$this->db->query($q);
 		return $run;
 	}
 	

@@ -96,6 +96,7 @@
         </li>
         <? /*
         <li><a href="<?=base_url()?>perpustakaan"><img src="<?=base_url()?>assets/images/icons/small/grey/file_cabinet.png"/><span>Perpustakaan</span></a></li>*/ ?>
+		<li><a href="<?=base_url()?>perumahan/progresTabel"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Progress</span></a></li>		
 		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda</span></a>
             <ul class="open_multiple">
             <li><a href="<?=base_url()?>perkantoran/form" class="pjax"><span>Form Agenda Pertemuan Penting</span></a></li>
@@ -123,6 +124,43 @@
         <? /*
         <li><a href="<?=base_url()?>perpustakaan"><img src="<?=base_url()?>assets/images/icons/small/grey/file_cabinet.png"/><span>Perpustakaan</span></a></li>*/?>
         <?php } ?>
+		
+		
+		<?php if ($this->session->userdata('group')=="Perumahan"){?>
+		<li><a href="<?=base_url()?>geospasial"><img src="<?=base_url()?>assets/images/icons/small/grey/google_maps.png"/><span>GeoSpasial</span></a></li>                
+        <li><a><img src="<?=base_url()?>assets/images/icons/small/grey/apartment_building.png"/><span>Perumahan</span></a>
+            <ul class="open_multiple">
+                <li><a href="<?=base_url()?>perumahan/form2" class="pjax"><span>Form Kegiatan</span></a></li>
+				<li><a href="<?=base_url()?>perumahann/form" class="pjax"><span>Form Anggaran</span></a></li>
+				<li><a href="<?=base_url()?>perumahann/form3" class="pjax"><span>Form Realisasi</span></a></li>
+				<li><a href="<?=base_url()?>perumahan_update/form" class="pjax"><span>Form Update Realisasi</span></a></li>
+                <li><a href="<?=base_url()?>perumahan" class="pjax"><span>Perumahan</span></a></li>
+				
+            </ul>
+        </li>
+        </li>
+		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/blocks_images.png"/><span>Pengendalian dan Evaluasi Program</span></a>
+        	<ul class="open_multiple">
+                <li><a href="<?=base_url()?>monitoring/form" class="pjax"><span>Form Upload Program</span></a></li>
+                <li><a href="<?=base_url()?>monitoring" class="pjax"><span>Laporan</span></a></li>
+            </ul>
+        </li> 
+        <? /* 
+        <li><a href="<?=base_url()?>perpustakaan"><img src="<?=base_url()?>assets/images/icons/small/grey/file_cabinet.png"/><span>Perpustakaan</span></a></li>      
+		*/ ?>
+		<li><a href="<?=base_url()?>perumahan/progresTabel"><img src="<?=base_url()?>assets/images/icons/small/grey/users.png"/><span>Progress</span></a></li>
+		<?php } ?>
+		
+		
+		
+		<?php if ($this->session->userdata('group')=="Agenda"){?>
+		<li><a><img src="<?=base_url()?>assets/images/icons/small/grey/strategy.png"/><span>Agenda</span></a>
+            <ul class="open_multiple">
+                <li><a href="<?=base_url()?>perkantoran/form" class="pjax"><span>Form Agenda Pertemuan Penting</span></a></li>
+                <li><a href="<?=base_url()?>perkantoran" class="pjax"><span>Agenda Pertemuan Penting</span></a></li>
+            </ul>
+        </li>
+        <?php } ?>		
 		
 		
         <li><a href="<?=base_url()?>member/logout" class="pjax"><img src="<?=base_url()?>assets/images/icons/small/grey/locked_2.png"/><span>Logout</span></a></li>

@@ -12,6 +12,7 @@ class Dashboard extends CI_Controller {
 		$this->load->model('Perumahan_mdl','perm');
 		$this->load->model('monitoring_mdl','mon');
 		$this->load->model('perpustakaan_mdl','perp');
+		$this->load->model('eprogress_mdl','eprog');
 	}
 	
 	function index(){	  
@@ -41,6 +42,9 @@ class Dashboard extends CI_Controller {
 		$data['title_perp2']="JUMLAH KUNJUNGAN PERPUSTAKAAN PER TAHUN";
 		$data['rs_perp'] = $this->perp->getKoleksi();
 		$data['kunjungan'] = $this->perp->getKunjungan();
+		
+		//E-PROGRESS
+		$data['rs_eprog'] = $this->eprog->pie();
 		
 		$this->load->view('header');
 		$this->load->view('index',$data);

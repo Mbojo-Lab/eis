@@ -639,3 +639,98 @@ $(function() {
     </div>
 </div>                                
 <script src="<?=base_url()?>assets/scripts/eventCalendar/jquery.eventCalendar.js" type="text/javascript"></script>
+
+<div class="box grid_8">
+  <h2 class="box_head">E-Progress</h2>
+    <div id="tabs-eprog" class="block" style="min-height:440px;">
+	  <div class="section">
+<script type="text/javascript">
+$(function () {
+    var chart;
+    
+    $(document).ready(function () {
+    	
+    	// Build the chart
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+			credits:{
+				enabled: false
+			},
+            title: {
+                text: '<?=$title1 ?>'
+            },
+			subtitle: {
+                text: '<?=$subtitle1 ?>'
+            },
+            tooltip: {
+				enabled: false,
+        	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+            	percentageDecimals: 1
+            },			
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+						formatter: function() {
+							return this.point.name+": "+nformat2(this.y,0);
+						}
+                    },
+                    showInLegend: true
+                },series: {
+					cursor: 'pointer',
+					point: {
+						events: {
+							click: function() {
+								window.open('<?=base_url()?>eprogress/progressTabel/'+ this.name,'_self');
+							}
+						}
+					}
+				}
+            },
+            series: [{
+                type: 'pie',
+                name: 'Kategori',				
+                data: [
+				<?php 
+				if($rs_eprog):
+				$jmla=0;
+				$jmlb=0;
+				$jmlc=0;
+				$data = '';
+				foreach($rs_eprog as $r_eprog): 
+					if ($r_eprog->prog_rencana > $r_eprog->prog_realisasi){
+						$jmla += 1;
+					} else if ($r_eprog->prog_rencana == $r_eprog->prog_realisasi){
+						$jmlb += 1;
+					} else {
+						$jmlc += 1;
+					}
+					
+					
+				endforeach; 
+				
+				$data .= "{name:'Telat', y:".$jmla."},";
+				$data .= "{name:'Sesuai', y:".$jmlb."},";
+				$data .= "{name:'Lebih Cepat', y:".$jmlc."},";
+				$data = substr($data,0,-1);
+				
+				endif;	
+				echo $data;			                
+				?>
+				]
+            }]
+        });
+	});
+});
+</script>
+<div id="container" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
+		  </div>
+    </div>
+</div>

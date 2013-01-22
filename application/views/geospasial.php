@@ -99,7 +99,7 @@ $("#map").gmap3({
 <div class="box grid_16">
 	<div id="map" class="gmap3"></div>
 	
-	<input type="text" id="prov" value=""/>
+	<input type="hidden" id="prov" value=""/>
 	<div id="radios" class="item gradient rounded shadow" style="margin:15px;padding:5px;">
 		<label style="margin-right:5px;"><input type="checkbox" style="margin-right:3px" value="DAK"/>DAK</label>
 		<label style="margin-right:5px;"><input type="checkbox" style="margin-right:3px" value="Rusunawa"/>Rusunawa</label>

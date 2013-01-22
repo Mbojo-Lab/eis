@@ -7,7 +7,7 @@
         $(document).ready(function(){      
         $('#provinsi').change(function(){
             $.post("<?php echo base_url();?>index.php/perumahann/get_kota/"+$('#provinsi').val(),{},function(obj){
-                $('#nm_kota').html(obj);
+                $('#kota').html(obj);
 			
             });
 			
@@ -68,13 +68,23 @@ return false;
     <h2><?=$menutitle?></h2>
 </div>
 
-<div style="width:600px"  class="flat_area grid_16">
-    <div region="center" border="false" style="padding:10px;background:#fff;border:1px solid #ccc;">
-    <form id="fm" method="post" onSubmit="return false">
+<div id="w" class="flat_area grid_16">
+<table id="dg" singleSelect="true"></table>              
+</div>
+<div id="toolbar">  
+    <a href="javascript:void(0)" id="btnTbh" class="easyui-linkbutton" iconCls="icon-add" plain="true" title="Tambah">Tambah</a>  
+    <a href="javascript:void(0)" id="btnUbh" class="easyui-linkbutton" iconCls="icon-edit" plain="true" title="Hapus">Ubah</a> 
+    <a href="javascript:void(0)" id="btnHps" class="easyui-linkbutton" iconCls="icon-remove" plain="true" title="Hapus">Hapus</a>  
+</div>
+
+<div id="dlg" class="easyui-dialog" style="width:550px;height:600px;padding:10px" closed="true" buttons="#dlg-buttons">
+	<form id="fm" method="post" onSubmit="return false">
     <table>
   	<tr>
 		<td>Tahun Anggaran</td>
-		<td>: <input type="text" name="tahun" id="tahun"/></td>
+		<td>: <input type="text" name="tahun" id="tahun"/>
+		
+		</td>
 	</tr>
 	<tr>
             <td>Unit Kerja</td>
@@ -90,7 +100,7 @@ return false;
     </tr>
 	<tr>
 		<td>Kegiatan</td>
-		<td>: <select id="id_keg" name="id_keg" style="width:300px">
+		<td>: <select id="nm_keg" name="nm_keg" style="width:300px">
               <option value="">Pilih Kegiatan</option>
               <?=$html?>
             </select>
@@ -111,7 +121,7 @@ return false;
         <tr>
             <td>Kota</td>
             <td> :
-                <select name="nm_kota" id="nm_kota">
+                <select name="kota" id="kota">
                 <option value="">Pilih Kota</option>
             </select>
             </td>
@@ -187,18 +197,28 @@ return false;
 			<option value="desember">Desember</option>
         </select></td>
 	</tr>
+	
 	<tr><td>Keterangan</td>
 		<td>: <textarea name="keterangan" id="keterangan"></textarea></td>
 	</tr>
 	<tr><td>Permasalahan dan Tindak Lanjut</td>
 		<td>: <textarea name="permasalahan" id="permasalahan"></textarea></td>
 	</tr>
-        </table>
-        </form>
-		
-			
-        <a class="easyui-linkbutton" iconCls="icon-ok" href="javascript:void(0)" onclick="simpann()">Simpan</a>
-        <a class="easyui-linkbutton" iconCls="icon-cancel" href="javascript:void(0)" onclick="kosong()">Batal</a>
-    </div>
-</div>    
+	<tr>
+		<td>Nilai Rencana</td>
+		<td>: <input type="text" name="nilai_rencana" id="nilai_rencana" /></</td>
+	</tr>
+	<tr>
+		<td>Nilai Realisasi</td>
+		<td>: <input type="text" name="nilai_realisasi" id="nilai_realisasi" /></</td>
+	<input type="text" name="id" id="id" />
+	</tr>
+          </table>
+       <input type="submit" id="btnSubmit" name="btnSubmit" style="display:none">
+    </form>            
+</div>
+<div id="dlg-buttons">
+    <a href="#" id="btnSim" class="easyui-linkbutton" iconCls="icon-ok">Simpan</a>
+    <a href="javascript:void(0)" id="btnReset" class="easyui-linkbutton" iconCls="icon-cancel">Kosongkan</a>
+</div>
 <br />&nbsp;

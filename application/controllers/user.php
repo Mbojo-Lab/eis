@@ -7,6 +7,7 @@ class User extends CI_Controller {
 		if (! $this->session->userdata('logged_in')){ redirect(base_url().'member/login'); }
 		
 		$this->load->model('user_mdl','mdl');
+		$this->load->model('unit_mdl','munit');
 		$this->load->helper('form');
 	}
 	
@@ -35,6 +36,7 @@ class User extends CI_Controller {
 		$data['menutitle']="Users";
 		$data['NmMenu'] = "Form Users";
 		
+		$data['rs'] = $this->munit->getAll();
 		$this->load->view('header_admin',$data);
 		$this->load->view('user_frm',$data);
 		$this->load->view('mst_fcj',$data);
@@ -50,6 +52,7 @@ class User extends CI_Controller {
 		$nama_lengkap = $form_data['nama_lengkap'];  
 		$password = $form_data['password']; 
 		$group = $form_data['group']; 
+		$unit_kerja = $form_data['unit_kerja']; 
 		
 		// perlu dibuat sebarang pengacak
 		$pengacak  = "K1234I4321K5678I8765N5891";
@@ -63,7 +66,8 @@ class User extends CI_Controller {
 			'username' => $username,  
 			'nama_lengkap' => $nama_lengkap,  
 			'password' => $password,
-			'group' => $group
+			'group' => $group,
+			'unit_kerja' => $unit_kerja
 			);
 		if ($aksi=="tambah"){	
 			$this->tambah($data);	

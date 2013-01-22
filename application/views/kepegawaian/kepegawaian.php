@@ -345,8 +345,7 @@ $(function () {
 					point: {
 						events: {
 							click: function() {
-								window.open('<?=base_url()?>kepegawaian/pegawailist/'+ this.category+'/'+this.series.name,'_self');
-								//alert('tes '+this.series.name);
+								window.open('<?=base_url()?>kepegawaian/pegawailist/'+ this.category+'/'+this.series.name,'_self');								
 							}
 						}
 					}

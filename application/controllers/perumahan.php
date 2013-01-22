@@ -4,7 +4,7 @@ class Perumahan extends CI_Controller {
 	
 	public function __construct(){
 		parent::__construct();
-		if (! $this->session->userdata('logged_in')){ redirect(base_url().'member/login'); }
+		if (! $this->session->userdata('logged_in')){ redirect(base_url().'index.php/member/login'); }
 		
 		$this->load->model('Perumahan_mdl','perm');
 		$this->load->helper('form');
@@ -38,6 +38,20 @@ class Perumahan extends CI_Controller {
 		$this->load->view('perumahan/kinerja',$data);
 		$this->load->view('footer');
 	}
+	function progresTabel(){		
+		$data['menutitle']="Progress";
+		$data['tabtitle']="Progress Pembangunan";		
+		$data['title']="LAPORAN PROGRESS PEMBANGUNAN RUSUN DI LUAR PULAU JAWA TA 2012";		
+		$data['subtitle']="SATUAN KERJA PENYEDIAAN PERUMAHAN";
+		$data['subtitle1']="KEMENTRIAN PERUMAHAN RAKYAT REPUBLIK INDONESIA";
+        $data['html'] = $this->perm->tampil_progres();		
+		
+		
+		$this->load->view('header');
+		
+		$this->load->view('perumahan/progres',$data);
+		$this->load->view('footer');
+	}
 	
 	function tabs($tabs=''){
 		$data['title']="Kinerja";
@@ -59,11 +73,13 @@ class Perumahan extends CI_Controller {
 	}
 	
 	function form2(){
-		$data['menutitle']="Form Kegiatan Perumahan";
+		$data['menutitle']="Kegiatan Perumahan";
+		$data['NmMenu'] = "Form Kegiatan";
 		$data['html']= $this->perm->getKegiatan1();
 				
 		$this->load->view('header_admin');
 		$this->load->view('perumahan/perumahan_frm2',$data);
+		$this->load->view('mst_fcj',$data);
 		$this->load->view('perumahan/perumahan_fcj',$data);	
 		$this->load->view('footer');
 	}
@@ -130,6 +146,7 @@ class Perumahan extends CI_Controller {
 	function getform($aksi){
 		$form_data = $this->input->post();
 		
+		$id = $form_data['id'];
 		$parent_id = $form_data['parent_id'];  
 		$no = $form_data['no'];
 		$nama = nl2br($form_data['nama']); 
@@ -157,6 +174,8 @@ class Perumahan extends CI_Controller {
 			$this->tambah($data);	
 		} else {
 			$data = array(  
+			'id' => $id,
+			'parent_id' =>$parent_id,
 			'no' => $no,
 			'nama' => $nama,
 			'sat' => $sat,
@@ -166,7 +185,7 @@ class Perumahan extends CI_Controller {
 			'status' => $status
 			);
 			
-			$this->ubah($data,$parent_id);
+			$this->ubah($data,$id);
 		}
 	}
 	
@@ -190,14 +209,15 @@ class Perumahan extends CI_Controller {
 	function ubah($data,$id){			
 		$success = $this->perm->ubah($data,$id);	
 		//print_r($data);
-		if ($success){				
+		/*if ($success){				
 			$bol=true;
 			$msg="Ubah data berhasil.";
 		} else {
 			$bol=false;
 			$msg="Ubah data gagal.";		
-		}
-		
+		}*/
+		$bol=true;
+		$msg = 'ubah data success';
 		echo json_encode(array('success'=>$bol,'msg'=>$msg)); 
 	}
 	
@@ -266,6 +286,11 @@ class Perumahan extends CI_Controller {
 	
 	function grid($id=0){
 		$rs = $this->perm->getGrid($id);
+		echo json_encode($rs);
+	}
+	
+	function gridKeg(){
+		$rs = $this->perm->getAll();
 		echo json_encode($rs);
 	}
 	

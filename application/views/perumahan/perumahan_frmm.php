@@ -40,12 +40,21 @@ return false;
     <h2><?=$menutitle?></h2>
 </div>
 
-<div style="width:500px"  class="flat_area grid_16">
-    <div region="center" border="false" style="padding:10px;background:#fff;border:1px solid #ccc;">
-    <form id="fm" method="post" onSubmit="return false">
-    <table>
+<div id="w" class="flat_area grid_16">
+<table id="dg" singleSelect="true"></table>              
+</div>
+<div id="toolbar">  
+    <a href="javascript:void(0)" id="btnTbh" class="easyui-linkbutton" iconCls="icon-add" plain="true" title="Tambah">Tambah</a>  
+    <a href="javascript:void(0)" id="btnUbh" class="easyui-linkbutton" iconCls="icon-edit" plain="true" title="Hapus">Ubah</a> 
+    <a href="javascript:void(0)" id="btnHps" class="easyui-linkbutton" iconCls="icon-remove" plain="true" title="Hapus">Hapus</a>  
+</div>
+
+<div id="dlg" class="easyui-dialog" style="width:550px;height:330px;padding:10px" closed="true" buttons="#dlg-buttons">
+	<form id="fm" method="post" onSubmit="return false">	
+	<table>
   	<tr><br>
 		<td>Tahun Anggaran</td>
+		<input type="hidden" name="id" id="id" />
 		<td>: <input type="text" name="tahun" id="tahun"/></td>
 	</tr>
 	<tr>
@@ -62,7 +71,7 @@ return false;
     </tr>
 	<tr>
 		<td>Kegiatan</td>
-		<td>: <select id="id_keg" name="id_keg" style="width:350px">
+		<td>: <select id="kegiatan" name="kegiatan" style="width:350px">
               <option value="">Pilih Kegiatan</option>
               <?=$html?>
             </select>
@@ -90,12 +99,14 @@ return false;
 	</tr>
 	<tr>
 		<td>Nilai (Rp. )</td>
-		<td>: <input type="text" name="nilai" id="nilai" onKeyPress="return numbersonly(this, event)"/></</td>
+		<td>: <input type="text" name="anggaran" id="anggaran" onKeyPress="return numbersonly(this, event)"/></</td>
 	</tr>
         </table>
-        </form><br>
-        <a class="easyui-linkbutton" iconCls="icon-ok" href="javascript:void(0)" onclick="simpan()">Simpan</a>
-        <a class="easyui-linkbutton" iconCls="icon-cancel" href="javascript:void(0)" onclick="kosong()">Batal</a>
-    </div>
-</div>    
+       <input type="submit" id="btnSubmit" name="btnSubmit" style="display:none">
+    </form>            
+</div>
+<div id="dlg-buttons">
+    <a href="#" id="btnSim" class="easyui-linkbutton" iconCls="icon-ok">Simpan</a>
+    <a href="javascript:void(0)" id="btnReset" class="easyui-linkbutton" iconCls="icon-cancel">Kosongkan</a>
+</div>
 <br />&nbsp;

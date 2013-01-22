@@ -1,33 +1,75 @@
 <script type="text/javascript">   
-$(function(){
-	setdg($('#id_keg').val());
-});
-function getDetail(){
-	$.getJSON('<?=base_url()?>perumahann/getDetail',{
-		tahun:$('#tahun').val(),
-		id_keg:$('#id_keg').val()
-	},function(result){
-		$('#target').val(result.target);
-		$('#sasaran').val(result.sasaran);
-		$('#tg_anggaran').val(result.tg_anggaran);
-		$('#realisasi').val(result.realisasi);
-		$('#re_anggaran').val(result.re_anggaran);
-		$('#alamat').val(result.address);
-		$('#x').val(result.x);
-		$('#y').val(result.y);
-		$('#bulan').val(result.bulan);
-		setdg($('#id_keg').val());
+
+function setdg(){
+	$('#dg').datagrid({  	
+		title:"<?=$NmMenu?>",
+		width:950,
+		height:350,	
+		toolbar:'#toolbar',
+		fitColumns:true,
+		rownumbers:true,
+		columns:[[  
+			{field:'id',width:90,hidden:true},
+			{field:'tahun',title:'Tahun',width:40},
+			{field:'unit_kerja',title:'Unit Kerja',width:90},
+			{field:'kegiatan',title:'Kegiatan',width:300},
+			{field:'volume',title:'Volume',width:40},
+			{field:'satuan',title:'Satuan',width:50},
+			{field:'anggaran',title:'Anggaran',width:80},
+			{field:'provinsi',title:'Provinsi',width:90}
+		]],
+		url: '<?=base_url()?>perumahann/grid'
 	});
+}
+
+var url;
+function tambah(){
+	$('#dlg').dialog('open').dialog('setTitle','Tambah <?=$NmMenu?>');
+	$('#fm').form('clear');
+	url = '<?=base_url()?>perumahann/getform/tambah';
+}
+
+function ubah(){
+	var row = $('#dg').datagrid('getSelected');
+	if (row){
+		$('#dlg').dialog('open').dialog('setTitle','Ubah <?=$NmMenu?>');
+		$('#fm').form('load',row);
+				
+		tahun = row.tahun;
+		tahun = tahun.replace(/<br \/>/g, "");
+		$('#tahun').val(tahun);
+		id = row.id;
+		id = id.replace(/<br \/>/g, "");
+		$('#id').val(id);
+		unit_kerja = row.unit_kerja;
+		unit_kerja = unit_kerja.replace(/<br \/>/g, "");
+		$('#unit_kerja').val(unit_kerja);
+		kegiatan = row.kegiatan;
+		kegiatan = kegiatan.replace(/<br \/>/g, "");
+		$('#kegiatan').val(kegiatan);
+		volume = row.volume;
+		volume = volume.replace(/<br \/>/g, "");
+		$('#volume').val(volume);
+		satuan = row.satuan;
+		satuan = satuan.replace(/<br \/>/g, "");
+		$('#satuan').val(satuan);
+		anggaran = row.anggaran;
+		anggaran = anggaran.replace(/<br \/>/g, "");
+		$('#anggaran').val(anggaran);
+		provinsi = row.provinsi;
+		provinsi = provinsi.replace(/<br \/>/g, "");
+		$('#provinsi').val(provinsi);
+		url = '<?=base_url()?>perumahann/getform/ubah';
+	}
 }
 
 function simpan(){
 	$('#fm').form('submit',{
-		url: '<?=base_url()?>perumahann/simpan',
+		url: url,
 		onSubmit: function(){
 			return $(this).form('validate');
 		},
 		success: function(result){
-			//alert(result);
 			var result = eval('('+result+')');
 			if (result.success){
 				$('#dlg').dialog('close');		// close the dialog
@@ -36,7 +78,6 @@ function simpan(){
 					title: 'Info',
 					msg: result.msg
 				});
-				kosong();
 			} else {
 				$.messager.alert('error',result.msg);
 			}
@@ -44,54 +85,28 @@ function simpan(){
 	});
 }
 
-function kosong(){
-	$("#fm").form('clear');
+function hapus(){
+	var row = $('#dg').datagrid('getSelected');
+	if (row){
+		$.messager.confirm('Confirm','Apakah anda yakin akan menghapus data ini?',function(r){
+			if (r){
+				$.getJSON('<?=base_url()?>perumahann/hapus',{id:row.id},function(result){
+					if (result.success){
+						$('#dg').datagrid('reload');	// reload the user data
+						$.messager.show({
+							title: 'Info',
+							msg: result.msg
+						});
+					} else {
+						$.messager.alert('error',result.msg);
+						/*$.messager.show({	// show error message
+							title: 'Error',
+							msg: result.msg
+						});*/
+					}
+				});
+			}
+		});
+	}
 }
-
-function setdg(id){
-	$('#dg').edatagrid({  	
-		title:"",
-		width:770,
-		height:250,	
-		toolbar:'#toolbar',
-		fitColumns:true,
-		rownumbers:true,
-		columns:[[  
-			{field:'provinsi',title:'Provinsi',width:80,editor:'validatebox'},
-			{field:'kota',title:'Kota',width:80,editor:'validatebox'},
-			{field:'address',title:'Lokasi',width:80,editor:'validatebox'},
-			{field:'x',title:'X',width:80,editor:'validatebox'},
-			{field:'y',title:'Y',width:80,editor:'validatebox'},
-			{field:'nilai',title:'Nilai',width:80,editor:'numberbox'},
-			{field:'ket',title:'Keterangan',width:80,editor:'validatebox'}
-		]],
-		url: '<?=base_url()?>perumahann/grid/'+id,
-		saveUrl: '<?=base_url()?>perumahann/simpanGrid/'+id,
-		updateUrl: '<?=base_url()?>perumahann/simpanGrid/'+id,
-		destroyUrl: '<?=base_url()?>perumahann/hapusGrid/'+id,
-		onDestroy:function(index,data){
-			$.post('<?=base_url()?>perumahann/hapusGrid/'+id,{
-				no:data.no
-			},function(result){
-				//alert(result);	
-			});	
-		}
-		<? /*, 
-		onAfterEdit:function(index,data){
-			$.post('<?=base_url()?>perumahan/simpanGrid/'+id,{
-				no:data.no,
-				provinsi:data.provinsi,
-				kota:data.kota,
-				address:data.address,
-				x:data.x,
-				y:data.y,
-				nilai:data.nilai,
-				ket:data.ket
-			},function(result){
-				alert(result);	
-			});	
-		}*/ ?>
-	});
-}
-
 </script>	

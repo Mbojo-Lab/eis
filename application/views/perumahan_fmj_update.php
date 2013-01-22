@@ -17,8 +17,8 @@ function setdg(){
 			{field:'lokasi',title:'Lokasi',width:75},
 			{field:'prog_rencana',title:'Progress Rencana',width:40},
 			{field:'prog_realisasi',title:'Progress Realisasi',width:40},
-			{field:'nilai_rencana',title:'Nilai Rencana',width:40},
-			{field:'nilai_realisasi',title:'Nilai Realisasi',width:40}
+		//	{field:'nilai_rencana',title:'Nilai Rencana',width:40},
+		//	{field:'nilai_realisasi',title:'Nilai Realisasi',width:40}
 		]],
 		url: '<?=base_url()?>perumahan_update/grid'
 	});
@@ -28,7 +28,7 @@ var url;
 function tambah(){
 	$('#dlg').dialog('open').dialog('setTitle','Tambah <?=$NmMenu?>');
 	$('#fm').form('clear');
-	url = '<?=base_url()?>perkantoran/getform/tambah';
+	url = '<?=base_url()?>perumahan_update/getform/tambah';
 }
 
 function ubah(){
@@ -46,12 +46,12 @@ function ubah(){
 		prog_realisasi0 = row.prog_realisasi;
 		prog_realisasi = prog_realisasi0.replace(/<br \/>/g, "");
 		$('#prog_realisasi').val(prog_realisasi);
-		nilai_rencana0 = row.nilai_rencana;
+		/*nilai_rencana0 = row.nilai_rencana;
 		nilai_rencana = nilai_rencana0.replace(/<br \/>/g, "");
 		$('#nilai_rencana').val(nilai_rencana);
 		nilai_realisasi0 = row.nilai_realisasi;
 		nilai_realisasi = nilai_realisasi0.replace(/<br \/>/g, "");
-		$('#nilai_realisasi').val(nilai_realisasi);
+		$('#nilai_realisasi').val(nilai_realisasi); */
 		url = '<?=base_url()?>perumahan_update/getform/ubah';
 	}
 }

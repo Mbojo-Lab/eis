@@ -28,7 +28,7 @@ function formatDate(date, fmt) {
 function setdg(){
 	$('#dg').datagrid({  	
 		title:"<?=$NmMenu?>",
-		width:700,
+		width:900,
 		height:350,	
 		toolbar:'#toolbar',
 		fitColumns:true,
@@ -38,7 +38,8 @@ function setdg(){
 			{field:'nama_lengkap',title:'Nama Lengkap',width:90},
 			{field:'username',title:'Username',width:90},
 			{field:'password',title:'Password',width:90},
-			{field:'group',title:'Group',width:90}
+			{field:'group',title:'Group',width:90},
+			{field:'unit_kerja',title:'Unit Kerja',width:90}
 		]],
 		url: '<?=base_url()?>user/grid'
 	});

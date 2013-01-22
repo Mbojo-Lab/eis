@@ -4,7 +4,7 @@ class Perumahan_update extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		if (! $this->session->userdata('logged_in')){ redirect(base_url().'member/login'); }
+		if (! $this->session->userdata('logged_in')){ redirect(base_url().'index.php/member/login'); }
 		
 		$this->load->model('perumahan_update_mdl');
 		$this->load->helper('form');
@@ -36,8 +36,8 @@ class Perumahan_update extends CI_Controller {
 		$lokasi = $form_data['lokasi'];
 		$prog_rencana = $form_data['prog_rencana'];
 		$prog_realisasi = $form_data['prog_realisasi'];
-		$nilai_rencana = $form_data['nilai_rencana'];
-		$nilai_realisasi = $form_data['nilai_realisasi'];
+		//$nilai_rencana = $form_data['nilai_rencana'];
+		//$nilai_realisasi = $form_data['nilai_realisasi'];
 
 		$data = array(  
 			'id' => $id,  
@@ -46,8 +46,8 @@ class Perumahan_update extends CI_Controller {
 			'lokasi' => $lokasi,
 			'prog_rencana' => $prog_rencana,
 			'prog_realisasi' => $prog_realisasi,
-			'nilai_rencana' => $nilai_rencana,
-			'nilai_realisasi' => $nilai_realisasi
+			//'nilai_rencana' => $nilai_rencana,
+			//'nilai_realisasi' => $nilai_realisasi
 			);
 		
 			$this->ubah($data,$id);
